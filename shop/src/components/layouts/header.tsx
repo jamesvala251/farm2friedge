@@ -2,7 +2,6 @@ import LocationBasedShopForm from '@/components/form/location-based-shop-form';
 import { CloseIcon } from '@/components/icons/close-icon';
 import { MapPin } from '@/components/icons/map-pin';
 import { SearchIcon } from '@/components/icons/search-icon';
-import GroupsDropdownMenu from '@/components/layouts/menu/groups-menu';
 import Alert from '@/components/ui/alert';
 import Button from '@/components/ui/button';
 import CountdownTimer from '@/components/ui/countdown-timer';
@@ -171,8 +170,6 @@ const Header = ({ layout }: { layout?: string }) => {
             className={cn(
               'flex w-full transform-gpu items-center justify-between bg-light px-5 transition-transform duration-300 lg:h-22 lg:px-6 2xl:px-8',
               {
-                'lg:absolute lg:border-0 lg:bg-transparent lg:shadow-none':
-                  isFlattenHeader,
                 'lg:!bg-light': openDropdown,
               },
             )}
@@ -202,9 +199,7 @@ const Header = ({ layout }: { layout?: string }) => {
               </div>
             ) : null} */}
 
-              <div className="hidden ltr:ml-10 ltr:mr-auto rtl:mr-10 rtl:ml-auto xl:block">
-                <GroupsDropdownMenu />
-              </div>
+            {/* GroupsDropdownMenu removed - not needed for eGroceryMart (only Grocery type) */}
             </div>
 
             {/* PERMANENT SEARCH BAR - Added for eGroceryMart */}

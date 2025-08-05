@@ -557,6 +557,11 @@ html[dir='rtl'] .react-tel-input .country-list .flag {
   @apply border-b border-border-200 bg-light shadow-sm;
 }
 
+/* Ensure header always has background - not just when scrolling */
+#site-header {
+  @apply bg-light;
+}
+
 /* Mobile Drawer Menu */
 .mobileMenu .menu-item.active {
   @apply font-semibold text-black;

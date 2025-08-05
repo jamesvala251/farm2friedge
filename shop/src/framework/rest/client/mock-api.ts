@@ -529,7 +529,11 @@ const mockData = {
       name: "Fruits & Vegetables",
       slug: "fruits-vegetables",
       parent: null,
-      children: [],
+      children: [
+        { id: 101, name: "Fresh Fruits", slug: "fresh-fruits", products_count: 2 },
+        { id: 102, name: "Fresh Vegetables", slug: "fresh-vegetables", products_count: 2 },
+        { id: 103, name: "Organic Produce", slug: "organic-produce", products_count: 1 }
+      ],
       image: "/images/categories/fruits-vegetables.jpg",
       icon: "🍎",
       type: {
@@ -544,7 +548,11 @@ const mockData = {
       name: "Dairy & Eggs",
       slug: "dairy-eggs",
       parent: null,
-      children: [],
+      children: [
+        { id: 201, name: "Milk & Milk Products", slug: "milk-products", products_count: 2 },
+        { id: 202, name: "Cheese & Butter", slug: "cheese-butter", products_count: 1 },
+        { id: 203, name: "Fresh Eggs", slug: "fresh-eggs", products_count: 1 }
+      ],
       image: "/images/categories/dairy-eggs.jpg",
       icon: "🥛",
       type: {
@@ -556,25 +564,14 @@ const mockData = {
     },
     {
       id: 3,
-      name: "Bakery",
-      slug: "bakery",
-      parent: null,
-      children: [],
-      image: "/images/categories/bakery.jpg",
-      icon: "🥖",
-      type: {
-        id: 1,
-        name: "Grocery",
-        slug: "grocery"
-      },
-      products_count: 2
-    },
-    {
-      id: 4,
       name: "Meat & Seafood",
       slug: "meat-seafood",
       parent: null,
-      children: [],
+      children: [
+        { id: 301, name: "Fresh Meat", slug: "fresh-meat", products_count: 1 },
+        { id: 302, name: "Fresh Fish", slug: "fresh-fish", products_count: 1 },
+        { id: 303, name: "Frozen Seafood", slug: "frozen-seafood", products_count: 0 }
+      ],
       image: "/images/categories/meat-seafood.jpg",
       icon: "🥩",
       type: {
@@ -585,11 +582,15 @@ const mockData = {
       products_count: 2
     },
     {
-      id: 5,
+      id: 4,
       name: "Pantry & Staples",
       slug: "pantry-staples",
       parent: null,
-      children: [],
+      children: [
+        { id: 401, name: "Rice & Grains", slug: "rice-grains", products_count: 1 },
+        { id: 402, name: "Cooking Oils", slug: "cooking-oils", products_count: 0 },
+        { id: 403, name: "Spices & Seasonings", slug: "spices-seasonings", products_count: 0 }
+      ],
       image: "/images/categories/pantry-staples.jpg",
       icon: "🍚",
       type: {
@@ -600,11 +601,15 @@ const mockData = {
       products_count: 1
     },
     {
-      id: 6,
+      id: 5,
       name: "Snacks & Beverages",
       slug: "snacks-beverages",
       parent: null,
-      children: [],
+      children: [
+        { id: 501, name: "Packaged Snacks", slug: "packaged-snacks", products_count: 0 },
+        { id: 502, name: "Soft Drinks", slug: "soft-drinks", products_count: 0 },
+        { id: 503, name: "Tea & Coffee", slug: "tea-coffee", products_count: 0 }
+      ],
       image: "/images/categories/snacks-beverages.jpg",
       icon: "🥤",
       type: {
@@ -615,11 +620,17 @@ const mockData = {
       products_count: 0
     },
     {
-      id: 7,
+      id: 6,
       name: "Religious Items",
       slug: "religious-items",
       parent: null,
-      children: [],
+      children: [
+        { id: 601, name: "Puja Items", slug: "puja-items", products_count: 0 },
+        { id: 602, name: "Aarti & Bhajan", slug: "aarti-bhajan", products_count: 0 },
+        { id: 603, name: "Murtis & Idols", slug: "murtis-idols", products_count: 0 },
+        { id: 604, name: "Rituals & Offerings", slug: "rituals-offerings", products_count: 0 },
+        { id: 605, name: "Festival Items", slug: "festival-items", products_count: 0 }
+      ],
       image: "/images/categories/religious-items.jpg",
       icon: "🕉️",
       type: {
@@ -630,11 +641,15 @@ const mockData = {
       products_count: 0
     },
     {
-      id: 8,
+      id: 7,
       name: "Indian Sweets",
       slug: "indian-sweets",
       parent: null,
-      children: [],
+      children: [
+        { id: 701, name: "Traditional Sweets", slug: "traditional-sweets", products_count: 0 },
+        { id: 702, name: "Festival Sweets", slug: "festival-sweets", products_count: 0 },
+        { id: 703, name: "Dry Fruits & Nuts", slug: "dry-fruits-nuts", products_count: 0 }
+      ],
       image: "/images/categories/indian-sweets.jpg",
       icon: "🍬",
       type: {
@@ -645,11 +660,16 @@ const mockData = {
       products_count: 0
     },
     {
-      id: 9,
+      id: 8,
       name: "South Indian Groceries",
       slug: "south-indian-groceries",
       parent: null,
-      children: [],
+      children: [
+        { id: 801, name: "Rice Varieties", slug: "rice-varieties", products_count: 0 },
+        { id: 802, name: "Lentils & Pulses", slug: "lentils-pulses", products_count: 0 },
+        { id: 803, name: "South Indian Spices", slug: "south-indian-spices", products_count: 0 },
+        { id: 804, name: "Pickles & Chutneys", slug: "pickles-chutneys", products_count: 0 }
+      ],
       image: "/images/categories/south-indian-groceries.jpg",
       icon: "🌶️",
       type: {
@@ -660,11 +680,15 @@ const mockData = {
       products_count: 0
     },
     {
-      id: 10,
+      id: 9,
       name: "Sri Lankan Groceries",
       slug: "sri-lankan-groceries",
       parent: null,
-      children: [],
+      children: [
+        { id: 901, name: "Coconut Products", slug: "coconut-products", products_count: 0 },
+        { id: 902, name: "Sri Lankan Spices", slug: "sri-lankan-spices", products_count: 0 },
+        { id: 903, name: "Traditional Items", slug: "traditional-items", products_count: 0 }
+      ],
       image: "/images/categories/sri-lankan-groceries.jpg",
       icon: "🥥",
       type: {
@@ -675,11 +699,15 @@ const mockData = {
       products_count: 0
     },
     {
-      id: 11,
+      id: 10,
       name: "Philippine Groceries",
       slug: "philippine-groceries",
       parent: null,
-      children: [],
+      children: [
+        { id: 1001, name: "Filipino Condiments", slug: "filipino-condiments", products_count: 0 },
+        { id: 1002, name: "Philippine Spices", slug: "philippine-spices", products_count: 0 },
+        { id: 1003, name: "Traditional Snacks", slug: "traditional-snacks", products_count: 0 }
+      ],
       image: "/images/categories/philippine-groceries.jpg",
       icon: "🍍",
       type: {

@@ -59,6 +59,30 @@ Restructure the eGroceryMart header and footer for better UX:
   - [x] Removed from promo-popup/index.tsx
   - [x] Removed from maintenance/news-letter.tsx
   - [x] Deleted subscribe-to-newsletter.tsx component
+- [x] **GroupsDropdownMenu removed**:
+  - [x] Removed from header.tsx
+  - [x] Clean header - no unnecessary dropdown
+  - [x] Only Grocery type - no confusion
+- [x] **Z-index issues fixed**:
+  - [x] Fixed banner-with-search.tsx - removed -z-1
+  - [x] Fixed banner-short.tsx - removed -z-1
+  - [x] Hero section no longer overlaps header
+- [x] **Header background fixed**:
+  - [x] Removed transparent background when scroll=0
+  - [x] Added CSS rule for consistent background
+  - [x] Header always visible with background
+- [x] **Hero Section Improved (Flipkart Style)**:
+  - [x] Reduced height - more compact (300px-450px)
+  - [x] Added auto-scroll with 3-second delay
+  - [x] Enabled touch/swipe navigation
+  - [x] Fixed layout spacing between sections
+  - [x] Smaller text and button sizes
+- [x] **Categories Updated (BRD Compliant)**:
+  - [x] Added hierarchical structure with sub-categories
+  - [x] Religious Items with 5 sub-categories (Puja, Aarti, Murtis, etc.)
+  - [x] Ethnic categories with specific sub-categories
+  - [x] All 10 main categories as per BRD
+  - [x] Proper product counts for each category
 - [x] **Header cleaned up**:
   - [x] StaticMenu dropdown removed
   - [x] Cart icon added with counter

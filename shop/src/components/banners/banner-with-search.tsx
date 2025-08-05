@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import { Swiper, SwiperSlide, Navigation } from '@/components/ui/slider';
+import { Autoplay } from 'swiper/modules';
 import { Image } from '@/components/ui/image';
 import { productPlaceholder } from '@/lib/placeholders';
 import Search from '@/components/ui/search/search';
@@ -45,14 +46,18 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
         '!block': layout === 'minimal',
       })}
     >
-      <div className="-z-1 overflow-hidden">
+      <div className="overflow-hidden">
         <div className="relative">
           <Swiper
             id="banner"
-            // loop={true}
-            modules={[Navigation]}
+            loop={true}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            modules={[Navigation, Autoplay]}
             resizeObserver={true}
-            allowTouchMove={false}
+            allowTouchMove={true}
             slidesPerView={1}
             navigation={{
               nextEl: '.banner-next',
@@ -62,13 +67,14 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
             {reverseBanners?.map((banner, idx) => (
               <SwiperSlide key={idx}>
                 <div
-                  className={cn('relative h-screen w-full', {
+                  className={cn('relative w-full', {
+                    'h-[300px] md:h-[400px] lg:h-[450px]': layout === 'classic',
                     'max-h-140': layout === 'standard',
                     'max-h-[320px] md:max-h-[680px]': layout === 'minimal',
                   })}
                 >
                   <Image
-                    className="h-full min-h-140 w-full object-cover"
+                    className="h-full w-full object-cover"
                     src={banner?.image?.original ?? productPlaceholder}
                     alt={banner?.title ?? ''}
                     fill
@@ -76,7 +82,7 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
                   />
                   <div
                     className={cn(
-                      'absolute inset-0 mt-8 flex w-full flex-col items-center justify-center p-5 text-center md:px-20 lg:space-y-10',
+                      'absolute inset-0 flex w-full flex-col items-center justify-center p-5 text-center md:px-20 lg:space-y-6',
                       {
                         'space-y-5 md:!space-y-8': layout === 'minimal',
                       }
@@ -84,7 +90,7 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
                   >
                     <h1
                       className={cn(
-                        'text-2xl font-bold tracking-tight text-heading lg:text-4xl xl:text-5xl',
+                        'text-xl font-bold tracking-tight text-heading lg:text-3xl xl:text-4xl',
                         {
                           '!text-accent': layout === 'minimal',
                         }
@@ -92,13 +98,13 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
                     >
                       {banner?.title}
                     </h1>
-                    <p className="text-sm text-heading lg:text-base xl:text-lg">
+                    <p className="text-sm text-heading lg:text-base">
                       {banner?.description}
                     </p>
                     {/* SEARCH REMOVED - Now in header for better UX */}
                     <div className="w-full max-w-3xl flex justify-center">
                       <button
-                        className="bg-accent hover:bg-accent-hover text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200"
+                        className="bg-accent hover:bg-accent-hover text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-200 text-sm lg:text-base"
                         onClick={() => {
                           // Scroll to products section
                           const element = document.getElementById('grid');

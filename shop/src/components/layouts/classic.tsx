@@ -10,15 +10,29 @@ export default function ClassicLayout({ variables }: HomePageProps) {
   return (
     <>
       <Banner layout="classic" variables={variables.types} />
-      <PromotionSliders variables={variables.types} />
-      <FilterBar variables={variables.categories} />
+      
+      {/* Categories moved to horizontal position after banner */}
+      <div className="bg-white py-6">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Categories layout="simple" variables={variables.categories} />
+        </div>
+      </div>
+      
+      {/* Promotion Sliders hidden for now - can be re-enabled later */}
+      {/* <div className="mt-4">
+        <PromotionSliders variables={variables.types} />
+      </div> */}
+      
+      {/* FilterBar hidden - not needed on home page */}
+      {/* <FilterBar variables={variables.categories} /> */}
+      
       <Element
         name="grid"
         className="flex border-t border-solid border-border-200 border-opacity-70"
       >
-        <Categories layout="classic" variables={variables.categories} />
+        {/* Categories sidebar removed from here since it's now horizontal */}
         <ProductGridHome
-          className="px-4 pt-3.5 pb-16 lg:p-6 xl:p-8"
+          className="px-4 pt-3.5 pb-16 lg:p-6 xl:p-8 w-full"
           variables={variables.products}
         />
       </Element>

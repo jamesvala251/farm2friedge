@@ -17,12 +17,17 @@ const FilterCategoryGrid = dynamic(
 const SlidingCardCategories = dynamic(
   () => import('@/components/categories/sliding-card-category'),
 );
+const SimpleMenuCategories = dynamic(
+  () => import('@/components/categories/simple-menu-categories'),
+);
+
 const MAP_CATEGORY_TO_GROUP: Record<string, any> = {
   classic: StickySidebarListCategories,
   modern: StickySidebarBoxedCategories,
   standard: StaticSidebarVerticalRectangleCategories,
   minimal: FilterCategoryGrid,
   compact: SlidingCardCategories,
+  simple: SimpleMenuCategories, // New simple menu layout
   default: StickySidebarListCategories,
 };
 interface CategoriesProps {

@@ -20,7 +20,7 @@ const BannerShort: React.FC<BannerProps> = ({ banners }) => {
 
   return (
     <div className="relative">
-      <div className="-z-1 overflow-hidden">
+      <div className="overflow-hidden">
         <div className="relative">
           <Swiper
             id="banner"
