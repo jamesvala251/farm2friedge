@@ -1,4 +1,3 @@
-import SubscriptionWidget from '@/components/settings/subscribe-to-newsletter';
 import Checkbox from '@/components/ui/forms/checkbox/checkbox';
 import Spinner from '@/components/ui/loaders/spinner/spinner';
 import Modal from '@/components/ui/modal/modal';
@@ -60,8 +59,6 @@ const PromoPopup = () => {
               ) : (
                 ''
               )}
-
-              <SubscriptionWidget />
 
               {popupData?.isPopUpNotShow ? (
                 <div className="mt-12">

@@ -3,7 +3,6 @@ import { CloseIcon } from '@/components/icons/close-icon';
 import { MapPin } from '@/components/icons/map-pin';
 import { SearchIcon } from '@/components/icons/search-icon';
 import GroupsDropdownMenu from '@/components/layouts/menu/groups-menu';
-import StaticMenu from '@/components/layouts/menu/static-menu';
 import Alert from '@/components/ui/alert';
 import Button from '@/components/ui/button';
 import CountdownTimer from '@/components/ui/countdown-timer';
@@ -49,6 +48,9 @@ const HeaderNotification = dynamic(
     ssr: false,
   },
 );
+const CartCounterIconButton = dynamic(() => import('@/components/cart/cart-counter-icon-button'), {
+  ssr: false,
+});
 
 const Header = ({ layout }: { layout?: string }) => {
   const { t } = useTranslation('common');
@@ -205,6 +207,28 @@ const Header = ({ layout }: { layout?: string }) => {
               </div>
             </div>
 
+            {/* PERMANENT SEARCH BAR - Added for eGroceryMart */}
+            <div className="hidden lg:flex flex-1 max-w-2xl mx-8 px-4">
+              <Search
+                label={t('text-search-label')}
+                variant="minimal"
+                className="w-full"
+                inputClassName="border-accent-400 focus:border-accent-500"
+              />
+            </div>
+
+            {/* Mobile Search Toggle */}
+            <div className="lg:hidden">
+              <Button
+                variant="custom"
+                className="h-[38px] w-[38px] items-center gap-2 rounded-full border border-border-200 bg-light !p-1 text-sm !font-normal focus:!shadow-none focus:!ring-0 md:text-base"
+                onClick={() =>
+                  setDisplayMobileHeaderSearch((prev) => !prev)
+                }
+              >
+                <SearchIcon className="h-4 w-4" />
+              </Button>
+            </div>
             {isHomePage ? (
               <>
                 {(displayMobileHeaderSearch && show) ||
@@ -236,9 +260,7 @@ const Header = ({ layout }: { layout?: string }) => {
           Map
         </button> */}
             <div className="flex shrink-0 items-center space-x-7 rtl:space-x-reverse 2xl:space-x-10">
-              <ul className="hidden shrink-0 items-center space-x-7 rtl:space-x-reverse xl:flex 2xl:space-x-10">
-                <StaticMenu />
-              </ul>
+              {/* STATIC MENU REMOVED - Now in footer for better UX */}
               <div className="flex items-center space-x-4 rtl:space-x-reverse">
                 {(isHomePage && show) || (isHomePage && layout === 'modern') ? (
                   <Button
@@ -286,6 +308,9 @@ const Header = ({ layout }: { layout?: string }) => {
                   isAuthorize={isAuthorize}
                   isEnable={Boolean(settings?.enableEmailForDigitalProduct)}
                 />
+
+                {/* CART ICON - Added for eGroceryMart */}
+                <CartCounterIconButton className="h-[38px] w-[38px] items-center gap-2 rounded-full border border-border-200 bg-light !p-1 text-sm !font-normal focus:!shadow-none focus:!ring-0 md:text-base" />
 
                 {isMultiLangEnable ? (
                   <div className="ms-auto shrink-0">

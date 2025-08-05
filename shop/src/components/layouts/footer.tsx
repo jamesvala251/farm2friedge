@@ -2,7 +2,6 @@ import { useTranslation } from 'next-i18next';
 import { siteSettings } from '@/config/site';
 import Link from '@/components/ui/link';
 import Logo from '@/components/ui/logo';
-import SubscriptionWidget from '@/components/settings/subscribe-to-newsletter';
 import { useSettings } from '@/framework/settings';
 import { useRouter } from 'next/router';
 import { StripeIcon } from '@/components/icons/payment-gateways/stripe';
@@ -148,12 +147,48 @@ const Footer = () => {
           </div>
         ))}
 
-        <div className="col-span-full md:col-span-2 lg:col-auto">
-          <SubscriptionWidget
-            title="text-subscribe-now"
-            description="text-subscribe-details"
-          />
+        {/* ENHANCED FOOTER SECTIONS FOR eGroceryMart */}
+        
+        {/* Essential Navigation - Simplified */}
+        <div className="flex flex-col">
+          <h3 className="mt-3 mb-4 font-semibold text-heading lg:mb-7">
+            Navigation
+          </h3>
+          <ul className="space-y-3">
+            <li>
+              <Link href={Routes.shops} className="text-sm transition-colors text-heading hover:text-orange-500">
+                Shops
+              </Link>
+            </li>
+            <li>
+              <Link href={Routes.coupons} className="text-sm transition-colors text-heading hover:text-orange-500">
+                Offers
+              </Link>
+            </li>
+            <li>
+              <Link href={Routes.contactUs} className="text-sm transition-colors text-heading hover:text-orange-500">
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link href={Routes.becomeSeller} className="text-sm transition-colors text-heading hover:text-orange-500">
+                Become a Seller
+              </Link>
+            </li>
+            <li>
+              <Link href={Routes.help} className="text-sm transition-colors text-heading hover:text-orange-500">
+                FAQ
+              </Link>
+            </li>
+            <li>
+              <Link href={Routes.terms} className="text-sm transition-colors text-heading hover:text-orange-500">
+                Terms
+              </Link>
+            </li>
+          </ul>
         </div>
+
+        {/* Subscription section removed - not needed for eGroceryMart */}
       </div>
 
       {/* Bottom */}

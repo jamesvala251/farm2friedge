@@ -50,12 +50,20 @@ const BannerWithoutSlider: React.FC<BannerProps> = ({ banners, layout }) => {
           <p className="text-sm text-body md:text-base xl:text-lg">
             {banners![0]?.description}
           </p>
-          <div className="w-full max-w-3xl">
-            <SearchWithSuggestion
-              label="search"
-              className="hidden lg:block"
-              variant="with-shadow"
-            />
+          {/* SEARCH REMOVED - Now in header for better UX */}
+          <div className="w-full max-w-3xl flex justify-center">
+            <button
+              className="bg-accent hover:bg-accent-hover text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200"
+              onClick={() => {
+                // Scroll to products section
+                const element = document.getElementById('grid');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
+              Shop Now
+            </button>
           </div>
         </div>
       </div>

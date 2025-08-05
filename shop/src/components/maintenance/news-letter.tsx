@@ -1,4 +1,3 @@
-import SubscriptionWidget from '@/components/settings/subscribe-to-newsletter';
 import { useModalState } from '@/components/ui/modal/modal.context';
 import Image from 'next/image';
 
@@ -35,9 +34,7 @@ const NewsLetter = () => {
         )}
       </div>
 
-      <div className="mx-auto max-w-md">
-        <SubscriptionWidget />
-      </div>
+      {/* SubscriptionWidget removed - not needed for eGroceryMart */}
     </div>
   );
 };

@@ -6,7 +6,6 @@ import Sorting from './sorting';
 import PriceFilter from '@/components/search-view/price-filter';
 import CategoryFilter from '@/components/search-view/category-filter-view';
 import TagFilter from '@/components/search-view/tag-filter-view';
-import ManufacturerFilter from '@/components/search-view/manufacturer-filter-view';
 import classNames from 'classnames';
 import { useAtom } from 'jotai';
 import { drawerAtom } from '@/store/drawer-atom';
@@ -31,7 +30,6 @@ function ClearFiltersButton() {
       sortedBy,
       orderBy,
       tags,
-      manufacturer,
       text,
       ...rest
     } = router.query;
@@ -39,7 +37,6 @@ function ClearFiltersButton() {
       pathname: router.pathname,
       query: {
         ...rest,
-        ...(router.route !== '/[searchType]/search' && { manufacturer }),
       },
     });
   }
@@ -54,9 +51,8 @@ function ClearFiltersButton() {
 }
 const SidebarFilter: React.FC<{
   type?: string;
-  showManufacturers?: boolean;
   className?: string;
-}> = ({ type, showManufacturers = true, className }) => {
+}> = ({ type, className }) => {
   const router = useRouter();
   const { isRTL } = useIsRTL();
   const { t } = useTranslation('common');
@@ -114,12 +110,6 @@ const SidebarFilter: React.FC<{
         <FieldWrapper title="text-tags">
           <TagFilter type={type} />
         </FieldWrapper>
-
-        {showManufacturers && (
-          <FieldWrapper title="text-manufacturers">
-            <ManufacturerFilter type={type} />
-          </FieldWrapper>
-        )}
       </div>
       <div className="sticky bottom-0 z-10 mt-auto border-t border-gray-200 bg-white p-5 lg:hidden">
         <Button

@@ -115,8 +115,6 @@ export const siteSettings = {
       label: 'Become a seller',
     },
     { href: Routes.flashSale, label: 'nav-menu-flash-sale' },
-    { href: Routes.manufacturers, label: 'text-manufacturers' },
-    { href: Routes.authors, label: 'text-authors' },
     { href: Routes.help, label: 'nav-menu-faq' },
     { href: Routes.terms, label: 'nav-menu-terms' },
     { href: Routes.customerRefundPolicies, label: 'nav-menu-refund-policy' },
@@ -140,10 +138,6 @@ export const siteSettings = {
           {
             name: 'Shops',
             href: Routes.shops,
-          },
-          {
-            name: 'Authors',
-            href: Routes.authors,
           },
           {
             name: 'Flash Deals',
@@ -175,10 +169,6 @@ export const siteSettings = {
       {
         title: 'text-our-information',
         links: [
-          {
-            name: 'Manufacturers',
-            href: Routes?.manufacturers,
-          },
           {
             name: 'Privacy policies',
             href: Routes.privacy,

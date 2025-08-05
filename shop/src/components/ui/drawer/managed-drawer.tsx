@@ -46,7 +46,6 @@ export default function ManagedDrawer() {
       {view === 'SEARCH_FILTER' && (
         <SearchFilterView
           type={data?.type}
-          showManufacturers={data?.showManufacturers}
         />
       )}
       {view === 'MAINTENANCE_MORE_INFO' && (
