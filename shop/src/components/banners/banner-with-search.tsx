@@ -42,12 +42,12 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
   const reverseBanners = useReverse({ items: banners as Banner[] });
   return (
     <div
-      className={cn('textClass relative hidden lg:block', {
+      className={cn('textClass relative hidden lg:block bg-white', {
         '!block': layout === 'minimal',
       })}
     >
-      <div className="overflow-hidden">
-        <div className="relative">
+      <div className="overflow-hidden py-6">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Swiper
             id="banner"
             loop={true}
@@ -67,7 +67,7 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
             {reverseBanners?.map((banner, idx) => (
               <SwiperSlide key={idx}>
                 <div
-                  className={cn('relative w-full', {
+                  className={cn('relative w-full rounded-lg overflow-hidden', {
                     'h-[300px] md:h-[400px] lg:h-[450px]': layout === 'classic',
                     'max-h-140': layout === 'standard',
                     'max-h-[320px] md:max-h-[680px]': layout === 'minimal',
@@ -80,7 +80,8 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
                     fill
                     sizes="(max-width: 768px) 100vw"
                   />
-                  <div
+                  {/* Text and Button Overlay - Hidden */}
+                  {/* <div
                     className={cn(
                       'absolute inset-0 flex w-full flex-col items-center justify-center p-5 text-center md:px-20 lg:space-y-6',
                       {
@@ -101,12 +102,10 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
                     <p className="text-sm text-heading lg:text-base">
                       {banner?.description}
                     </p>
-                    {/* SEARCH REMOVED - Now in header for better UX */}
                     <div className="w-full max-w-3xl flex justify-center">
                       <button
                         className="bg-accent hover:bg-accent-hover text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-200 text-sm lg:text-base"
                         onClick={() => {
-                          // Scroll to products section
                           const element = document.getElementById('grid');
                           if (element) {
                             element.scrollIntoView({ behavior: 'smooth' });
@@ -116,7 +115,7 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
                         Shop Now
                       </button>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </SwiperSlide>
             ))}
@@ -124,7 +123,7 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
           {banners && banners?.length > 1 ? (
             <>
               <div
-                className="banner-prev absolute top-2/4 z-10 -mt-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-border-200 border-opacity-70 bg-light text-heading shadow-200 transition-all duration-200 ltr:left-4 rtl:right-4 md:-mt-5 ltr:md:left-5 rtl:md:right-5"
+                className="banner-prev absolute top-2/4 z-10 -mt-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-border-200 border-opacity-70 bg-light text-heading shadow-200 transition-all duration-200 ltr:left-4 rtl:right-4 md:-mt-5 ltr:md:left-5 rtl:md:-right-5"
                 role="button"
               >
                 <span className="sr-only">{t('text-previous')}</span>
@@ -147,9 +146,7 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
                 )}
               </div>
             </>
-          ) : (
-            ''
-          )}
+          ) : null}
         </div>
       </div>
     </div>

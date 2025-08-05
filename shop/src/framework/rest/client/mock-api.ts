@@ -716,6 +716,27 @@ const mockData = {
         slug: "grocery"
       },
       products_count: 0
+    },
+    {
+      id: 11,
+      name: "Dietary Preferences",
+      slug: "dietary-preferences",
+      parent: null,
+      children: [
+        { id: 1101, name: "Organic Products", slug: "organic-products", products_count: 2 },
+        { id: 1102, name: "Vegan Products", slug: "vegan-products", products_count: 1 },
+        { id: 1103, name: "Gluten-Free", slug: "gluten-free", products_count: 1 },
+        { id: 1104, name: "Halal Products", slug: "halal-products", products_count: 3 },
+        { id: 1105, name: "Kosher Products", slug: "kosher-products", products_count: 2 }
+      ],
+      image: "/images/categories/dietary-preferences.jpg",
+      icon: "🌱",
+      type: {
+        id: 1,
+        name: "Grocery",
+        slug: "grocery"
+      },
+      products_count: 5
     }
   ],
   types: [
@@ -730,35 +751,47 @@ const mockData = {
           description: "Get fresh groceries delivered to your doorstep within 90 minutes",
           image: {
             id: 1,
-            original: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&h=400&fit=crop&bg=white",
-            thumbnail: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&h=100&fit=crop&bg=white"
+            original: "/img/banners/banner-1.jpg",
+            thumbnail: "/img/banners/banner-1.jpg"
           },
           button_text: "Shop Now",
           button_url: "/products"
         },
         {
           id: 2,
-          title: "Organic Products Sale",
-          description: "Up to 30% off on organic fruits and vegetables",
+          title: "Organic Fruits & Vegetables",
+          description: "Fresh organic produce delivered daily from local farms",
           image: {
             id: 2,
-            original: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=400&fit=crop&bg=white",
-            thumbnail: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=100&fit=crop&bg=white"
+            original: "/img/banners/banner-2.jpg",
+            thumbnail: "/img/banners/banner-2.jpg"
           },
-          button_text: "View Offers",
-          button_url: "/offers"
+          button_text: "View Organic",
+          button_url: "/category/organic-products"
         },
         {
           id: 3,
-          title: "Free Delivery on Orders >$50",
-          description: "Get free delivery on all orders above $50",
+          title: "Fresh Dairy & Eggs",
+          description: "Farm fresh dairy products and organic eggs",
           image: {
             id: 3,
-            original: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=1200&h=400&fit=crop&bg=white",
-            thumbnail: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=300&h=100&fit=crop&bg=white"
+            original: "/img/banners/banner-3.jpg",
+            thumbnail: "/img/banners/banner-3.jpg"
           },
-          button_text: "Shop Now",
-          button_url: "/products"
+          button_text: "Shop Dairy",
+          button_url: "/category/dairy-eggs"
+        },
+        {
+          id: 4,
+          title: "Premium Meat & Seafood",
+          description: "Quality meat and fresh seafood from trusted suppliers",
+          image: {
+            id: 4,
+            original: "/img/banners/banner-4.jpg",
+            thumbnail: "/img/banners/banner-4.jpg"
+          },
+          button_text: "Shop Meat",
+          button_url: "/category/meat-seafood"
         }
       ],
       promotional_sliders: [
@@ -782,6 +815,27 @@ const mockData = {
           description: "Freshly baked bread and pastries",
           original: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=200&fit=crop&bg=white",
           url: "/category/bakery"
+        },
+        {
+          id: 4,
+          title: "Organic Vegetables",
+          description: "Fresh organic vegetables from local farms",
+          original: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=200&fit=crop&bg=white",
+          url: "/category/organic-products"
+        },
+        {
+          id: 5,
+          title: "Premium Meat & Seafood",
+          description: "Quality meat and fresh seafood",
+          original: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=400&h=200&fit=crop&bg=white",
+          url: "/category/meat-seafood"
+        },
+        {
+          id: 6,
+          title: "Free Delivery Offer",
+          description: "Free delivery on orders above $50",
+          original: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=200&fit=crop&bg=white",
+          url: "/products"
         }
       ],
       settings: {
