@@ -20,6 +20,9 @@ const SlidingCardCategories = dynamic(
 const SimpleMenuCategories = dynamic(
   () => import('@/components/categories/simple-menu-categories'),
 );
+const DropdownCategories = dynamic(
+  () => import('@/components/categories/dropdown-categories'),
+);
 
 const MAP_CATEGORY_TO_GROUP: Record<string, any> = {
   classic: StickySidebarListCategories,
@@ -28,6 +31,7 @@ const MAP_CATEGORY_TO_GROUP: Record<string, any> = {
   minimal: FilterCategoryGrid,
   compact: SlidingCardCategories,
   simple: SimpleMenuCategories, // New simple menu layout
+  dropdown: DropdownCategories, // New dropdown layout
   default: StickySidebarListCategories,
 };
 interface CategoriesProps {
