@@ -47,6 +47,7 @@ function ClearFiltersButton() {
     </button>
   );
 }
+
 const SidebarFilter: React.FC<{
   type?: string;
   className?: string;

@@ -1,7 +1,6 @@
 import { CloseIcon } from '@/components/icons/close-icon';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useRef } from 'react';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { getDirection } from '@/lib/constants';
 import classNames from 'classnames';
@@ -16,7 +15,6 @@ export default function Modal({
   className,
 }: any) {
   const cancelButtonRef = useRef(null);
-  const { t } = useTranslation('common');
 
   const { locale } = useRouter();
   const dir = getDirection(locale);
@@ -78,7 +76,7 @@ export default function Modal({
                   ),
                 )}
               >
-                <span className="sr-only">{t('text-close')}</span>
+                <span className="sr-only">Close</span>
                 <CloseIcon className="h-4 w-4" />
               </button>
               {children}

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import SearchBox from './search-box';
 import { useRouter } from 'next/router';
+import SearchBox from './search-box';
 
-interface SearchProps {
+export interface SearchProps {
   label?: string;
   variant?: 'minimal' | 'normal' | 'with-shadow' | 'flat';
   className?: string;

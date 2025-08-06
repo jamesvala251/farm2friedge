@@ -10,7 +10,6 @@ const AddToCart = dynamic(
 );
 
 import usePrice from '@/lib/use-price';
-import { useTranslation } from 'next-i18next';
 import { useModalAction } from '@/components/ui/modal/modal.context';
 import { productPlaceholder } from '@/lib/placeholders';
 import { PlusIcon } from '@/components/icons/plus-icon';
@@ -23,7 +22,6 @@ type ArgonProps = {
 };
 
 const Argon: React.FC<ArgonProps> = ({ product, className }) => {
-  const { t } = useTranslation('common');
   const { query } = useRouter();
   const {
     name,
@@ -70,7 +68,7 @@ const Argon: React.FC<ArgonProps> = ({ product, className }) => {
             : ''
         )}
       >
-        <span className="sr-only">{t('text-product-image')}</span>
+        <span className="sr-only">Product image</span>
         <Image
           src={image?.original ?? productPlaceholder}
           alt={name}
@@ -102,49 +100,41 @@ const Argon: React.FC<ArgonProps> = ({ product, className }) => {
               )}
             </>
           ) : (
-            <>
-              {Number(quantity) > 0 && (
-                <AddToCart variant="argon" data={product} />
-              )}
-            </>
-          )}
-
-          {Number(quantity) <= 0 && (
-            <div className="rounded bg-red-500 px-2 py-1 text-xs text-light">
-              {t('text-out-stock')}
-            </div>
+            <AddToCart
+              variant="argon"
+              data={product}
+            />
           )}
         </div>
       </div>
-      {/* End of product image */}
 
-      <header className="p-3 md:p-6">
-        {product_type.toLowerCase() === 'variable' ? (
-          <div className="mb-2">
-            <span className="text-sm font-semibold text-heading md:text-base">
-              {minPrice}
-            </span>
-            <span> - </span>
-            <span className="text-sm font-semibold text-heading md:text-base">
-              {maxPrice}
-            </span>
-          </div>
-        ) : (
-          <div className="mb-2 flex items-center">
-            <span className="text-sm font-semibold text-heading md:text-base">
-              {price}
+      <header className="p-3 md:p-4">
+        <div className="mb-2 flex items-center justify-between">
+          <h3 className="mb-1 truncate text-sm font-semibold leading-6 text-heading transition-colors group-hover:text-accent md:text-base">
+            {name}
+          </h3>
+        </div>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <span className="text-sm font-bold text-heading md:text-base">
+              {product_type.toLowerCase() === 'variable' ? (
+                <span>
+                  {minPrice} - {maxPrice}
+                </span>
+              ) : (
+                <span>{price}</span>
+              )}
             </span>
             {basePrice && (
-              <del className="text-xs text-body ltr:ml-2 rtl:mr-2 md:text-sm">
+              <del className="text-xs text-muted ltr:ml-2 rtl:mr-2 md:text-sm">
                 {basePrice}
               </del>
             )}
           </div>
-        )}
-        {/* End of product price */}
-
-        <h3 className="text-xs text-body md:text-sm">{name}</h3>
-        {/* End of product title */}
+          {Number(quantity) <= 0 && (
+            <span className="text-xs text-red-500 md:text-sm">Out of stock</span>
+          )}
+        </div>
       </header>
     </article>
   );

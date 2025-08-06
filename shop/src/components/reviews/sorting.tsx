@@ -1,7 +1,6 @@
 import Select from '@/components/ui/select/select';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { useTranslation } from 'next-i18next';
 import { useIsRTL } from '@/lib/locals';
 interface Plan {
   id: number | string;
@@ -40,7 +39,6 @@ const plans: Plan[] = [
 
 const Sorting = () => {
   const router = useRouter();
-  const { t } = useTranslation('common');
   const { isRTL } = useIsRTL();
   const [selected, setSelected] = useState(
     () =>
@@ -73,7 +71,7 @@ const Sorting = () => {
   return (
     <div className="flex items-center">
       <span className="min-w-[50px] text-sm text-body ltr:mr-2 rtl:ml-2">
-        {t('text-sort-by')} :
+        Sort by:
       </span>
       <Select
         defaultValue={selected}

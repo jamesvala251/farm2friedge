@@ -4,7 +4,6 @@ import { generateCartItem } from '@/store/quick-cart/generate-cart-item';
 import Link from 'next/link';
 import { PlusIconNew } from '@/components/icons/plus-icon';
 import { MinusIconNew } from '@/components/icons/minus-icon';
-import { useTranslation } from 'next-i18next';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 const AddToCartBtn = dynamic(
@@ -49,7 +48,6 @@ export const AddToCart = ({
   variation,
   disabled,
 }: Props) => {
-  const { t } = useTranslation('common');
   const {
     addItemToCart,
     removeItemFromCart,
@@ -102,10 +100,11 @@ export const AddToCart = ({
               disabled={disabledState || !isInCart(item?.id)}
               onClick={handleRemoveClick}
             >
-              <span className="sr-only">{t('text-minus')}</span>
               <MinusIconNew />
             </button>
-            <div className="text-sm uppercase text-[#666]">Add</div>
+            <span className="flex-1 text-center text-sm font-semibold text-heading">
+              {getItemFromCart(item?.id)?.quantity}
+            </span>
             <button
               className={classNames(
                 'p-2 text-base',
@@ -116,7 +115,6 @@ export const AddToCart = ({
               disabled={disabledState}
               onClick={handleAddClick}
             >
-              <span className="sr-only">{t('text-plus')}</span>
               <PlusIconNew />
             </button>
           </div>
@@ -124,23 +122,20 @@ export const AddToCart = ({
       ) : (
         <Link
           href={data?.external_product_url}
-          target="_blank"
-          className="inline-flex h-10 !shrink items-center justify-center rounded border border-transparent bg-accent px-5 py-0 text-sm font-semibold leading-none text-light outline-none transition duration-300 ease-in-out hover:bg-accent-hover focus:shadow focus:outline-0 focus:ring-1 focus:ring-accent-700"
+          className="inline-flex w-full items-center justify-center rounded bg-accent px-5 py-3 text-sm font-light text-light transition-colors duration-300 hover:bg-accent-hover focus:bg-accent-hover focus:outline-0"
         >
-          {data?.external_product_button_text}
+          Buy Now
         </Link>
       )}
     </div>
   ) : (
-    <>
-      <Counter
-        value={getItemFromCart(item.id).quantity}
-        onDecrement={handleRemoveClick}
-        onIncrement={handleAddClick}
-        variant={counterVariant || variant}
-        className={counterClass}
-        disabled={outOfStock}
-      />
-    </>
+    <Counter
+      value={getItemFromCart(item?.id)?.quantity}
+      onDecrement={handleRemoveClick}
+      onIncrement={handleAddClick}
+      variant={counterVariant}
+      disabled={disabledState}
+      className={counterClass}
+    />
   );
 };

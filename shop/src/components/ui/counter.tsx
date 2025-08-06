@@ -1,7 +1,6 @@
 import cn from 'classnames';
 import { PlusIcon } from '@/components/icons/plus-icon';
 import { MinusIcon } from '@/components/icons/minus-icon';
-import { useTranslation } from 'next-i18next';
 import { twMerge } from 'tailwind-merge';
 import { PlusIconNew } from '@/components/icons/plus-icon';
 import { MinusIconNew } from '@/components/icons/minus-icon';
@@ -59,8 +58,6 @@ const Counter: React.FC<CounterProps> = ({
   className,
   disabled,
 }) => {
-  const { t } = useTranslation('common');
-
   return (
     <div
       className={twMerge(
@@ -89,7 +86,7 @@ const Counter: React.FC<CounterProps> = ({
             : cn('p-2 text-base', disabled ? 'text-[#c1c1c1]' : 'text-accent')
         )}
       >
-        <span className="sr-only">{t('text-minus')}</span>
+        <span className="sr-only">Decrease</span>
         {variant !== 'florine' ? (
           <MinusIcon className="h-3 w-3 stroke-2.5" />
         ) : (
@@ -123,9 +120,9 @@ const Counter: React.FC<CounterProps> = ({
               )
             : cn('p-2 text-base', disabled ? 'text-[#c1c1c1]' : 'text-accent')
         }
-        title={disabled ? t('text-out-stock') : ''}
+        title={disabled ? 'Out of Stock' : ''}
       >
-        <span className="sr-only">{t('text-plus')}</span>
+        <span className="sr-only">Increase</span>
         {variant !== 'florine' ? (
           <PlusIcon className="md:w-4.5 h-3.5 w-3.5 stroke-2.5 md:h-4.5" />
         ) : (

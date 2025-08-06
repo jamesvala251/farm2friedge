@@ -19,8 +19,7 @@ export const EMAIL_VERIFIED = 'emailVerified';
 export const RESPONSIVE_WIDTH = 1024 as number;
 
 export function getDirection(language: string | undefined) {
-  if (!language) return 'ltr';
-  return RTL_LANGUAGES.includes(language) ? 'rtl' : 'ltr';
+  return 'ltr';
 }
 
 export const checkIsMaintenanceModeComing = atom(false);
@@ -30,9 +29,7 @@ export const checkIsShopMaintenanceModeStart = atom(false);
 export const checkIsScrollingStart = atom(false);
 export const setNewAddress = atom<any>([]);
 
-export const isMultiLangEnable =
-  process.env.NEXT_PUBLIC_ENABLE_MULTI_LANG === 'true' &&
-  !!process.env.NEXT_PUBLIC_AVAILABLE_LANGUAGES;
+export const isMultiLangEnable = false;
 
 export const NEWSLETTER_POPUP_MODAL_KEY = 'SEEN_POPUP';
 export const REVIEW_POPUP_MODAL_KEY = 'SEEN_REVIEW_POPUP';

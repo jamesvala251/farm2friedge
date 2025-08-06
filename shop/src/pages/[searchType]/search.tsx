@@ -5,14 +5,17 @@ import { Grid } from '@/components/products/grid';
 import SearchCount from '@/components/search-view/search-count';
 import SidebarFilter from '@/components/search-view/sidebar-filter';
 import Sorting from '@/components/search-view/sorting';
+import ActiveFilters from '@/components/search-view/active-filters';
 import ErrorMessage from '@/components/ui/error-message';
 import { PRODUCTS_PER_PAGE } from '@/framework/client/variables';
 import { useProducts } from '@/framework/product';
+import { useCategories } from '@/framework/category';
 import { drawerAtom } from '@/store/drawer-atom';
 import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
 import { useRouter } from 'next/router';
 import StickyBox from 'react-sticky-box';
+import Link from 'next/link';
 
 import dynamic from 'next/dynamic';
 import { Product } from '@/types';
@@ -94,9 +97,10 @@ export default function SearchPage() {
           }
         />
         <div className="max-w-xs mt-4 md:mt-0">
-          <Sorting variant="dropdown" />
+          <Sorting />
         </div>
       </div>
+      <ActiveFilters />
       <Grid
         products={products as Product[] | undefined}
         loadMore={loadMore}

@@ -1,4 +1,3 @@
-import { useTranslation } from 'next-i18next';
 import Link from '@/components/ui/link';
 import type { Category } from '@/types';
 
@@ -15,8 +14,6 @@ const SimpleMenuCategories: React.FC<SimpleMenuCategoriesProps> = ({
   loading,
   title,
 }) => {
-  const { t } = useTranslation('common');
-
   if (loading) {
     return (
       <div className="flex justify-center py-4">

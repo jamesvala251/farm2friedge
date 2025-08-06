@@ -1,5 +1,4 @@
 import SearchBox from '@/components/ui/search/search-box';
-import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 import AutoSuggestionBox from '@/components/search-view/suggestion';
 import cn from 'classnames';
@@ -24,7 +23,6 @@ const SearchWithSuggestion: React.FC<Props> = ({
   variant,
   ...props
 }) => {
-  const { t } = useTranslation();
   const router = useRouter();
   const [searchTerm, updateSearchTerm] = useState('');
   const { homePage }: any = useHomepage();
@@ -77,7 +75,7 @@ const SearchWithSuggestion: React.FC<Props> = ({
         value={searchTerm}
         inputClassName={inputClassName}
         name="search"
-        placeholder={t('common:text-search-placeholder-minimal')}
+        placeholder="Search for products..."
         variant={variant}
         {...props}
       />

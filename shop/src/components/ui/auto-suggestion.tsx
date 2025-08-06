@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import cn from 'classnames';
-import { useTranslation } from 'next-i18next';
 import Scrollbar from '@/components/ui/scrollbar';
 import Link from '@/components/ui/link';
 import { Image } from '@/components/ui/image';
@@ -28,7 +27,6 @@ const AutoSuggestion: React.FC<Props> = ({
   seeMore,
   seeMoreLink,
 }) => {
-  const { t } = useTranslation('common');
   const router = useRouter();
 
   const handleClick = (path: string) => {
@@ -55,7 +53,7 @@ const AutoSuggestion: React.FC<Props> = ({
           <Scrollbar className="h-full w-full">
             {notFound && (
               <h3 className="flex h-full w-full items-center justify-center py-10 font-semibold text-gray-400">
-                {t('text-no-products')}
+                No products found
               </h3>
             )}
 
@@ -97,7 +95,7 @@ const AutoSuggestion: React.FC<Props> = ({
                 onClick={seeMoreLink}
                 className="text-sm font-semibold text-accent transition-colors hover:text-accent-hover"
               >
-                {t('text-see-more')}
+                See more
               </button>
             </div>
           )}
