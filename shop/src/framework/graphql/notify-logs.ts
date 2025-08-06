@@ -6,7 +6,7 @@ import {
   useNotifyLogAllReadMutation,
 } from './gql/notify_log.graphql';
 import { NetworkStatus } from '@apollo/client';
-import { useTranslation } from 'next-i18next';
+
 import { toast } from 'react-toastify';
 import { UpdateNotifyLogInput } from '__generated__/__types__';
 import { useUser } from '@/framework/user';
@@ -70,12 +70,12 @@ export function useNotifyLog({ id }: { id: string }) {
 }
 
 export function useNotificationRead() {
-  const { t } = useTranslation('common');
+  
   const [readNotifyLogsMutation, { loading: isLoading }] =
     useReadNotifyLogsMutation({
       refetchQueries: ['NotifyLogs'],
       onCompleted: (data: any) => {
-        toast.success(t('text-notification-read-message'));
+        toast.success("text-notification-read-message");
       },
     });
 
@@ -90,15 +90,15 @@ export function useNotificationRead() {
 }
 
 export function useNotifyLogAllRead() {
-  const { t } = useTranslation('common');
+  
   const [notifyLogAllReadMutation, { loading: isLoading }] =
     useNotifyLogAllReadMutation({
       refetchQueries: ['NotifyLogs'],
       onCompleted: (data: any) => {
-        toast.success(t('text-notification-read-message'));
+        toast.success("text-notification-read-message");
       },
       onError: (error: any) => {
-        toast.error(t(`common:${error?.response?.data.message}`));
+        toast.error("common:${error?.response?.data.message}");
       },
     });
 

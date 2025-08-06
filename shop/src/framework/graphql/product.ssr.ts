@@ -1,6 +1,6 @@
 import type { Product } from '__generated__/__types__';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import invariant from 'tiny-invariant';
 import { addApolloState, initializeApollo } from './client';
 import {
@@ -72,8 +72,7 @@ export const getStaticProps: GetStaticProps<
   return addApolloState(apolloClient, {
     props: {
       product,
-      ...(await serverSideTranslations(locale!, ['common'])),
-    },
+      },
     revalidate: 60,
   });
 };

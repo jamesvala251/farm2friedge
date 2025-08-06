@@ -4,7 +4,7 @@ import { API_ENDPOINTS } from '@/framework/client/api-endpoints';
 import client from '@/framework/client';
 import { useModalAction } from '@/components/ui/modal/modal.context';
 import { toast } from 'react-toastify';
-import { useTranslation } from 'next-i18next';
+
 import { useUser } from '@/framework/user';
 
 export function useCards(params?: any, options?: any) {
@@ -28,13 +28,13 @@ export function useCards(params?: any, options?: any) {
 
 export const useDeleteCard = () => {
   const queryClient = useQueryClient();
-  const { t } = useTranslation();
+  
   const { closeModal } = useModalAction();
 
   const { mutate, isLoading, error } = useMutation(client.cards.remove, {
     onSuccess: () => {
       closeModal();
-      toast.success(`${t('common:card-successfully-deleted')}`);
+      toast.success("Card successfully deleted");
     },
     // Always refetch after error or success:
     onSettled: () => {
@@ -50,7 +50,7 @@ export const useDeleteCard = () => {
 };
 
 export function useAddCards(method_key?: any) {
-  const { t } = useTranslation();
+  
   const { closeModal } = useModalAction();
   const queryClient = useQueryClient();
   const { mutate, isLoading, error } = useMutation(
@@ -58,7 +58,7 @@ export function useAddCards(method_key?: any) {
     {
       onSuccess: () => {
         closeModal();
-        toast.success(`${t('common:card-successfully-add')}`, {
+        toast.success("Card successfully added", {
           toastId: 'success',
         });
       },
@@ -66,7 +66,7 @@ export function useAddCards(method_key?: any) {
         const {
           response: { data },
         }: any = error ?? {};
-        toast.error(`${t(data?.message)}`, {
+        toast.error(data?.message || "Something went wrong", {
           toastId: 'error',
         });
       },
@@ -85,13 +85,13 @@ export function useAddCards(method_key?: any) {
 }
 
 export function useDefaultPaymentMethod() {
-  const { t } = useTranslation();
+  
   const queryClient = useQueryClient();
   const { mutate, isLoading, error } = useMutation(
     client.cards.makeDefaultPaymentMethod,
     {
       onSuccess: () => {
-        toast.success(`${t('common:set-default-card-message')}`);
+        toast.success("Default payment method set successfully");
       },
       // Always refetch after error or success:
       onSettled: () => {

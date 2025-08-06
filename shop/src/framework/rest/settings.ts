@@ -8,7 +8,7 @@ import { getPreviewImage } from '@/lib/get-preview-image';
 import { useAtom } from 'jotai';
 import { couponAtom } from '@/store/checkout';
 import { toast } from 'react-toastify';
-import { useTranslation } from 'next-i18next';
+
 import { useRouter } from 'next/router';
 import { setMaintenanceDetails } from './utils/maintenance-utils';
 
@@ -77,14 +77,14 @@ export function useSubscription() {
 }
 
 export function useVerifyCoupon() {
-  const { t } = useTranslation();
+  
   const [_, applyCoupon] = useAtom(couponAtom);
   let [formError, setFormError] = useState<any>(null);
   const { mutate, isLoading } = useMutation(client.coupons.verify, {
     onSuccess: (data: any) => {
       if (!data.is_valid) {
         setFormError({
-          code: t(`common:${data?.message}`),
+          code: "common:${data?.message}",
         });
       }
       applyCoupon(data?.coupon);

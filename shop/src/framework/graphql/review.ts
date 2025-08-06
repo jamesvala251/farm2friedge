@@ -1,6 +1,6 @@
 import { useModalAction } from '@/components/ui/modal/modal.context';
 import type { ReviewQueryOptions } from '@/types';
-import { useTranslation } from 'next-i18next';
+
 import { toast } from 'react-toastify';
 import { CreateReviewInput, UpdateReviewInput } from '__generated__/__types__';
 import {
@@ -41,11 +41,11 @@ export function useReviews({
 }
 
 export function useCreateReview() {
-  const { t } = useTranslation('common');
+  
   const { closeModal } = useModalAction();
   const [create, { loading: isLoading }] = useCreateReviewMutation({
     onCompleted: (data:any) => {
-      toast.success(t('text-review-request-submitted'));
+      toast.success("text-review-request-submitted");
       closeModal();
     },
     refetchQueries: [
@@ -66,11 +66,11 @@ export function useCreateReview() {
 }
 
 export function useUpdateReview() {
-  const { t } = useTranslation('common');
+  
   const { closeModal } = useModalAction();
   const [update, { loading: isLoading }] = useUpdateReviewMutation({
     onCompleted: (data:any) => {
-      toast.success(t('text-review-request-update-submitted'));
+      toast.success("text-review-request-update-submitted");
       closeModal();
     },
     refetchQueries: [

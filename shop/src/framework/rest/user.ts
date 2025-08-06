@@ -26,7 +26,7 @@ import { useAtom } from 'jotai';
 import Cookies from 'js-cookie';
 import { useStateMachine } from 'little-state-machine';
 import { signOut as socialLoginSignOut } from 'next-auth/react';
-import { useTranslation } from 'next-i18next';
+
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
@@ -105,11 +105,11 @@ export const useDeleteAddress = () => {
 };
 export const useUpdateEmail = () => {
   const queryClient = useQueryClient();
-  const { t } = useTranslation();
+  
   return useMutation(client.users.updateEmail, {
     onSuccess: (data) => {
       if (data) {
-        toast.success(t('successfully-email-updated'));
+        toast.success("successfully-email-updated");
       }
     },
     onError: (error) => {
@@ -126,18 +126,17 @@ export const useUpdateEmail = () => {
 };
 
 export const useUpdateUser = () => {
-  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { closeModal } = useModalAction();
   return useMutation(client.users.update, {
     onSuccess: (data) => {
       if (data?.id) {
-        // toast.success(`${t('profile-update-successful')}`);
+        // toast.success(`${"profile-update-successful"}`);
         closeModal();
       }
     },
     onError: (error) => {
-      toast.error(`${t('error-something-wrong')}`);
+      toast.error(`${"error-something-wrong"}`);
     },
     onSettled: () => {
       queryClient.invalidateQueries(API_ENDPOINTS.USERS_ME);
@@ -146,15 +145,13 @@ export const useUpdateUser = () => {
 };
 
 export const useContact = ({ reset }: { reset: () => void }) => {
-  const { t } = useTranslation('common');
-
   return useMutation(client.users.contactUs, {
     onSuccess: (data) => {
       if (data.success) {
-        toast.success(`${t(data.message)}`);
+        toast.success(`${data.message}`);
         reset();
       } else {
-        toast.error(`${t(data.message)}`);
+        toast.error(`${data.message}`);
       }
     },
     onError: (err) => {
@@ -164,7 +161,6 @@ export const useContact = ({ reset }: { reset: () => void }) => {
 };
 
 export function useLogin() {
-  const { t } = useTranslation('common');
   const [_, setAuthorized] = useAtom(authorizationAtom);
   const { closeModal } = useModalAction();
   const { setToken } = useToken();
@@ -174,7 +170,7 @@ export function useLogin() {
   const { mutate, isLoading } = useMutation(client.users.login, {
     onSuccess: (data) => {
       if (!data.token) {
-        setServerError('error-credential-wrong');
+        setServerError('Invalid credentials');
         return;
       }
       setToken(data.token);
@@ -194,7 +190,6 @@ export function useLogin() {
 }
 
 export function useSocialLogin() {
-  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { setToken } = useToken();
   const [_, setAuthorized] = useAtom(authorizationAtom);
@@ -207,7 +202,7 @@ export function useSocialLogin() {
         return;
       }
       if (!data.token) {
-        toast.error(`${t('error-credential-wrong')}`);
+        toast.error("Invalid credentials");
       }
     },
     onError: (error: Error) => {
@@ -281,7 +276,6 @@ export function useVerifyOtpCode({
 
 export function useOtpLogin() {
   const [otpState, setOtpState] = useAtom(optAtom);
-  const { t } = useTranslation('common');
   const [_, setAuthorized] = useAtom(authorizationAtom);
   const { closeModal } = useModalAction();
   const { setToken } = useToken();
@@ -291,7 +285,7 @@ export function useOtpLogin() {
   const { mutate: otpLogin, isLoading } = useMutation(client.users.OtpLogin, {
     onSuccess: (data) => {
       if (!data.token) {
-        setServerError('text-otp-verify-failed');
+        setServerError('OTP verification failed');
         return;
       }
       setToken(data.token!);
@@ -322,7 +316,6 @@ export function useOtpLogin() {
 }
 
 export function useRegister() {
-  const { t } = useTranslation('common');
   const { setToken } = useToken();
   const queryClient = useQueryClient();
   const [_, setAuthorized] = useAtom(authorizationAtom);
@@ -340,7 +333,7 @@ export function useRegister() {
         return;
       }
       if (!data.token) {
-        toast.error(`${t('error-credential-wrong')}`);
+        toast.error("Invalid credentials");
       }
     },
     onError: (error) => {
@@ -358,13 +351,12 @@ export function useRegister() {
   return { mutate, isLoading, formError, setFormError };
 }
 export function useResendVerificationEmail() {
-  const { t } = useTranslation('common');
   const { mutate, isLoading } = useMutation(
     client.users.resendVerificationEmail,
     {
       onSuccess: (data) => {
         if (data?.success) {
-          toast.success(t('PICKBAZAR_MESSAGE.EMAIL_SENT_SUCCESSFUL'));
+          toast.success("Email sent successfully");
         }
       },
       onError: (error) => {
@@ -413,7 +405,6 @@ export function useLogout() {
 }
 
 export function useChangePassword() {
-  const { t } = useTranslation('common');
   let [formError, setFormError] =
     useState<Partial<ChangePasswordUserInput> | null>(null);
 
@@ -425,7 +416,7 @@ export function useChangePassword() {
         });
         return;
       }
-      toast.success(`${t('password-successful')}`);
+      toast.success(`${"password-successful"}`);
     },
     onError: (error) => {
       const {
@@ -442,7 +433,6 @@ export function useForgotPassword() {
   const { actions } = useStateMachine({ updateFormState });
   let [message, setMessage] = useState<string | null>(null);
   let [formError, setFormError] = useState<any>(null);
-  const { t } = useTranslation();
 
   const { mutate, isLoading } = useMutation(client.users.forgotPassword, {
     onSuccess: (data, variables) => {

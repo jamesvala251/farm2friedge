@@ -4,7 +4,7 @@ import type {
   TypeQueryOptions,
 } from '@/types';
 import type { GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 import client from './client';
@@ -28,7 +28,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   );
   return {
     props: {
-      ...(await serverSideTranslations(locale!, ['form', 'common', 'table'])),
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
     },
   };

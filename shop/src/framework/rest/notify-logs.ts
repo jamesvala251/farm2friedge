@@ -13,7 +13,7 @@ import {
 import client from './client';
 import { API_ENDPOINTS } from './client/api-endpoints';
 import { toast } from 'react-toastify';
-import { useTranslation } from 'next-i18next';
+
 import { useUser } from '@/framework/user';
 import { useSettings } from '@/framework/settings';
 
@@ -82,7 +82,6 @@ export function useNotifyLog({ id }: { id: string }) {
 }
 
 export function useNotificationRead() {
-  const { t } = useTranslation('common');
   const queryClient = useQueryClient();
   const {
     mutate: readNotification,
@@ -90,7 +89,7 @@ export function useNotificationRead() {
     isSuccess,
   } = useMutation(client?.notifyLogs?.readNotifyLog, {
     onSuccess: () => {
-      toast.success(t('text-notification-read-message'));
+      toast.success("Notification marked as read");
     },
     // Always refetch after error or success:
     onSettled: () => {
@@ -103,18 +102,17 @@ export function useNotificationRead() {
 
 export const useNotifyLogAllRead = () => {
   const queryClient = useQueryClient();
-  const { t } = useTranslation('common');
 
   return useMutation(client?.notifyLogs?.readAllNotifyLogs, {
     onSuccess: () => {
-      toast.success(t('text-notifications-read-message'));
+      toast.success("All notifications marked as read");
     },
     // Always refetch after error or success:
     onSettled: () => {
       queryClient.invalidateQueries(API_ENDPOINTS.NOTIFY_LOGS);
     },
     onError: (error: any) => {
-      toast.error(t(`common:${error?.response?.data.message}`));
+      toast.error(error?.response?.data.message || "Something went wrong");
     },
   });
 };

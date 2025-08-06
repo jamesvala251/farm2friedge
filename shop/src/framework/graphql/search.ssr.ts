@@ -1,5 +1,5 @@
 import type { GetServerSideProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import invariant from 'tiny-invariant';
 import { addApolloState, initializeApollo } from './client';
 import { CategoriesDocument } from './gql/categories.graphql';
@@ -30,7 +30,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   });
   return addApolloState(apolloClient, {
     props: {
-      ...(await serverSideTranslations(locale!, ['common'])),
-    },
+      },
   });
 };

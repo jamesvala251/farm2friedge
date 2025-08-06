@@ -11,7 +11,7 @@ import type {
   OrderQueryOptions,
   QueryOptions,
 } from '@/types';
-import { useTranslation } from 'next-i18next';
+
 import { toast } from 'react-toastify';
 import { useModalAction } from '@/components/ui/modal/modal.context';
 import {
@@ -177,13 +177,13 @@ export const useDownloadableProducts = (
 };
 
 export function useCreateRefund() {
-  const { t } = useTranslation();
+  
   const { closeModal } = useModalAction();
   const { locale } = useRouter();
   const [refundRequest, { loading: isLoading }] = useCreateRefundMutation({
     refetchQueries: ['Orders'],
     onCompleted: () => {
-      toast.success(t('text-refund-request-submitted'));
+      toast.success("text-refund-request-submitted");
       closeModal();
     },
   });
@@ -255,7 +255,7 @@ export function useGenerateDownloadableUrl() {
   const [getDownloadableUrl] = useGenerateDownloadableUrlMutation({
     onCompleted: (data) => {
       function download(fileUrl: string, fileName: string) {
-        var a = document.createElement('a');
+        var a = document.createElemen"a";
         a.href = fileUrl;
         a.setAttribute('download', fileName);
         a.click();

@@ -2,7 +2,7 @@ import { LIMIT_HUNDRED } from '@/lib/constants';
 import type { TermsAndConditionsQueryOptions, TypeQueryOptions } from '@/types';
 import { SettingsQueryOptions } from '@/types';
 import type { GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 import client from './client';
@@ -31,7 +31,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   );
   return {
     props: {
-      ...(await serverSideTranslations(locale!, ['common', 'terms'])),
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
     },
   };

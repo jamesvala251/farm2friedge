@@ -158,6 +158,7 @@ className="bg-gray-50 rounded-lg shadow-md border border-gray-300 p-6 lg:p-8"
 - **Replaced:** `useTranslation()` with static strings
 - **Fixed:** 50+ files with language issues
 - **Result:** Pure English static content
+- **Server Fix:** Removed `serverSideTranslations` from SSR files
 
 ### Image Management
 - **Fixed:** Wishlist image paths

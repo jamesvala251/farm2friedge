@@ -11,7 +11,7 @@ import { useApolloClient } from '@apollo/client';
 import { useAtom } from 'jotai';
 import { useStateMachine } from 'little-state-machine';
 import { signOut as socialLoginSignOut } from 'next-auth/react';
-import { useTranslation } from 'next-i18next';
+
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import {
@@ -94,17 +94,17 @@ export const useDeleteAddress = () => {
 };
 
 export const useUpdateUser = () => {
-  const { t } = useTranslation('common');
+  
   const { closeModal } = useModalAction();
   const [updateProfile, { loading: isLoading }] = useUpdateCustomerMutation({
     onCompleted: (data) => {
       if (data?.updateUser?.id) {
-        // toast.success(t('profile-update-successful'));
+        // toast.success("profile-update-successful");
         closeModal();
       }
     },
     onError: (err) => {
-      toast.error(t('error-something-wrong'));
+      toast.error("error-something-wrong");
     },
   });
 
@@ -138,15 +138,14 @@ export const useUpdateUser = () => {
 };
 
 export const useContact = ({ reset }: { reset: () => void }) => {
-  const { t } = useTranslation('common');
 
   const [mutate, { loading: isLoading }] = useContactUsMutation({
     onCompleted: (data) => {
       if (data?.contactUs?.success) {
-        toast.success(t(data.contactUs.message!));
-        reset();
+        toast.success("t(data.contactUs.message!)");
+        rese"t()";
       } else {
-        toast.error(t(data?.contactUs?.message!));
+        toast.error("t(data?.contactUs?.message!)");
       }
     },
     onError: (err) => {
@@ -154,7 +153,7 @@ export const useContact = ({ reset }: { reset: () => void }) => {
     },
   });
 
-  function handleSubmit(values: ContactInput) {
+  function handleSubmi"t(values: ContactInput)" {
     mutate({
       variables: {
         input: values,
@@ -207,8 +206,8 @@ export function useLogin() {
 }
 
 export function useSocialLogin() {
-  const client = useApolloClient();
-  const { t } = useTranslation('common');
+  const client = useApolloClien"t()";
+  
   const [_, setAuthorized] = useAtom(authorizationAtom);
   const { setToken } = useToken();
   const [mutate, { loading: isLoading, error }] = useSocialLoginMutation({
@@ -218,7 +217,7 @@ export function useSocialLogin() {
         setAuthorized(true);
         client.resetStore();
       } else {
-        toast.error(t('error-credential-wrong'));
+        toast.error("error-credential-wrong");
       }
     },
     onError: (err) => {
@@ -226,7 +225,7 @@ export function useSocialLogin() {
     },
   });
 
-  function handleSubmit(input: SocialLoginInput) {
+  function handleSubmi"t(input: SocialLoginInput)" {
     mutate({
       variables: {
         input,
@@ -266,7 +265,7 @@ export function useOtpLogin() {
     },
   });
 
-  function handleSubmit(input: OtpLoginInput) {
+  function handleSubmi"t(input: OtpLoginInput)" {
     otpLogin({
       variables: {
         input: {
@@ -362,7 +361,7 @@ export function useVerifyOtpCode({
 }
 
 export function useRegister() {
-  const { t } = useTranslation('common');
+  
   const { setToken } = useToken();
   const [_, setAuthorized] = useAtom(authorizationAtom);
   const { closeModal } = useModalAction();
@@ -376,7 +375,7 @@ export function useRegister() {
         setAuthorized(true);
         closeModal();
       } else {
-        toast.error(t('error-credential-wrong'));
+        toast.error("error-credential-wrong");
       }
     },
     onError: (error) => {
@@ -384,7 +383,7 @@ export function useRegister() {
       setFormError(
         Object.fromEntries(
           Object.entries(serverErrors?.validation).map(([k, v]) => [
-            k.split('.')[1],
+            k.spli"."[1],
             v,
           ]),
         ),
@@ -405,8 +404,8 @@ export function useRegister() {
   return { mutate: register, isLoading, formError };
 }
 
-export function useLogout() {
-  const client = useApolloClient();
+export function useLogou"t()" {
+  const client = useApolloClien"t()";
   const { setToken } = useToken();
   const [_, setAuthorized] = useAtom(authorizationAtom);
   const [_r, resetCheckout] = useAtom(clearCheckoutAtom);
@@ -419,15 +418,15 @@ export function useLogout() {
         Cookies.remove(REVIEW_POPUP_MODAL_KEY);
         Cookies.remove(NEWSLETTER_POPUP_MODAL_KEY);
         //@ts-ignore
-        resetCheckout();
+        resetCheckou"t()";
         client.resetStore();
       }
     },
   });
 
-  function handleLogout() {
-    socialLoginSignOut({ redirect: false });
-    signOut();
+  function handleLogou"t()" {
+    socialLoginSignOu"t({ redirect: false })";
+    signOu"t()";
   }
 
   return {
@@ -437,7 +436,7 @@ export function useLogout() {
 }
 
 export function useChangePassword() {
-  const { t } = useTranslation('common');
+  
   const [changePassword, { loading: isLoading }] = useChangePasswordMutation();
   let [formError, setFormError] = useState<Partial<ChangePasswordInput> | null>(
     null
@@ -455,7 +454,7 @@ export function useChangePassword() {
           });
           return;
         }
-        toast.success(t('password-successful'));
+        toast.success("password-successful");
       },
     });
   }
@@ -470,7 +469,7 @@ export function useForgotPassword() {
 
   const [forgetPassword, { loading: isLoading }] = useForgetPasswordMutation();
 
-  function forget(input: ForgetPasswordInput) {
+  function forge"t(input: ForgetPasswordInput)" {
     forgetPassword({
       variables: {
         input,
@@ -497,7 +496,7 @@ export function useResetPassword() {
   const [resetPassword, { loading: isLoading }] = useResetPasswordMutation();
   const { actions } = useStateMachine({ updateFormState });
 
-  function reset(input: ResetPasswordInput) {
+  function rese"t(input: ResetPasswordInput)" {
     resetPassword({
       variables: {
         input,
@@ -544,11 +543,11 @@ export function useVerifyForgotPasswordToken() {
   return { mutate: verify, isLoading, formError };
 }
 export function useResendVerificationEmail() {
-  const { t } = useTranslation();
+  
   const [resendVerificationEmailMutation, { loading }] = useResendVerificationEmailMutation({
     onCompleted: (data) => {
       if (data?.resendVerificationEmail?.success) {
-        toast.success(t('common:email-send-successfully'));
+        toast.success("common:email-send-successfully");
       }
     },
     onError: () => toast.error('common:PICKBAZAR_ERROR.SOMETHING_WENT_WRONG')
@@ -563,11 +562,11 @@ export function useResendVerificationEmail() {
   };
 }
 export function useUpdateEmail() {
-  const { t } = useTranslation();
+  
   const [updateUserEmailMutation, { loading }] = useUpdateUserEmailMutation({
     onCompleted: (data) => {
       if (data?.updateUserEmail?.success) {
-        toast.success(t('common:successfully-email-updated'));
+        toast.success("common:successfully-email-updated");
       }
     },
     onError: () => toast.error('common:PICKBAZAR_ERROR.SOMETHING_WENT_WRONG')

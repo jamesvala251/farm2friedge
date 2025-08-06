@@ -16,7 +16,7 @@ import {
   useQuery,
   useQueryClient,
 } from 'react-query';
-import { useTranslation } from 'next-i18next';
+
 import { toast } from 'react-toastify';
 import { useModalAction } from '@/components/ui/modal/modal.context';
 import { API_ENDPOINTS } from './client/api-endpoints';
@@ -134,7 +134,6 @@ export function useRefunds(options: Pick<QueryOptions, 'limit'>) {
   };
 }
 
-
 export const useDownloadableProducts = (
   options: Pick<QueryOptions, 'limit'>
 ) => {
@@ -183,7 +182,7 @@ export const useDownloadableProducts = (
 };
 
 export function useCreateRefund() {
-  const { t } = useTranslation();
+  
   const { locale } = useRouter();
   const { closeModal } = useModalAction();
   const queryClient = useQueryClient();
@@ -191,14 +190,14 @@ export function useCreateRefund() {
     client.orders.createRefund,
     {
       onSuccess: () => {
-        toast.success(`${t('text-refund-request-submitted')}`);
+        toast.success(`${"text-refund-request-submitted"}`);
       },
       onError: (error) => {
         const {
           response: { data },
         }: any = error ?? {};
 
-        toast.error(`${t(data?.message)}`);
+        toast.error(data?.message);
       },
       onSettled: () => {
         queryClient.invalidateQueries(API_ENDPOINTS.ORDERS);
@@ -224,7 +223,6 @@ export function useCreateRefund() {
 export function useCreateOrder() {
   const router = useRouter();
   const { locale } = router;
-  const { t } = useTranslation();
   const { mutate: createOrder, isLoading } = useMutation(client.orders.create, {
     onSuccess: ({ tracking_number, payment_gateway, payment_intent }) => {
       console.log(
@@ -267,15 +265,15 @@ export function useCreateOrder() {
       ...input,
       language: locale,
       invoice_translated_text: {
-        subtotal: t('order-sub-total'),
-        discount: t('order-discount'),
-        tax: t('order-tax'),
-        delivery_fee: t('order-delivery-fee'),
-        total: t('order-total'),
-        products: t('text-products'),
-        quantity: t('text-quantity'),
-        invoice_no: t('text-invoice-no'),
-        date: t('text-date'),
+        subtotal: "order-sub-total",
+        discount: "order-discount",
+        tax: "order-tax",
+        delivery_fee: "order-delivery-fee",
+        total: "order-total",
+        products: "text-products",
+        quantity: "text-quantity",
+        invoice_no: "text-invoice-no",
+        date: "text-date",
       },
     };
     createOrder(formattedInputs);
@@ -294,7 +292,7 @@ export function useGenerateDownloadableUrl() {
     {
       onSuccess: (data) => {
         function download(fileUrl: string, fileName: string) {
-          var a = document.createElement('a');
+          var a = document.createElement("a");
           a.href = fileUrl;
           a.setAttribute('download', fileName);
           a.click();

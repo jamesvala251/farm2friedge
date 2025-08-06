@@ -1,12 +1,11 @@
 import { FlashSale } from '@/types';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import invariant from 'tiny-invariant';
 import { addApolloState, initializeApollo } from './client';
 import { FlashSaleDocument, FlashSaleQuery, FlashSalesDocument, FlashSalesQuery } from './gql/flash_sales.graphql';
 import { SettingsDocument } from './gql/settings.graphql';
 import { LIMIT_HUNDRED, SHOPS_LIMIT } from '@/lib/constants';
-
 
 type ParsedQueryParams = {
   slug: string;
@@ -34,7 +33,6 @@ export const getStaticPaths: GetStaticPaths<ParsedQueryParams> = async ({ locale
 type PageProps = {
   flashSale: FlashSale;
 };
-
 
 export const getStaticProps: GetStaticProps<
   PageProps,
@@ -67,8 +65,7 @@ export const getStaticProps: GetStaticProps<
   return addApolloState(apolloClient, {
     props: {
       flashSale,
-      ...(await serverSideTranslations(locale!, ['common'])),
-    },
+      },
     revalidate: 60,
   });
 };

@@ -18,7 +18,7 @@ import client from './client';
 import { API_ENDPOINTS } from './client/api-endpoints';
 import { mapPaginatorData } from '@/framework/utils/data-mappers';
 import { formatProductsArgs } from '@/framework/utils/format-products-args';
-import { useTranslation } from 'next-i18next';
+
 import { useModalAction } from '@/components/ui/modal/modal.context';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
@@ -155,13 +155,13 @@ export function useQuestions(options?: Partial<QuestionQueryOptions>) {
 }
 
 export function useCreateFeedback() {
-  const { t } = useTranslation('common');
+  
   const queryClient = useQueryClient();
   const { mutate: createFeedback, isLoading } = useMutation(
     client.products.createFeedback,
     {
       onSuccess: (res) => {
-        toast.success(`${t('text-feedback-submitted')}`);
+        toast.success("Feedback submitted successfully");
         queryClient.refetchQueries(API_ENDPOINTS.PRODUCTS_QUESTIONS);
         queryClient.refetchQueries(API_ENDPOINTS.PRODUCTS_REVIEWS);
       },
@@ -174,20 +174,20 @@ export function useCreateFeedback() {
 }
 
 export function useCreateAbuseReport() {
-  const { t } = useTranslation('common');
+  
   const { closeModal } = useModalAction();
   const { mutate: createAbuseReport, isLoading } = useMutation(
     client.products.createAbuseReport,
     {
       onSuccess: () => {
-        toast.success(`${t('text-abuse-report-submitted')}`);
+        toast.success("Abuse report submitted successfully");
       },
       onError: (error) => {
         const {
           response: { data },
         }: any = error ?? {};
 
-        toast.error(`${t(data?.message)}`);
+        toast.error(data?.message || "Something went wrong");
       },
       onSettled: () => {
         closeModal();
@@ -201,24 +201,23 @@ export function useCreateAbuseReport() {
 }
 
 export function useCreateQuestion() {
-  const { t } = useTranslation('common');
+  
   const { closeModal } = useModalAction();
   const queryClient = useQueryClient();
   const { mutate: createQuestion, isLoading } = useMutation(
     client.products.createQuestion,
     {
       onSuccess: () => {
-        toast.success(`${t('text-question-submitted')}`);
+        toast.success("Question submitted successfully");
       },
       onError: (error) => {
         const {
           response: { data },
         }: any = error ?? {};
 
-        toast.error(`${t(data?.message)}`);
+        toast.error(data?.message || "Something went wrong");
       },
       onSettled: () => {
-        queryClient.refetchQueries(API_ENDPOINTS.PRODUCTS_QUESTIONS);
         closeModal();
       },
     },

@@ -6,7 +6,7 @@ import type {
   QuestionQueryOptions,
 } from '@/types';
 import { NetworkStatus } from '@apollo/client';
-import { useTranslation } from 'next-i18next';
+
 import { toast } from 'react-toastify';
 import {
   CreateAbusiveReportInput,
@@ -162,11 +162,11 @@ export function useQuestions({
 }
 
 export function useCreateFeedback() {
-  const { t } = useTranslation('common');
+  
   const [create, { loading: isLoading }] = useCreateFeedbackMutation({
     refetchQueries: ['Questions', 'Reviews'],
     onCompleted: (data: any) => {
-      toast.success(t('text-feedback-submitted'));
+      toast.success("Feedback submitted successfully");
     },
   });
 
@@ -181,15 +181,15 @@ export function useCreateFeedback() {
 }
 
 export function useCreateAbuseReport() {
-  const { t } = useTranslation('common');
+  
   const { closeModal } = useModalAction();
   const [create, { loading: isLoading }] = useCreateAbuseReportMutation({
     onCompleted: (data) => {
-      toast.success(t('text-abuse-report-submitted'));
+      toast.success("Abuse report submitted successfully");
       closeModal();
     },
     onError: (error) => {
-      toast.error(t(error.message));
+      toast.error(error.message || "Something went wrong");
     },
   });
 
@@ -204,16 +204,16 @@ export function useCreateAbuseReport() {
 }
 
 export function useCreateQuestion() {
-  const { t } = useTranslation('common');
+  
   const { closeModal } = useModalAction();
   const [create, { loading: isLoading }] = useCreateQuestionMutation({
     refetchQueries: ['Questions'],
     onCompleted: (data) => {
-      toast.success(t('text-question-submitted'));
+      toast.success("Question submitted successfully");
       closeModal();
     },
     onError: (error) => {
-      toast.error(t(error.message));
+      toast.error(error.message || "Something went wrong");
     },
   });
 

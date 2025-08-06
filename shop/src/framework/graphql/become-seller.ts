@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import { addApolloState, initializeApollo } from './client';
 import {
   BecameSellerDocument,
@@ -28,8 +28,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     return addApolloState(apolloClient, {
       props: {
         data: data.becameSeller,
-        ...(await serverSideTranslations(locale!, ['common'])),
-      },
+        },
     });
   } catch (error) {
     return {

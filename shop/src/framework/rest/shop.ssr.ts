@@ -1,6 +1,6 @@
 import type { ProductQueryOptions, Shop } from '@/types';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 import invariant from 'tiny-invariant';
@@ -57,7 +57,6 @@ export const getStaticProps: GetStaticProps<
           shop_id: shop?.id,
           limit: PRODUCTS_PER_PAGE,
         },
-        ...(await serverSideTranslations(locale!, ['common'])),
         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
       },
       revalidate: 60,

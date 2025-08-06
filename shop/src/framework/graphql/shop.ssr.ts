@@ -1,6 +1,6 @@
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import type { Shop } from '__generated__/__types__';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import invariant from 'tiny-invariant';
 import { addApolloState, initializeApollo } from './client';
 import { PRODUCTS_PER_PAGE } from './client/variables';
@@ -87,8 +87,7 @@ export const getStaticProps: GetStaticProps<
         limit: PRODUCTS_PER_PAGE,
         shop_id: Number(data?.shop?.id),
       },
-      ...(await serverSideTranslations(locale!, ['common'])),
-    },
+      },
     revalidate: 120,
   });
 };

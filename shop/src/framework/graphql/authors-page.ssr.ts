@@ -1,6 +1,5 @@
 import type { GetStaticProps } from 'next';
 
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { addApolloState, initializeApollo } from './client';
 import { AUTHORS_PER_PAGE } from './client/variables';
 import { AuthorsDocument } from './gql/authors.graphql';
@@ -31,7 +30,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   });
   return addApolloState(apolloClient, {
     props: {
-      ...(await serverSideTranslations(locale!, ['common'])),
-    },
+      },
   });
 };

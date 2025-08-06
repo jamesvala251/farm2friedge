@@ -1,6 +1,6 @@
 import type { Product } from '@/types';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import invariant from 'tiny-invariant';
 import client from './client';
 import { dehydrate } from 'react-query/hydration';
@@ -46,7 +46,6 @@ export const getStaticProps: GetStaticProps<
     return {
       props: {
         product,
-        ...(await serverSideTranslations(locale!, ['common'])),
         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
       },
       revalidate: 60,

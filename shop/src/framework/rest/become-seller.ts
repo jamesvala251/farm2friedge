@@ -3,7 +3,6 @@ import { QueryClient, dehydrate } from 'react-query';
 import { API_ENDPOINTS } from './client/api-endpoints';
 import client from './client';
 import { QueryOptions, SettingsQueryOptions } from '@/types';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const queryClient = new QueryClient();
@@ -32,7 +31,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
             },
           },
         },
-        ...(await serverSideTranslations(locale!, ['common'])),
         dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
       },
       revalidate: 60,

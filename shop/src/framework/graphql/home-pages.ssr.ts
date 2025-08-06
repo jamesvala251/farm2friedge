@@ -1,6 +1,6 @@
 import type { HomePageProps } from '@/types';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import invariant from 'tiny-invariant';
 import { addApolloState, initializeApollo } from './client';
 import { CATEGORIES_PER_PAGE, PRODUCTS_PER_PAGE } from './client/variables';
@@ -134,8 +134,7 @@ export const getStaticProps: GetStaticProps<
       layout:
         types.find((t) => t.slug === pageType)?.settings?.layoutType ??
         'default',
-      ...(await serverSideTranslations(locale!, ['common', 'banner'])),
-    },
+      },
     revalidate: 120,
   });
 };

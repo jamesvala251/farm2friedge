@@ -7,7 +7,7 @@ import {
   useSubscribeToNewsletterMutation,
 } from './gql/settings.graphql';
 import { useUploadMutation } from './gql/upload.graphql';
-import { useTranslation } from 'next-i18next';
+
 import { useAtom } from 'jotai';
 import { couponAtom } from '@/store/checkout';
 import { toast } from 'react-toastify';
@@ -71,14 +71,14 @@ export const useUploads = ({ onChange, defaultFiles }: any) => {
 };
 
 export const useVerifyCoupon = () => {
-  const { t } = useTranslation();
+  
   const [_, applyCoupon] = useAtom(couponAtom);
   let [formError, setFormError] = useState<any>(null);
   const [mutate, { loading: isLoading }] = useVerifyCouponMutation({
     onCompleted: (data: any) => {
       if (!data?.verifyCoupon?.is_valid) {
         setFormError({
-          code: t(`common:${data?.verifyCoupon?.message}`),
+          code: "common:${data?.verifyCoupon?.message}",
         });
       }
       applyCoupon(data?.verifyCoupon?.coupon);

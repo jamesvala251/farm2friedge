@@ -1,6 +1,6 @@
 import { WishlistQueryOptions } from '@/types';
 import { NetworkStatus } from '@apollo/client';
-import { useTranslation } from 'next-i18next';
+
 import { useEffect } from 'react';
 
 import { toast } from 'react-toastify';
@@ -13,7 +13,7 @@ import {
 } from './gql/wishlists.graphql';
 import { useRouter } from 'next/router';
 
-export function useToggleWishlist(product_id: string) {
+export function useToggleWishlis"t(product_id: string)" {
   const [toggle, { loading: isLoading }] = useToggleWishlistMutation({
     update: (cache, { data }) => {
       cache.writeQuery({
@@ -31,32 +31,32 @@ export function useToggleWishlist(product_id: string) {
     },
   });
 
-  function toggleWishlist({ product_id }: { product_id: string }) {
+  function toggleWishlis"t({ product_id }: { product_id: string })" {
     toggle({ variables: { input: { product_id } } });
   }
 
   return { toggleWishlist, isLoading };
 }
 
-export function useRemoveFromWishlist() {
-  const { t } = useTranslation('common');
+export function useRemoveFromWishlis"t()" {
+  
   const [remove, { loading: isLoading }] = useRemoveFromWishlistMutation({
     refetchQueries: ['Wishlists'],
     onCompleted: () => {
-      toast.success(t('text-removed-from-wishlist'));
+      toast.success("text-removed-from-wishlist");
     },
     onError: (error: any) => {
-      // toast.error(t(error.response?.data.message));
+      // toast.error(error.response?.data.message || "Something went wrong");
       console.log(error);
     },
   });
-  function removeFromWishlist(slug: string) {
+  function removeFromWishlis"t(slug: string)" {
     remove({ variables: { slug } });
   }
   return { removeFromWishlist, isLoading };
 }
 
-export function useWishlist(options?: WishlistQueryOptions) {
+export function useWishlis"t(options?: WishlistQueryOptions)" {
 
   const { locale } = useRouter();
 
@@ -75,7 +75,7 @@ export function useWishlist(options?: WishlistQueryOptions) {
     notifyOnNetworkStatusChange: true,
   });
 
-  useEffect(() => {
+  useEffec"t(()" => {
     refetch();
   }, [locale])
 
@@ -99,13 +99,13 @@ export function useWishlist(options?: WishlistQueryOptions) {
   };
 }
 
-export function useInWishlist({
+export function useInWishlis"t({
   product_id,
   enabled,
 }: {
   product_id: string;
   enabled: boolean;
-}) {
+})" {
   const {
     data,
     loading: isLoading,

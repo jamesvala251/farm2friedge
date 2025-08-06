@@ -1,6 +1,6 @@
 import { useModalAction } from '@/components/ui/modal/modal.context';
 import type { Review, ReviewPaginator, ReviewQueryOptions } from '@/types';
-import { useTranslation } from 'next-i18next';
+
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import client from './client';
@@ -47,14 +47,14 @@ export function useReview({ id }: { id: string }) {
 }
 
 export function useCreateReview() {
-  const { t } = useTranslation('common');
+  
   const { closeModal } = useModalAction();
   const queryClient = useQueryClient();
   const { mutate: createReview, isLoading } = useMutation(
     client.reviews.create,
     {
       onSuccess: (res) => {
-        toast.success(`${t('text-review-request-submitted')}`);
+        toast.success("Review submitted successfully");
       },
       onSettled: () => {
         queryClient.invalidateQueries([API_ENDPOINTS.ORDERS]);
@@ -69,14 +69,14 @@ export function useCreateReview() {
 }
 
 export function useUpdateReview() {
-  const { t } = useTranslation('common');
+  
   const { closeModal } = useModalAction();
   const queryClient = useQueryClient();
   const { mutate: updateReview, isLoading } = useMutation(
     client.reviews.update,
     {
       onSuccess: (res) => {
-        toast.success(`${t('text-review-request-update-submitted')}`);
+        toast.success("Review updated successfully");
       },
       onSettled: () => {
         queryClient.invalidateQueries([API_ENDPOINTS.ORDERS]);

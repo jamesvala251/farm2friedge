@@ -16,7 +16,6 @@ import { API_ENDPOINTS } from './client/api-endpoints';
 import { mapPaginatorData } from '@/framework/utils/data-mappers';
 import { useModalAction } from '@/components/ui/modal/modal.context';
 import { toast } from 'react-toastify';
-import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
 
 export function useShops(options?: Partial<ShopQueryOptions>) {
@@ -68,19 +67,19 @@ export const useShop = (
 };
 
 export const useSearchNearShops = () => {
-  const { t } = useTranslation();
+  
   const queryClient = useQueryClient();
   const { closeModal } = useModalAction();
   return useMutation(client.shops.searchNearShops, {
     onSuccess: (data) => {
       if (data.length > 0) {
-        toast.success(`${t('Show Result')}`);
+        toast.success(`${"Show Result"}`);
         queryClient.invalidateQueries(API_ENDPOINTS.NEAR_SHOPS);
         closeModal();
       }
     },
     onError: (error) => {
-      toast.error(`${t('error-something-wrong')}`);
+      toast.error(`${"error-something-wrong"}`);
     },
   });
 };
@@ -98,7 +97,6 @@ export const useGetSearchNearShops = ({ lat, lng }: ShopMapLocation) => {
 };
 
 export const useShopMaintenanceEvent = () => {
-  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const router = useRouter();
   const { reload } = router;
@@ -109,7 +107,7 @@ export const useShopMaintenanceEvent = () => {
         reload();
       },
       onError: (error) => {
-        toast.error(`${t('error-something-wrong')}`);
+        toast.error(`${"error-something-wrong"}`);
       },
       onSettled: () => {
         queryClient.invalidateQueries(API_ENDPOINTS.SHOPS);
