@@ -5,6 +5,9 @@ import Sorting from './sorting';
 import PriceFilter from '@/components/search-view/price-filter';
 import CategoryFilter from '@/components/search-view/category-filter-view';
 import TagFilter from '@/components/search-view/tag-filter-view';
+import VendorFilter from '@/components/search-view/vendor-filter-view';
+import DietaryFilter from '@/components/search-view/dietary-filter-view';
+import BrandFilter from '@/components/search-view/brand-filter-view';
 import classNames from 'classnames';
 import { useAtom } from 'jotai';
 import { drawerAtom } from '@/store/drawer-atom';
@@ -107,6 +110,18 @@ const SidebarFilter: React.FC<{
 
         <FieldWrapper title="Tags">
           <TagFilter />
+        </FieldWrapper>
+
+        <FieldWrapper title="Vendor">
+          <VendorFilter />
+        </FieldWrapper>
+
+        <FieldWrapper title="Dietary">
+          <DietaryFilter />
+        </FieldWrapper>
+
+        <FieldWrapper title="Brand">
+          <BrandFilter />
         </FieldWrapper>
       </div>
     </div>

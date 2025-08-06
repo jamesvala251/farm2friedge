@@ -54,6 +54,11 @@ const mockData = {
       variation_options: [],
       meta: [],
       tags: ["organic", "fresh", "healthy"],
+      brand: {
+        id: 1,
+        name: "Nature's Best",
+        slug: "natures-best"
+      },
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
@@ -107,6 +112,11 @@ const mockData = {
       variation_options: [],
       meta: [],
       tags: ["dairy", "fresh", "calcium"],
+      brand: {
+        id: 2,
+        name: "Dairy Fresh",
+        slug: "dairy-fresh"
+      },
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
@@ -160,6 +170,11 @@ const mockData = {
       variation_options: [],
       meta: [],
       tags: ["bakery", "whole-grain", "healthy"],
+      brand: {
+        id: 3,
+        name: "Bakery Delight",
+        slug: "bakery-delight"
+      },
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",

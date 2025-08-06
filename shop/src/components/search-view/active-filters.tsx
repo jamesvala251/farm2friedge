@@ -1,9 +1,28 @@
 import { useRouter } from 'next/router';
 import { useCategories } from '@/framework/category';
+import { useProducts } from '@/framework/product';
 
 const ActiveFilters = () => {
   const router = useRouter();
   const { categories } = useCategories({ limit: 1000 });
+
+  // Helper function to get icons for dietary options
+  function getDietaryIcon(slug: string): string {
+    switch (slug) {
+      case 'organic-products':
+        return '🌿';
+      case 'vegan-products':
+        return '🥬';
+      case 'gluten-free':
+        return '🌾';
+      case 'halal-products':
+        return '☪️';
+      case 'kosher-products':
+        return '✡️';
+      default:
+        return '🌱';
+    }
+  }
 
   // Get all active filters from URL
   const activeFilters: any[] = [];
@@ -73,6 +92,50 @@ const ActiveFilters = () => {
     });
   }
 
+  // Vendor filter
+  if (router.query.vendor) {
+    // Find vendor from products data
+    const vendor = categories?.find(cat => cat.slug === router.query.vendor);
+    if (vendor) {
+      activeFilters.push({
+        type: 'vendor',
+        label: vendor.name,
+        value: router.query.vendor as string,
+        icon: '🏪'
+      });
+    }
+  }
+
+  // Dietary filter
+  if (router.query.dietary) {
+    // Find dietary option from categories
+    const dietaryCategory = categories?.find(cat => cat.slug === 'dietary-preferences');
+    const dietaryOption = (dietaryCategory as any)?.children?.find((child: any) => child.slug === router.query.dietary);
+    if (dietaryOption) {
+      activeFilters.push({
+        type: 'dietary',
+        label: dietaryOption.name,
+        value: router.query.dietary as string,
+        icon: getDietaryIcon(router.query.dietary as string)
+      });
+    }
+  }
+
+  // Brand filter
+  if (router.query.brand) {
+    // Find brand from products data
+    const { products } = useProducts({ limit: 1000 });
+    const productWithBrand = products?.find((product: any) => (product as any).brand?.slug === router.query.brand);
+    if ((productWithBrand as any)?.brand) {
+      activeFilters.push({
+        type: 'brand',
+        label: (productWithBrand as any).brand.name,
+        value: router.query.brand as string,
+        icon: '🏷️'
+      });
+    }
+  }
+
   const removeFilter = (filter: any) => {
     const newQuery = { ...router.query };
 
@@ -99,6 +162,15 @@ const ActiveFilters = () => {
       case 'search':
         delete newQuery.search;
         break;
+      case 'vendor':
+        delete newQuery.vendor;
+        break;
+      case 'dietary':
+        delete newQuery.dietary;
+        break;
+      case 'brand':
+        delete newQuery.brand;
+        break;
     }
 
     router.push({
@@ -114,6 +186,9 @@ const ActiveFilters = () => {
     delete newQuery.price;
     delete newQuery.tags;
     delete newQuery.search;
+    delete newQuery.vendor;
+    delete newQuery.dietary;
+    delete newQuery.brand;
 
     router.push({
       pathname: router.pathname,
