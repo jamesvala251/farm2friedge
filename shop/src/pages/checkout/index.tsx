@@ -1,27 +1,66 @@
 import type { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
 import { getLayout } from '@/components/layouts/layout';
 import Head from 'next/head';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 export default function CheckoutPage() {
-  const { t } = useTranslation('common');
+  const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState('card');
   const [deliveryMethod, setDeliveryMethod] = useState('home');
+  const [isProcessing, setIsProcessing] = useState(false);
+  
+  // Default form data for demo
+  const [formData, setFormData] = useState({
+    fullName: 'John Doe',
+    phone: '+1 (555) 123-4567',
+    email: 'john.doe@example.com',
+    address: '123 Main Street, Downtown, New York, NY 10001',
+    pickupLocation: 'Main Store (Downtown)',
+    cardNumber: '1234 5678 9012 3456',
+    expiryDate: '12/25',
+    cvv: '123',
+    cardholderName: 'John Doe'
+  });
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handlePlaceOrder = async () => {
+    setIsProcessing(true);
+    
+    // Simulate order processing
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // Generate a demo tracking number
+    const trackingNumber = 'ORD-' + Date.now().toString().slice(-8);
+    
+    // Show success toast instead of alert
+    toast.success('Order placed successfully! Thank you for your purchase.');
+    
+    // Redirect to order detail page
+    router.push(`/orders/${trackingNumber}`);
+    
+    setIsProcessing(false);
+  };
 
   return (
     <>
       <Head>
-        <title>{t('text-checkout')} - eGroceryMart</title>
+        <title>Checkout - eGroceryMart</title>
       </Head>
       <section className="mx-auto w-full max-w-7xl px-4 py-8 lg:py-10">
         <div className="mb-8 text-center lg:mb-12">
           <h1 className="mb-4 text-3xl font-bold text-heading lg:text-4xl xl:text-5xl">
-            {t('text-checkout')}
+            Checkout
           </h1>
           <p className="text-base text-body-dark">
-            {t('text-complete-your-order')}
+            Complete your order
           </p>
         </div>
         
@@ -30,7 +69,7 @@ export default function CheckoutPage() {
           <div className="space-y-6">
             {/* Delivery Information */}
             <div className="rounded-lg border border-gray-200 bg-white p-6">
-              <h2 className="mb-4 text-xl font-semibold">{t('text-delivery-information')}</h2>
+              <h2 className="mb-4 text-xl font-semibold">Delivery Information</h2>
               
               <div className="mb-4 space-y-3">
                 <label className="flex items-center space-x-3">
@@ -42,7 +81,7 @@ export default function CheckoutPage() {
                     onChange={(e) => setDeliveryMethod(e.target.value)}
                     className="text-accent focus:ring-accent"
                   />
-                  <span>{t('text-home-delivery')}</span>
+                  <span>Home Delivery</span>
                 </label>
                 
                 <label className="flex items-center space-x-3">
@@ -54,57 +93,69 @@ export default function CheckoutPage() {
                     onChange={(e) => setDeliveryMethod(e.target.value)}
                     className="text-accent focus:ring-accent"
                   />
-                  <span>{t('text-store-pickup')}</span>
+                  <span>Store Pickup</span>
                 </label>
               </div>
               
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">{t('text-full-name')}</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                   <input
                     type="text"
+                    value={formData.fullName}
+                    onChange={(e) => handleInputChange('fullName', e.target.value)}
                     className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
-                    placeholder={t('text-john-doe')}
+                    placeholder="John Doe"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">{t('text-phone-number')}</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
                   <input
                     type="tel"
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange('phone', e.target.value)}
                     className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
-                    placeholder={t('text-phone-placeholder')}
+                    placeholder="+1 (555) 123-4567"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">{t('text-email-address')}</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                   <input
                     type="email"
+                    value={formData.email}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
                     className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
-                    placeholder={t('text-email-placeholder')}
+                    placeholder="john.doe@example.com"
                   />
                 </div>
                 
                 {deliveryMethod === 'home' && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">{t('text-delivery-address')}</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Delivery Address</label>
                     <textarea
                       rows={3}
+                      value={formData.address}
+                      onChange={(e) => handleInputChange('address', e.target.value)}
                       className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
-                      placeholder={t('text-enter-complete-delivery-address')}
+                      placeholder="Enter complete delivery address"
                     ></textarea>
                   </div>
                 )}
                 
                 {deliveryMethod === 'pickup' && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">{t('text-pickup-location')}</label>
-                    <select className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent">
-                      <option>{t('text-select-pickup-location')}</option>
-                      <option>{t('text-main-store-downtown')}</option>
-                      <option>{t('text-north-branch-shopping-center')}</option>
-                      <option>{t('text-south-branch-mall')}</option>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Pickup Location</label>
+                    <select 
+                      value={formData.pickupLocation}
+                      onChange={(e) => handleInputChange('pickupLocation', e.target.value)}
+                      className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
+                    >
+                      <option>Select Pickup Location</option>
+                      <option>Main Store (Downtown)</option>
+                      <option>North Branch Shopping Center</option>
+                      <option>South Branch Mall</option>
                     </select>
                   </div>
                 )}
@@ -113,7 +164,7 @@ export default function CheckoutPage() {
             
             {/* Payment Method */}
             <div className="rounded-lg border border-gray-200 bg-white p-6">
-              <h2 className="mb-4 text-xl font-semibold">{t('text-payment-method')}</h2>
+              <h2 className="mb-4 text-xl font-semibold">Payment Method</h2>
               
               <div className="mb-4 space-y-3">
                 <label className="flex items-center space-x-3">
@@ -125,7 +176,7 @@ export default function CheckoutPage() {
                     onChange={(e) => setPaymentMethod(e.target.value)}
                     className="text-accent focus:ring-accent"
                   />
-                  <span>{t('text-credit-debit-card')}</span>
+                  <span>Credit/Debit Card</span>
                 </label>
                 
                 <label className="flex items-center space-x-3">
@@ -137,7 +188,7 @@ export default function CheckoutPage() {
                     onChange={(e) => setPaymentMethod(e.target.value)}
                     className="text-accent focus:ring-accent"
                   />
-                  <span>{t('text-paypal')}</span>
+                  <span>PayPal</span>
                 </label>
                 
                 <label className="flex items-center space-x-3">
@@ -149,45 +200,53 @@ export default function CheckoutPage() {
                     onChange={(e) => setPaymentMethod(e.target.value)}
                     className="text-accent focus:ring-accent"
                   />
-                  <span>{t('text-cash-on-delivery')}</span>
+                  <span>Cash on Delivery</span>
                 </label>
               </div>
               
               {paymentMethod === 'card' && (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">{t('text-card-number')}</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
                     <input
                       type="text"
-                      placeholder={t('text-card-number-placeholder')}
+                      value={formData.cardNumber}
+                      onChange={(e) => handleInputChange('cardNumber', e.target.value)}
+                      placeholder="1234 5678 9012 3456"
                       className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
                     />
                   </div>
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">{t('text-expiry-date')}</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label>
                       <input
                         type="text"
-                        placeholder={t('text-mm-yy')}
+                        value={formData.expiryDate}
+                        onChange={(e) => handleInputChange('expiryDate', e.target.value)}
+                        placeholder="MM/YY"
                         className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">{t('text-cvv')}</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">CVV</label>
                       <input
                         type="text"
-                        placeholder={t('text-cvv-placeholder')}
+                        value={formData.cvv}
+                        onChange={(e) => handleInputChange('cvv', e.target.value)}
+                        placeholder="123"
                         className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
                       />
                     </div>
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">{t('text-cardholder-name')}</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Cardholder Name</label>
                     <input
                       type="text"
-                      placeholder={t('text-john-doe')}
+                      value={formData.cardholderName}
+                      onChange={(e) => handleInputChange('cardholderName', e.target.value)}
+                      placeholder="John Doe"
                       className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
                     />
                   </div>
@@ -199,69 +258,73 @@ export default function CheckoutPage() {
           {/* Order Summary */}
           <div className="space-y-6">
             <div className="rounded-lg border border-gray-200 bg-white p-6">
-              <h2 className="mb-4 text-xl font-semibold">{t('text-order-summary')}</h2>
+              <h2 className="mb-4 text-xl font-semibold">Order Summary</h2>
               
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">{t('text-fresh-tomatoes-2-lb')}</span>
-                  <span className="text-sm">{t('text-price', { price: '5.98' })}</span>
+                  <span className="text-sm">Fresh Tomatoes (2 lb)</span>
+                  <span className="text-sm">Price: $5.98</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">{t('text-organic-bananas-1-lb')}</span>
-                  <span className="text-sm">{t('text-price', { price: '1.49' })}</span>
+                  <span className="text-sm">Organic Bananas (1 lb)</span>
+                  <span className="text-sm">Price: $1.49</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">{t('text-whole-milk-1-gallon')}</span>
-                  <span className="text-sm">{t('text-price', { price: '3.99' })}</span>
+                  <span className="text-sm">Whole Milk (1 gallon)</span>
+                  <span className="text-sm">Price: $3.99</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">{t('text-fresh-bread-1-loaf')}</span>
-                  <span className="text-sm">{t('text-price', { price: '4.99' })}</span>
+                  <span className="text-sm">Fresh Bread (1 loaf)</span>
+                  <span className="text-sm">Price: $4.99</span>
                 </div>
               </div>
               
               <div className="mt-4 border-t border-gray-200 pt-4 space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">{t('text-subtotal')}</span>
-                  <span className="text-sm">{t('text-price', { price: '16.45' })}</span>
+                  <span className="text-sm">Subtotal</span>
+                  <span className="text-sm">Price: $16.45</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">{t('text-delivery-fee')}</span>
-                  <span className="text-sm">{t('text-price', { price: '2.00' })}</span>
+                  <span className="text-sm">Delivery Fee</span>
+                  <span className="text-sm">Price: $2.00</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">{t('text-tax')}</span>
-                  <span className="text-sm">{t('text-price', { price: '1.32' })}</span>
+                  <span className="text-sm">Tax</span>
+                  <span className="text-sm">Price: $1.32</span>
                 </div>
                 <div className="flex items-center justify-between font-semibold">
-                  <span>{t('text-total')}</span>
-                  <span>{t('text-price', { price: '19.77' })}</span>
+                  <span>Total</span>
+                  <span>Price: $19.77</span>
                 </div>
               </div>
             </div>
             
             {/* Promo Code */}
             <div className="rounded-lg border border-gray-200 bg-white p-6">
-              <h3 className="mb-3 font-semibold">{t('text-promo-code')}</h3>
+              <h3 className="mb-3 font-semibold">Promo Code</h3>
               <div className="flex space-x-2">
                 <input
                   type="text"
-                  placeholder={t('text-enter-promo-code')}
+                  placeholder="Enter promo code"
                   className="flex-1 rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
                 />
                 <button className="rounded-md bg-accent px-4 py-2 text-white hover:bg-accent-hover">
-                  {t('text-apply')}
+                  Apply
                 </button>
               </div>
             </div>
             
             {/* Place Order */}
             <div className="rounded-lg border border-gray-200 bg-white p-6">
-              <button className="w-full rounded-md bg-accent px-4 py-3 text-white hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">
-                {t('text-place-order')}
+              <button 
+                onClick={handlePlaceOrder}
+                disabled={isProcessing}
+                className="w-full rounded-md bg-accent px-4 py-3 text-white hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isProcessing ? 'Placing Order...' : 'Place Order'}
               </button>
               <p className="mt-2 text-xs text-gray-500 text-center">
-                {t('text-by-placing-order-agree-terms')}
+                By placing order, you agree to our terms and conditions.
               </p>
             </div>
           </div>

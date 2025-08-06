@@ -1,5 +1,4 @@
 import cn from 'classnames';
-import { useTranslation } from 'next-i18next';
 import ProductCard from '../cards/card';
 interface Props {
   products: any;
@@ -12,12 +11,10 @@ const RelatedProducts = ({
   currentProductId,
   gridClassName,
 }: Props) => {
-  const { t } = useTranslation('common');
-
   return (
     <>
       <h2 className="mb-6 text-lg font-semibold tracking-tight text-heading">
-        {t('text-related-products')}
+        Related Products
       </h2>
       <div
         className={cn(

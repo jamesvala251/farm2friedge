@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Input from '@/components/ui/forms/input';
 import Button from '@/components/ui/button';
 import { useForm } from 'react-hook-form';
-import { useTranslation } from 'next-i18next';
 import { couponAtom } from '@/store/checkout';
 import { useAtom } from 'jotai';
 import classNames from 'classnames';
@@ -14,7 +13,6 @@ type FormTypes = {
 };
 
 const Coupon = ({ theme, subtotal }: { theme?: 'dark'; subtotal: number }) => {
-  const { t } = useTranslation('common');
   const [hasCoupon, setHasCoupon] = useState(false);
   const [coupon, applyCoupon] = useAtom(couponAtom);
   const { items, total } = useCart();
@@ -36,7 +34,7 @@ const Coupon = ({ theme, subtotal }: { theme?: 'dark'; subtotal: number }) => {
         className="text-xs font-bold transition duration-200 text-body hover:text-accent"
         onClick={() => setHasCoupon(true)}
       >
-        {t('text-have-coupon')}
+        Have a coupon?
       </p>
     );
   }
@@ -74,11 +72,11 @@ const Coupon = ({ theme, subtotal }: { theme?: 'dark'; subtotal: number }) => {
     >
       <Input
         {...register('code', { required: 'text-coupon-required' })}
-        placeholder={t('text-enter-coupon')}
+        placeholder="Enter coupon code"
         variant="outline"
         className="flex-1 mb-4 sm:mb-0 ltr:sm:mr-4 rtl:sm:ml-4"
         dimension="small"
-        error={t(formError?.code!)}
+        error={formError?.code!}
       />
       <Button
         loading={loading}
@@ -88,7 +86,7 @@ const Coupon = ({ theme, subtotal }: { theme?: 'dark'; subtotal: number }) => {
           'bg-gray-800 transition-colors hover:bg-gray-900': theme === 'dark',
         })}
       >
-        {t('text-apply')}
+        Apply
       </Button>
     </form>
   );

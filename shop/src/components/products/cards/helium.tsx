@@ -8,6 +8,7 @@ import CartIcon from '@/components/icons/cart';
 import { useRouter } from 'next/router';
 import { twMerge } from 'tailwind-merge';
 import dynamic from 'next/dynamic';
+import Rating from '@/components/ui/rating';
 const AddToCart = dynamic(
   () =>
     import('@/components/products/add-to-cart/add-to-cart').then(
@@ -32,7 +33,7 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
     quantity,
     min_price,
     max_price,
-    product_type,
+    product_type = 'simple',
     in_flash_sale,
   } = product ?? {};
 
@@ -99,6 +100,23 @@ const Helium: React.FC<HeliumProps> = ({ product, className }) => {
           {name}
         </h3>
         <p className="text-xs text-muted">{unit}</p>
+        
+        {/* Rating Section */}
+        <div className="mt-2 mb-3">
+          <Rating
+            rating={product.ratings || 0}
+            totalReviews={product.total_reviews || 0}
+            size="sm"
+            showCount={false}
+            className="mb-1"
+          />
+          {product.total_reviews > 0 && (
+            <span className="text-xs text-gray-500">
+              ({product.total_reviews} {product.total_reviews === 1 ? 'review' : 'reviews'})
+            </span>
+          )}
+        </div>
+        
         {/* End of product info */}
 
         <div className="relative flex items-center justify-between mt-7 min-h-6 md:mt-8">

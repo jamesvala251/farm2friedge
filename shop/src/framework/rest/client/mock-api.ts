@@ -3,6 +3,156 @@
 
 import { API_ENDPOINTS } from './api-endpoints';
 
+// Dictionary for related products (same for all products for demo)
+const relatedProductsDictionary = [
+  {
+    id: 1,
+    name: "Fresh Organic Apples",
+    slug: "fresh-organic-apples",
+    image: {
+      id: 1,
+      original: "/img/Apples.webp",
+      thumbnail: "/img/Apples.webp"
+    },
+    price: 2.99,
+    sale_price: 2.49,
+    ratings: 4.5,
+    total_reviews: 128
+  },
+  {
+    id: 2,
+    name: "Fresh Milk",
+    slug: "fresh-milk",
+    image: {
+      id: 2,
+      original: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&h=400&fit=crop",
+      thumbnail: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200&h=200&fit=crop"
+    },
+    price: 3.99,
+    sale_price: 3.49,
+    ratings: 4.8,
+    total_reviews: 89
+  },
+  {
+    id: 3,
+    name: "Whole Grain Bread",
+    slug: "whole-grain-bread",
+    image: {
+      id: 3,
+      original: "/img/grain_free.webp",
+      thumbnail: "/img/grain_free.webp"
+    },
+    price: 4.99,
+    sale_price: 4.49,
+    ratings: 4.2,
+    total_reviews: 67
+  },
+  {
+    id: 4,
+    name: "Organic Tomatoes",
+    slug: "organic-tomatoes",
+    image: {
+      id: 4,
+      original: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400&h=400&fit=crop",
+      thumbnail: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200&h=200&fit=crop"
+    },
+    price: 1.99,
+    sale_price: 1.79,
+    ratings: 4.6,
+    total_reviews: 94
+  },
+  {
+    id: 5,
+    name: "Free Range Eggs",
+    slug: "free-range-eggs",
+    image: {
+      id: 5,
+      original: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=400&h=400&fit=crop",
+      thumbnail: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=200&h=200&fit=crop"
+    },
+    price: 5.99,
+    sale_price: 5.49,
+    ratings: 4.7,
+    total_reviews: 112
+  }
+];
+
+// Dictionary for customer reviews (same for all products for demo)
+const customerReviewsDictionary = [
+  {
+    id: 1,
+    customerName: "John Doe",
+    rating: 5,
+    date: "2024-01-15",
+    title: "Excellent Quality!",
+    comment: "Great product! Highly recommend. The quality is outstanding and it arrived fresh.",
+    verified: true,
+  },
+  {
+    id: 2,
+    customerName: "Jane Smith",
+    rating: 4,
+    date: "2024-01-14",
+    title: "Good but Expensive",
+    comment: "Good quality product, but a bit expensive for what you get. Still satisfied with the purchase.",
+    verified: true,
+  },
+  {
+    id: 3,
+    customerName: "Peter Jones",
+    rating: 3,
+    date: "2024-01-13",
+    title: "Average Product",
+    comment: "Average product, not bad but nothing special either. Would buy again if on sale.",
+    verified: false,
+  },
+  {
+    id: 4,
+    customerName: "Sarah Wilson",
+    rating: 5,
+    date: "2024-01-12",
+    title: "Amazing Freshness!",
+    comment: "Incredibly fresh and tasty! Will definitely order again. The delivery was also very fast.",
+    verified: true,
+  },
+  {
+    id: 5,
+    customerName: "Mike Brown",
+    rating: 4,
+    date: "2024-01-11",
+    title: "Solid Product",
+    comment: "Good quality and reasonable price. The packaging was excellent and kept everything fresh.",
+    verified: true,
+  },
+  {
+    id: 6,
+    customerName: "Emily Davis",
+    rating: 5,
+    date: "2024-01-10",
+    title: "Perfect for My Needs",
+    comment: "Exactly what I was looking for. Great value for money and excellent customer service.",
+    verified: true,
+  },
+  {
+    id: 7,
+    customerName: "David Lee",
+    rating: 4,
+    date: "2024-01-09",
+    title: "Good Value",
+    comment: "Good quality product at a reasonable price. Would recommend to others.",
+    verified: true,
+  },
+  {
+    id: 8,
+    customerName: "Lisa Chen",
+    rating: 3,
+    date: "2024-01-08",
+    title: "Okay Product",
+    comment: "Product is okay, nothing special. Delivery was on time though.",
+    verified: false,
+  }
+];
+
 // Mock data structure
 const mockData = {
   products: [
@@ -25,6 +175,21 @@ const mockData = {
           id: 1,
           original: "/img/Apples.webp",
           thumbnail: "/img/Apples.webp"
+        },
+        {
+          id: 2,
+          original: "/img/Apples.webp",
+          thumbnail: "/img/Apples.webp"
+        },
+        {
+          id: 3,
+          original: "/img/Apples.webp",
+          thumbnail: "/img/Apples.webp"
+        },
+        {
+          id: 4,
+          original: "/img/Apples.webp",
+          thumbnail: "/img/Apples.webp"
         }
       ],
       category: {
@@ -37,7 +202,7 @@ const mockData = {
         name: "Organic",
         slug: "organic"
       },
-      shop: {
+      vendor: {
         id: 1,
         name: "Fresh Grocery Store",
         slug: "fresh-grocery-store",
@@ -46,6 +211,7 @@ const mockData = {
       },
       ratings: 4.5,
       total_reviews: 128,
+      reviews: customerReviewsDictionary,
       in_stock: true,
       is_taxable: true,
       min_price: 2.49,
@@ -62,7 +228,8 @@ const mockData = {
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
+      updated_at: "2024-01-01T00:00:00.000000Z",
+      related_products: relatedProductsDictionary
     },
     {
       id: 2,
@@ -83,6 +250,21 @@ const mockData = {
           id: 2,
           original: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&h=400&fit=crop",
           thumbnail: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200&h=200&fit=crop"
+        },
+        {
+          id: 3,
+          original: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200&h=200&fit=crop"
+        },
+        {
+          id: 4,
+          original: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200&h=200&fit=crop"
+        },
+        {
+          id: 5,
+          original: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200&h=200&fit=crop"
         }
       ],
       category: {
@@ -95,7 +277,7 @@ const mockData = {
         name: "Dairy",
         slug: "dairy"
       },
-      shop: {
+      vendor: {
         id: 1,
         name: "Fresh Grocery Store",
         slug: "fresh-grocery-store",
@@ -104,6 +286,7 @@ const mockData = {
       },
       ratings: 4.8,
       total_reviews: 89,
+      reviews: customerReviewsDictionary,
       in_stock: true,
       is_taxable: true,
       min_price: 3.49,
@@ -120,7 +303,8 @@ const mockData = {
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
+      updated_at: "2024-01-01T00:00:00.000000Z",
+      related_products: relatedProductsDictionary
     },
     {
       id: 3,
@@ -141,6 +325,21 @@ const mockData = {
           id: 3,
           original: "/img/grain_free.webp",
           thumbnail: "/img/grain_free.webp"
+        },
+        {
+          id: 4,
+          original: "/img/grain_free.webp",
+          thumbnail: "/img/grain_free.webp"
+        },
+        {
+          id: 5,
+          original: "/img/grain_free.webp",
+          thumbnail: "/img/grain_free.webp"
+        },
+        {
+          id: 6,
+          original: "/img/grain_free.webp",
+          thumbnail: "/img/grain_free.webp"
         }
       ],
       category: {
@@ -153,7 +352,7 @@ const mockData = {
         name: "Bakery",
         slug: "bakery"
       },
-      shop: {
+      vendor: {
         id: 2,
         name: "Bakery Corner",
         slug: "bakery-corner",
@@ -162,6 +361,7 @@ const mockData = {
       },
       ratings: 4.2,
       total_reviews: 67,
+      reviews: customerReviewsDictionary,
       in_stock: true,
       is_taxable: true,
       min_price: 4.49,
@@ -178,7 +378,8 @@ const mockData = {
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
+      updated_at: "2024-01-01T00:00:00.000000Z",
+      related_products: relatedProductsDictionary
     },
     {
       id: 4,
@@ -199,6 +400,21 @@ const mockData = {
           id: 4,
           original: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400&h=400&fit=crop",
           thumbnail: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200&h=200&fit=crop"
+        },
+        {
+          id: 5,
+          original: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200&h=200&fit=crop"
+        },
+        {
+          id: 6,
+          original: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200&h=200&fit=crop"
+        },
+        {
+          id: 7,
+          original: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200&h=200&fit=crop"
         }
       ],
       category: {
@@ -211,15 +427,16 @@ const mockData = {
         name: "Organic",
         slug: "organic"
       },
-      shop: {
-        id: 1,
-        name: "Fresh Grocery Store",
-        slug: "fresh-grocery-store",
-        rating: 4.5,
-        total_reviews: 156
+      vendor: {
+        id: 2,
+        name: "Organic Valley Market",
+        slug: "organic-valley-market",
+        rating: 4.7,
+        total_reviews: 89
       },
       ratings: 4.6,
       total_reviews: 94,
+      reviews: customerReviewsDictionary,
       in_stock: true,
       is_taxable: true,
       min_price: 1.79,
@@ -231,7 +448,8 @@ const mockData = {
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
+      updated_at: "2024-01-01T00:00:00.000000Z",
+      related_products: relatedProductsDictionary
     },
     {
       id: 5,
@@ -252,6 +470,21 @@ const mockData = {
           id: 5,
           original: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=400&h=400&fit=crop",
           thumbnail: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=200&h=200&fit=crop"
+        },
+        {
+          id: 6,
+          original: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=200&h=200&fit=crop"
+        },
+        {
+          id: 7,
+          original: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=200&h=200&fit=crop"
+        },
+        {
+          id: 8,
+          original: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=200&h=200&fit=crop"
         }
       ],
       category: {
@@ -264,15 +497,16 @@ const mockData = {
         name: "Dairy",
         slug: "dairy"
       },
-      shop: {
-        id: 1,
-        name: "Fresh Grocery Store",
-        slug: "fresh-grocery-store",
-        rating: 4.5,
-        total_reviews: 156
+      vendor: {
+        id: 3,
+        name: "Fresh Farm Foods",
+        slug: "fresh-farm-foods",
+        rating: 4.6,
+        total_reviews: 203
       },
       ratings: 4.7,
       total_reviews: 112,
+      reviews: customerReviewsDictionary,
       in_stock: true,
       is_taxable: true,
       min_price: 5.49,
@@ -284,7 +518,8 @@ const mockData = {
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
+      updated_at: "2024-01-01T00:00:00.000000Z",
+      related_products: relatedProductsDictionary
     },
     {
       id: 6,
@@ -305,6 +540,21 @@ const mockData = {
           id: 6,
           original: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=400&fit=crop",
           thumbnail: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=200&h=200&fit=crop"
+        },
+        {
+          id: 7,
+          original: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=200&h=200&fit=crop"
+        },
+        {
+          id: 8,
+          original: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=200&h=200&fit=crop"
+        },
+        {
+          id: 9,
+          original: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=200&h=200&fit=crop"
         }
       ],
       category: {
@@ -317,15 +567,16 @@ const mockData = {
         name: "Organic",
         slug: "organic"
       },
-      shop: {
-        id: 1,
-        name: "Fresh Grocery Store",
-        slug: "fresh-grocery-store",
-        rating: 4.5,
-        total_reviews: 156
+      vendor: {
+        id: 4,
+        name: "Local Grocery Hub",
+        slug: "local-grocery-hub",
+        rating: 4.4,
+        total_reviews: 167
       },
       ratings: 4.4,
       total_reviews: 78,
+      reviews: customerReviewsDictionary,
       in_stock: true,
       is_taxable: true,
       min_price: 1.29,
@@ -337,7 +588,8 @@ const mockData = {
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
+      updated_at: "2024-01-01T00:00:00.000000Z",
+      related_products: relatedProductsDictionary
     },
     {
       id: 7,
@@ -358,6 +610,21 @@ const mockData = {
           id: 7,
           original: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=400&fit=crop",
           thumbnail: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200&h=200&fit=crop"
+        },
+        {
+          id: 8,
+          original: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200&h=200&fit=crop"
+        },
+        {
+          id: 9,
+          original: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200&h=200&fit=crop"
+        },
+        {
+          id: 10,
+          original: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200&h=200&fit=crop"
         }
       ],
       category: {
@@ -370,15 +637,16 @@ const mockData = {
         name: "Dairy",
         slug: "dairy"
       },
-      shop: {
-        id: 1,
-        name: "Fresh Grocery Store",
-        slug: "fresh-grocery-store",
-        rating: 4.5,
-        total_reviews: 156
+      vendor: {
+        id: 5,
+        name: "Dairy Delights",
+        slug: "dairy-delights",
+        rating: 4.8,
+        total_reviews: 134
       },
       ratings: 4.6,
       total_reviews: 95,
+      reviews: customerReviewsDictionary,
       in_stock: true,
       is_taxable: true,
       min_price: 3.99,
@@ -390,7 +658,8 @@ const mockData = {
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
+      updated_at: "2024-01-01T00:00:00.000000Z",
+      related_products: relatedProductsDictionary
     },
     {
       id: 8,
@@ -411,6 +680,21 @@ const mockData = {
           id: 8,
           original: "/img/Peeled-Carrots.webp",
           thumbnail: "/img/Peeled-Carrots.webp"
+        },
+        {
+          id: 9,
+          original: "/img/Peeled-Carrots.webp",
+          thumbnail: "/img/Peeled-Carrots.webp"
+        },
+        {
+          id: 10,
+          original: "/img/Peeled-Carrots.webp",
+          thumbnail: "/img/Peeled-Carrots.webp"
+        },
+        {
+          id: 11,
+          original: "/img/Peeled-Carrots.webp",
+          thumbnail: "/img/Peeled-Carrots.webp"
         }
       ],
       category: {
@@ -423,7 +707,7 @@ const mockData = {
         name: "Organic",
         slug: "organic"
       },
-      shop: {
+      vendor: {
         id: 1,
         name: "Fresh Grocery Store",
         slug: "fresh-grocery-store",
@@ -432,6 +716,7 @@ const mockData = {
       },
       ratings: 4.3,
       total_reviews: 67,
+      reviews: customerReviewsDictionary,
       in_stock: true,
       is_taxable: true,
       min_price: 1.99,
@@ -443,7 +728,8 @@ const mockData = {
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
+      updated_at: "2024-01-01T00:00:00.000000Z",
+      related_products: relatedProductsDictionary
     },
     {
       id: 9,
@@ -464,6 +750,21 @@ const mockData = {
           id: 9,
           original: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=400&h=400&fit=crop",
           thumbnail: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=200&h=200&fit=crop"
+        },
+        {
+          id: 10,
+          original: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=200&h=200&fit=crop"
+        },
+        {
+          id: 11,
+          original: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=200&h=200&fit=crop"
+        },
+        {
+          id: 12,
+          original: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=200&h=200&fit=crop"
         }
       ],
       category: {
@@ -476,15 +777,16 @@ const mockData = {
         name: "Dairy",
         slug: "dairy"
       },
-      shop: {
-        id: 1,
-        name: "Fresh Grocery Store",
-        slug: "fresh-grocery-store",
-        rating: 4.5,
-        total_reviews: 156
+      vendor: {
+        id: 7,
+        name: "Artisan Cheese Co",
+        slug: "artisan-cheese-co",
+        rating: 4.7,
+        total_reviews: 95
       },
       ratings: 4.5,
       total_reviews: 83,
+      reviews: customerReviewsDictionary,
       in_stock: true,
       is_taxable: true,
       min_price: 6.49,
@@ -496,7 +798,8 @@ const mockData = {
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
+      updated_at: "2024-01-01T00:00:00.000000Z",
+      related_products: relatedProductsDictionary
     },
     {
       id: 10,
@@ -517,6 +820,21 @@ const mockData = {
           id: 10,
           original: "/img/BabySpinach.webp",
           thumbnail: "/img/BabySpinach.webp"
+        },
+        {
+          id: 11,
+          original: "/img/BabySpinach.webp",
+          thumbnail: "/img/BabySpinach.webp"
+        },
+        {
+          id: 12,
+          original: "/img/BabySpinach.webp",
+          thumbnail: "/img/BabySpinach.webp"
+        },
+        {
+          id: 13,
+          original: "/img/BabySpinach.webp",
+          thumbnail: "/img/BabySpinach.webp"
         }
       ],
       category: {
@@ -529,7 +847,7 @@ const mockData = {
         name: "Organic",
         slug: "organic"
       },
-      shop: {
+      vendor: {
         id: 1,
         name: "Fresh Grocery Store",
         slug: "fresh-grocery-store",
@@ -538,6 +856,7 @@ const mockData = {
       },
       ratings: 4.4,
       total_reviews: 71,
+      reviews: customerReviewsDictionary,
       in_stock: true,
       is_taxable: true,
       min_price: 2.99,
@@ -549,7 +868,8 @@ const mockData = {
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
+      updated_at: "2024-01-01T00:00:00.000000Z",
+      related_products: relatedProductsDictionary
     },
     {
       id: 11,
@@ -570,6 +890,21 @@ const mockData = {
           id: 11,
           original: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=400&fit=crop",
           thumbnail: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=200&h=200&fit=crop"
+        },
+        {
+          id: 12,
+          original: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=200&h=200&fit=crop"
+        },
+        {
+          id: 13,
+          original: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=200&h=200&fit=crop"
+        },
+        {
+          id: 14,
+          original: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=200&h=200&fit=crop"
         }
       ],
       category: {
@@ -582,7 +917,7 @@ const mockData = {
         name: "Dairy",
         slug: "dairy"
       },
-      shop: {
+      vendor: {
         id: 1,
         name: "Fresh Grocery Store",
         slug: "fresh-grocery-store",
@@ -591,6 +926,7 @@ const mockData = {
       },
       ratings: 4.7,
       total_reviews: 104,
+      reviews: customerReviewsDictionary,
       in_stock: true,
       is_taxable: true,
       min_price: 4.49,
@@ -602,7 +938,8 @@ const mockData = {
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
+      updated_at: "2024-01-01T00:00:00.000000Z",
+      related_products: relatedProductsDictionary
     },
     {
       id: 12,
@@ -623,6 +960,21 @@ const mockData = {
           id: 12,
           original: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&h=400&fit=crop",
           thumbnail: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=200&h=200&fit=crop"
+        },
+        {
+          id: 13,
+          original: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=200&h=200&fit=crop"
+        },
+        {
+          id: 14,
+          original: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=200&h=200&fit=crop"
+        },
+        {
+          id: 15,
+          original: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=200&h=200&fit=crop"
         }
       ],
       category: {
@@ -635,7 +987,7 @@ const mockData = {
         name: "Organic",
         slug: "organic"
       },
-      shop: {
+      vendor: {
         id: 1,
         name: "Fresh Grocery Store",
         slug: "fresh-grocery-store",
@@ -644,6 +996,7 @@ const mockData = {
       },
       ratings: 4.2,
       total_reviews: 56,
+      reviews: customerReviewsDictionary,
       in_stock: true,
       is_taxable: true,
       min_price: 1.49,
@@ -655,7 +1008,8 @@ const mockData = {
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
+      updated_at: "2024-01-01T00:00:00.000000Z",
+      related_products: relatedProductsDictionary
     }
   ],
   categories: [
@@ -1042,6 +1396,17 @@ export class MockApiClient {
     
     // Extract endpoint from URL
     const endpoint = url.replace(process.env.NEXT_PUBLIC_REST_API_ENDPOINT || '', '');
+    
+    // Handle individual product requests (e.g., /products/fresh-organic-apples)
+    if (endpoint.startsWith(API_ENDPOINTS.PRODUCTS + '/')) {
+      const slug = endpoint.split('/').pop();
+      const product = mockData.products.find(p => p.slug === slug);
+      if (product) {
+        return product as T;
+      }
+      // Return first product if slug not found (for demo purposes)
+      return mockData.products[0] as T;
+    }
     
     // Handle specific endpoints with parameters
     if (endpoint.startsWith(API_ENDPOINTS.TYPES + '/')) {

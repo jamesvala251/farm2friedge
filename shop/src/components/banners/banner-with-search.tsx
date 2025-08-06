@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide, Navigation } from '@/components/ui/slider';
 import { Autoplay } from 'swiper/modules';
 import { Image } from '@/components/ui/image';
 import { productPlaceholder } from '@/lib/placeholders';
-import Search from '@/components/ui/search/search';
+import Search from '@/components/ui/search/search-with-suggestion';
 import type { Banner } from '@/types';
 import { useHeaderSearch } from '@/layouts/headers/header-search-atom';
 import { useIntersection } from 'react-use';
@@ -12,6 +12,8 @@ import { useIsRTL } from '@/lib/locals';
 import { ArrowNext, ArrowPrev } from '@/components/icons';
 import { useTranslation } from 'next-i18next';
 import { useReverse } from '@/lib/reverse';
+import { useRouter } from 'next/router';
+import { useSettings } from '@/framework/settings';
 
 interface BannerProps {
   banners: Banner[] | undefined;

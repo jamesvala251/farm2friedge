@@ -3,10 +3,55 @@ import { useRouter } from 'next/router';
 import { getLayout } from '@/components/layouts/layout';
 import Head from 'next/head';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 export default function GuestCheckoutPage() {
+  const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState('card');
   const [deliveryMethod, setDeliveryMethod] = useState('home');
+  const [isProcessing, setIsProcessing] = useState(false);
+  
+  // Default form data for demo
+  const [formData, setFormData] = useState({
+    fullName: 'Jane Smith',
+    email: 'jane.smith@example.com',
+    phone: '+1 (555) 987-6543',
+    address: '456 Oak Avenue, Suburbia, New York, NY 10002',
+    deliveryInstructions: 'Please ring doorbell twice',
+    pickupLocation: 'Main Store - Downtown',
+    pickupTime: 'Today - 2:00 PM - 4:00 PM',
+    cardNumber: '9876 5432 1098 7654',
+    expiryDate: '06/26',
+    cvv: '456',
+    cardholderName: 'Jane Smith',
+    createAccount: false,
+    newsletter: true
+  });
+
+  const handleInputChange = (field: string, value: string | boolean) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handlePlaceOrder = async () => {
+    setIsProcessing(true);
+    
+    // Simulate order processing
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // Generate a demo tracking number
+    const trackingNumber = 'GUEST-' + Date.now().toString().slice(-8);
+    
+    // Show success toast instead of alert
+    toast.success('Order placed successfully! Thank you for your purchase. We\'ll send confirmation to your email.');
+    
+    // Redirect to order detail page
+    router.push(`/orders/${trackingNumber}`);
+    
+    setIsProcessing(false);
+  };
 
   return (
     <>
@@ -35,6 +80,8 @@ export default function GuestCheckoutPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                   <input
                     type="text"
+                    value={formData.fullName}
+                    onChange={(e) => handleInputChange('fullName', e.target.value)}
                     className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
                     placeholder="John Doe"
                   />
@@ -44,6 +91,8 @@ export default function GuestCheckoutPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                   <input
                     type="email"
+                    value={formData.email}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
                     className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
                     placeholder="john.doe@example.com"
                   />
@@ -54,6 +103,8 @@ export default function GuestCheckoutPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
                   <input
                     type="tel"
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange('phone', e.target.value)}
                     className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
                     placeholder="+1 (555) 123-4567"
                   />
@@ -97,6 +148,8 @@ export default function GuestCheckoutPage() {
                     <label className="block text-sm font-medium text-gray-700 mb-1">Delivery Address</label>
                     <textarea
                       rows={3}
+                      value={formData.address}
+                      onChange={(e) => handleInputChange('address', e.target.value)}
                       className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
                       placeholder="Enter your complete delivery address"
                     ></textarea>
@@ -106,6 +159,8 @@ export default function GuestCheckoutPage() {
                     <label className="block text-sm font-medium text-gray-700 mb-1">Delivery Instructions (Optional)</label>
                     <textarea
                       rows={2}
+                      value={formData.deliveryInstructions}
+                      onChange={(e) => handleInputChange('deliveryInstructions', e.target.value)}
                       className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
                       placeholder="Any special delivery instructions..."
                     ></textarea>
@@ -117,7 +172,11 @@ export default function GuestCheckoutPage() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Pickup Location</label>
-                    <select className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent">
+                    <select 
+                      value={formData.pickupLocation}
+                      onChange={(e) => handleInputChange('pickupLocation', e.target.value)}
+                      className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
+                    >
                       <option>Select pickup location</option>
                       <option>Main Store - Downtown</option>
                       <option>North Branch - Shopping Center</option>
@@ -127,7 +186,11 @@ export default function GuestCheckoutPage() {
                   
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Pickup Time</label>
-                    <select className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent">
+                    <select 
+                      value={formData.pickupTime}
+                      onChange={(e) => handleInputChange('pickupTime', e.target.value)}
+                      className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
+                    >
                       <option>Select pickup time</option>
                       <option>Today - 2:00 PM - 4:00 PM</option>
                       <option>Today - 4:00 PM - 6:00 PM</option>
@@ -187,6 +250,8 @@ export default function GuestCheckoutPage() {
                     <label className="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
                     <input
                       type="text"
+                      value={formData.cardNumber}
+                      onChange={(e) => handleInputChange('cardNumber', e.target.value)}
                       placeholder="1234 5678 9012 3456"
                       className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
                     />
@@ -197,6 +262,8 @@ export default function GuestCheckoutPage() {
                       <label className="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label>
                       <input
                         type="text"
+                        value={formData.expiryDate}
+                        onChange={(e) => handleInputChange('expiryDate', e.target.value)}
                         placeholder="MM/YY"
                         className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
                       />
@@ -205,6 +272,8 @@ export default function GuestCheckoutPage() {
                       <label className="block text-sm font-medium text-gray-700 mb-1">CVV</label>
                       <input
                         type="text"
+                        value={formData.cvv}
+                        onChange={(e) => handleInputChange('cvv', e.target.value)}
                         placeholder="123"
                         className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
                       />
@@ -215,6 +284,8 @@ export default function GuestCheckoutPage() {
                     <label className="block text-sm font-medium text-gray-700 mb-1">Cardholder Name</label>
                     <input
                       type="text"
+                      value={formData.cardholderName}
+                      onChange={(e) => handleInputChange('cardholderName', e.target.value)}
                       placeholder="John Doe"
                       className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
                     />
@@ -293,6 +364,8 @@ export default function GuestCheckoutPage() {
                 <label className="flex items-center space-x-3">
                   <input
                     type="checkbox"
+                    checked={formData.createAccount}
+                    onChange={(e) => handleInputChange('createAccount', e.target.checked)}
                     className="text-accent focus:ring-accent"
                   />
                   <span className="text-sm">Create account with this email</span>
@@ -300,6 +373,8 @@ export default function GuestCheckoutPage() {
                 <label className="flex items-center space-x-3">
                   <input
                     type="checkbox"
+                    checked={formData.newsletter}
+                    onChange={(e) => handleInputChange('newsletter', e.target.checked)}
                     className="text-accent focus:ring-accent"
                   />
                   <span className="text-sm">Subscribe to newsletter</span>
@@ -309,8 +384,12 @@ export default function GuestCheckoutPage() {
             
             {/* Place Order */}
             <div className="rounded-lg border border-gray-200 bg-white p-6">
-              <button className="w-full rounded-md bg-accent px-4 py-3 text-white hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">
-                Place Order
+              <button 
+                onClick={handlePlaceOrder}
+                disabled={isProcessing}
+                className="w-full rounded-md bg-accent px-4 py-3 text-white hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isProcessing ? 'Placing Order...' : 'Place Order'}
               </button>
               <p className="mt-2 text-xs text-gray-500 text-center">
                 By placing your order, you agree to our Terms & Conditions and Privacy Policy

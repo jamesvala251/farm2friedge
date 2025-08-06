@@ -4,10 +4,8 @@ import usePrice from '@/lib/use-price';
 import { drawerAtom } from '@/store/drawer-atom';
 import { useCart } from '@/store/quick-cart/cart.context';
 import { useAtom } from 'jotai';
-import { useTranslation } from 'next-i18next';
 
 const CartCounterButton = () => {
-  const { t } = useTranslation();
   const { totalUniqueItems, total } = useCart();
   const [_, setDisplayCart] = useAtom(drawerAtom);
   const { price: totalPrice } = usePrice({
@@ -24,7 +22,7 @@ const CartCounterButton = () => {
       <span className="flex pb-0.5">
         <CartCheckBagIcon className="shrink-0" width={14} height={16} />
         <span className="flex ltr:ml-2 rtl:mr-2">
-          {formatString(totalUniqueItems, t('common:text-item'))}
+          {formatString(totalUniqueItems, 'item')}
         </span>
       </span>
       <span className="w-full px-2 py-2 mt-3 rounded bg-light text-accent">

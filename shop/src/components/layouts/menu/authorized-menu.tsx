@@ -3,7 +3,6 @@ import { Menu, Transition } from '@headlessui/react';
 import { siteSettings } from '@/config/site';
 import Avatar from '@/components/ui/avatar';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
 import cn from 'classnames';
 import { avatarPlaceholder } from '@/lib/placeholders';
 import { UserOutlinedIcon } from '@/components/icons/user-outlined';
@@ -13,7 +12,6 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
   const { mutate: logout } = useLogout();
   const { me } = useUser();
   const router = useRouter();
-  const { t } = useTranslation('common');
 
   function handleClick(path: string) {
     router.push(path);
@@ -34,7 +32,7 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
             className="h-[38px] w-[38px] border-border-200"
           />
         )}
-        <span className="sr-only">{t('user-avatar')}</span>
+        <span className="sr-only">User Avatar</span>
       </Menu.Button>
 
       <Transition
@@ -57,7 +55,7 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
         >
           <Menu.Item>
             <li className="flex w-full items-center justify-between bg-accent-500 px-6 py-4 text-xs font-semibold capitalize text-light focus:outline-none ltr:text-left rtl:text-right">
-              <span>{t('text-points')}</span>
+              <span>Points</span>
               <span>{me?.wallet?.available_points ?? 0}</span>
             </li>
           </Menu.Item>
@@ -72,7 +70,24 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
                       active ? 'text-accent' : 'text-heading'
                     )}
                   >
-                    {t(label)}
+                    {label === 'profile-sidebar-orders' ? 'Orders' :
+                     label === 'profile-sidebar-refunds' ? 'Refunds' :
+                     label === 'profile-sidebar-downloads' ? 'Downloads' :
+                     label === 'profile-sidebar-my-wishlist' ? 'Wishlist' :
+                     label === 'profile-sidebar-my-questions' ? 'Questions' :
+                     label === 'profile-sidebar-profile' ? 'Profile' :
+                     label === 'profile-sidebar-password' ? 'Change Password' :
+                     label === 'profile-sidebar-addresses' ? 'Addresses' :
+                     label === 'profile-sidebar-help' ? 'Help' :
+                     label === 'profile-sidebar-logout' ? 'Logout' :
+                     label === 'auth-menu-profile' ? 'Profile' :
+                     label === 'auth-menu-my-orders' ? 'My Orders' :
+                     label === 'auth-menu-checkout' ? 'Checkout' :
+                     label === 'profile-sidebar-notifications' ? 'Notifications' :
+                     label === 'profile-sidebar-my-cards' ? 'My Cards' :
+                     label === 'text-my-refunds' ? 'My Refunds' :
+                     label === 'profile-sidebar-my-reports' ? 'My Reports' :
+                     label}
                   </button>
                 </li>
               )}
@@ -86,7 +101,7 @@ const AuthorizedMenu: React.FC<{ minimal?: boolean }> = ({ minimal }) => {
                   'block w-full py-2.5 px-6 text-sm font-semibold capitalize text-heading transition duration-200 hover:text-accent focus:outline-0 ltr:text-left rtl:text-right'
                 )}
               >
-                {t('auth-menu-logout')}
+                Logout
               </button>
             </li>
           </Menu.Item>

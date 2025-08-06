@@ -35,7 +35,7 @@ import { useShop } from '@/framework/shop';
 import { useRouter } from 'next/router';
 import { twMerge } from 'tailwind-merge';
 import { useShopMaintenanceEvent } from '@/framework/shop';
-const Search = dynamic(() => import('@/components/ui/search/search'));
+const Search = dynamic(() => import('@/components/ui/search/search-with-suggestion'));
 const AuthorizedMenu = dynamic(() => import('./menu/authorized-menu'), {
   ssr: false,
 });

@@ -2,106 +2,65 @@ import type { GetStaticProps } from 'next';
 import { motion } from 'framer-motion';
 import cn from 'classnames';
 import { useRouter } from 'next/router';
-import { getLayout } from '@/components/layouts/layout';
+import DashboardLayout from '@/layouts/_dashboard';
 import Head from 'next/head';
+import ProfileForm from '@/components/profile/profile-form';
+import { useUser } from '@/framework/user';
 
 export default function ProfilePage() {
+  const { me } = useUser();
+
+  // Mock user data for demo
+  const mockUser = {
+    id: 1,
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    profile: {
+      id: 1,
+      bio: 'I love shopping for fresh groceries and organic products. Always looking for the best deals and quality items.',
+      avatar: {
+        id: 1,
+        original: '/img/avatar-placeholder.png',
+        thumbnail: '/img/avatar-placeholder.png'
+      },
+      contact: '+1 (555) 123-4567'
+    },
+    wallet: {
+      total_points: 1250,
+      points_used: 450,
+      available_points: 800
+    }
+  };
+
+  // Use mock data if no real user data
+  const userData = me || mockUser;
+
   return (
     <>
       <Head>
         <title>My Profile - eGroceryMart</title>
       </Head>
-      <section className="mx-auto w-full max-w-7xl px-4 py-8 lg:py-10">
-        <div className="mb-8 text-center lg:mb-12">
-          <h1 className="mb-4 text-3xl font-bold text-heading lg:text-4xl xl:text-5xl">
-            My Profile
+      <div className="flex flex-col w-full">
+        <div className="mb-8">
+          <h1 className="mb-4 text-2xl font-bold text-heading lg:text-3xl">
+            Profile Information
           </h1>
           <p className="text-base text-body-dark">
-            Manage your account settings and preferences
+            Update your profile information and settings
           </p>
         </div>
         
-        <div className="grid gap-8 lg:grid-cols-3">
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="rounded-lg border border-gray-200 p-6">
-              <h3 className="mb-4 text-lg font-semibold">Account Menu</h3>
-              <nav className="space-y-2">
-                <a href="#profile" className="block rounded px-3 py-2 text-sm hover:bg-gray-100">
-                  Profile Information
-                </a>
-                <a href="#addresses" className="block rounded px-3 py-2 text-sm hover:bg-gray-100">
-                  Addresses
-                </a>
-                <a href="#orders" className="block rounded px-3 py-2 text-sm hover:bg-gray-100">
-                  Order History
-                </a>
-                <a href="#wishlist" className="block rounded px-3 py-2 text-sm hover:bg-gray-100">
-                  Wishlist
-                </a>
-                <a href="#settings" className="block rounded px-3 py-2 text-sm hover:bg-gray-100">
-                  Account Settings
-                </a>
-              </nav>
-            </div>
-          </div>
-          
-          {/* Main Content */}
-          <div className="lg:col-span-2">
-            <div className="rounded-lg border border-gray-200 p-6">
-              <h2 className="mb-6 text-xl font-semibold">Profile Information</h2>
-              
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Full Name</label>
-                  <input
-                    type="text"
-                    className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
-                    placeholder="Enter your full name"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Email Address</label>
-                  <input
-                    type="email"
-                    className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
-                    placeholder="Enter your email"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Phone Number</label>
-                  <input
-                    type="tel"
-                    className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
-                    placeholder="Enter your phone number"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Date of Birth</label>
-                  <input
-                    type="date"
-                    className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
-                  />
-                </div>
-                
-                <div className="pt-4">
-                  <button className="rounded-md bg-accent px-4 py-2 text-white hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">
-                    Update Profile
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="flex flex-col w-full">
+          <ProfileForm user={userData as any} />
         </div>
-      </section>
+      </div>
     </>
   );
 }
 
-ProfilePage.getLayout = getLayout;
+ProfilePage.getLayout = function getLayout(page: React.ReactElement) {
+  return <DashboardLayout>{page}</DashboardLayout>;
+};
 
 export const getStaticProps: GetStaticProps = async () => {
   return {

@@ -3,7 +3,6 @@ import { useAtom } from 'jotai';
 import ScheduleCard from './schedule-card';
 import { deliveryTimeAtom } from '@/store/checkout';
 import { useEffect } from 'react';
-import { useTranslation } from 'next-i18next';
 import { useSettings } from '@/framework/settings';
 import { isArray, isEmpty } from 'lodash';
 
@@ -18,7 +17,6 @@ export const ScheduleGrid: React.FC<ScheduleProps> = ({
   className,
   count,
 }) => {
-  const { t } = useTranslation('common');
   const {
     settings: { deliveryTime: schedules },
   }: any = useSettings();
@@ -58,7 +56,7 @@ export const ScheduleGrid: React.FC<ScheduleProps> = ({
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
           <span className="relative rounded border border-border-200 bg-gray-100 px-5 py-6 text-center text-base">
-            {t('text-no-delivery-time-found')}
+            No delivery time found
           </span>
         </div>
       )}

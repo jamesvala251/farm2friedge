@@ -1,4 +1,8 @@
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
+import { useSettings } from '@/framework/settings';
+import { useHeaderSearch } from '@/layouts/headers/header-search-atom';
+import Search from '@/components/ui/search/search-with-suggestion';
 import QuestionCard from '@/components/questions/question-card';
 import Pagination from '@/components/ui/pagination';
 import { useEffect, useState } from 'react';

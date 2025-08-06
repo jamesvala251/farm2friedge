@@ -25,21 +25,41 @@ const SearchWithSuggestion: React.FC<Props> = ({
 }) => {
   const router = useRouter();
   const [searchTerm, updateSearchTerm] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const { homePage }: any = useHomepage();
 
   const handleOnChange = (e: any) => {
     const { value: inputValue } = e.target;
     updateSearchTerm(inputValue);
+    
+    // Show suggestions after 1 character (instead of 2)
+    setShowSuggestions(inputValue.length > 0);
   };
 
   const onSearch = (e: any) => {
     e.preventDefault();
     if (!searchTerm) return;
+    
+    // Hide suggestions when searching
+    setShowSuggestions(false);
   };
 
   function clearSearch() {
     updateSearchTerm('');
+    setShowSuggestions(false);
   }
+
+  // Hide suggestions when clicking outside
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setShowSuggestions(false);
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   let redirectSearchPath = '';
   if (router.asPath === '/') {
@@ -55,7 +75,6 @@ const SearchWithSuggestion: React.FC<Props> = ({
     const { pages, ...restQuery } = query;
     router.push(
       {
-        // pathname: [group] asPath + Routes.search,
         pathname: redirectSearchPath + Routes.search,
         query: { ...restQuery, text: searchTerm },
       },
@@ -65,6 +84,7 @@ const SearchWithSuggestion: React.FC<Props> = ({
       },
     );
   };
+
   return (
     <div className={cn('relative w-full', className)}>
       <SearchBox
@@ -82,7 +102,7 @@ const SearchWithSuggestion: React.FC<Props> = ({
 
       <AutoSuggestionBox
         searchQuery={searchTerm}
-        visible={Boolean(searchTerm.length > 2)}
+        visible={showSuggestions && searchTerm.length > 0}
         seeMoreLink={onSearchMore}
         seeMore={seeMore}
       />

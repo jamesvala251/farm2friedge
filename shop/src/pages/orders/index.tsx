@@ -1,17 +1,76 @@
 import type { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import { getLayout } from '@/components/layouts/layout';
+import DashboardLayout from '@/layouts/_dashboard';
 import Head from 'next/head';
+import Card from '@/components/ui/cards/card';
+import Button from '@/components/ui/button';
 
 export default function OrdersIndexPage() {
+  const router = useRouter();
+
+  // Mock orders data for demo
+  const mockOrders = [
+    {
+      id: 'ORD-12345',
+      status: 'Processing',
+      date: new Date().toLocaleDateString(),
+      total: 8.47,
+      items: [
+        { name: 'Fresh Tomatoes', price: 2.99 },
+        { name: 'Organic Bananas', price: 1.49 },
+        { name: 'Whole Milk', price: 3.99 }
+      ]
+    },
+    {
+      id: 'ORD-12344',
+      status: 'Delivered',
+      date: 'Dec 15, 2024',
+      total: 12.99,
+      items: [
+        { name: 'Organic Apples', price: 4.99 },
+        { name: 'Fresh Bread', price: 2.49 },
+        { name: 'Greek Yogurt', price: 5.51 }
+      ]
+    },
+    {
+      id: 'ORD-12343',
+      status: 'Delivered',
+      date: 'Dec 10, 2024',
+      total: 8.75,
+      items: [
+        { name: 'Spinach', price: 2.99 },
+        { name: 'Chicken Breast', price: 5.76 }
+      ]
+    },
+    {
+      id: 'ORD-12342',
+      status: 'Delivered',
+      date: 'Dec 5, 2024',
+      total: 15.25,
+      items: [
+        { name: 'Salmon Fillet', price: 12.99 },
+        { name: 'Brown Rice', price: 2.26 }
+      ]
+    }
+  ];
+
+  const handleTrackOrder = (orderId: string) => {
+    router.push(`/orders/${orderId}`);
+  };
+
+  const handleReorder = (order: any) => {
+    // Simulate reorder functionality
+    alert(`Reordering ${order.id} - ${order.items.length} items added to cart!`);
+  };
+
   return (
     <>
       <Head>
         <title>My Orders - eGroceryMart</title>
       </Head>
-      <section className="mx-auto w-full max-w-7xl px-4 py-8 lg:py-10">
-        <div className="mb-8 text-center lg:mb-12">
-          <h1 className="mb-4 text-3xl font-bold text-heading lg:text-4xl xl:text-5xl">
+      <div className="flex flex-col">
+        <div className="mb-8">
+          <h1 className="mb-4 text-2xl font-bold text-heading lg:text-3xl">
             My Orders
           </h1>
           <p className="text-base text-body-dark">
@@ -20,104 +79,76 @@ export default function OrdersIndexPage() {
         </div>
         
         <div className="space-y-6">
-          {/* Current Order */}
-          <div className="rounded-lg border border-gray-200 bg-white p-6">
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Current Order</h2>
-              <span className="rounded-full bg-yellow-100 px-3 py-1 text-sm font-medium text-yellow-800">
-                Processing
-              </span>
-            </div>
-            
-            <div className="mb-4">
-              <p className="text-sm text-gray-600">Order #ORD-12345</p>
-              <p className="text-sm text-gray-600">Placed on: {new Date().toLocaleDateString()}</p>
-            </div>
-            
-            <div className="mb-4 space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Fresh Tomatoes</span>
-                <span className="text-sm">$2.99</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Organic Bananas</span>
-                <span className="text-sm">$1.49</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Whole Milk</span>
-                <span className="text-sm">$3.99</span>
-              </div>
-            </div>
-            
-            <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-              <span className="font-semibold">Total: $8.47</span>
-              <button className="rounded-md bg-accent px-4 py-2 text-white hover:bg-accent-hover">
-                Track Order
-              </button>
-            </div>
-          </div>
-          
-          {/* Past Orders */}
-          <div className="rounded-lg border border-gray-200 bg-white p-6">
-            <h2 className="mb-4 text-lg font-semibold">Past Orders</h2>
-            
-            <div className="space-y-4">
-              <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-                <div>
-                  <p className="font-medium">Order #ORD-12344</p>
-                  <p className="text-sm text-gray-600">Delivered on Dec 15, 2024</p>
-                  <p className="text-sm text-gray-600">Total: $12.99</p>
-                </div>
-                <div className="flex space-x-2">
-                  <button className="rounded-md border border-gray-300 px-3 py-1 text-sm hover:bg-gray-50">
-                    View Details
-                  </button>
-                  <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
-                    Reorder
-                  </button>
-                </div>
+          {mockOrders.map((order, index) => (
+            <Card key={order.id} className="p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-lg font-semibold">
+                  {index === 0 ? 'Current Order' : 'Past Order'}
+                </h2>
+                <span className={`rounded-full px-3 py-1 text-sm font-medium ${
+                  order.status === 'Processing' 
+                    ? 'bg-yellow-100 text-yellow-800' 
+                    : 'bg-green-100 text-green-800'
+                }`}>
+                  {order.status}
+                </span>
               </div>
               
-              <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-                <div>
-                  <p className="font-medium">Order #ORD-12343</p>
-                  <p className="text-sm text-gray-600">Delivered on Dec 10, 2024</p>
-                  <p className="text-sm text-gray-600">Total: $8.75</p>
-                </div>
-                <div className="flex space-x-2">
-                  <button className="rounded-md border border-gray-300 px-3 py-1 text-sm hover:bg-gray-50">
-                    View Details
-                  </button>
-                  <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
-                    Reorder
-                  </button>
-                </div>
+              <div className="mb-4">
+                <p className="text-sm text-gray-600">Order #{order.id}</p>
+                <p className="text-sm text-gray-600">
+                  {index === 0 ? 'Placed on:' : 'Delivered on:'} {order.date}
+                </p>
               </div>
               
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium">Order #ORD-12342</p>
-                  <p className="text-sm text-gray-600">Delivered on Dec 5, 2024</p>
-                  <p className="text-sm text-gray-600">Total: $15.50</p>
-                </div>
+              <div className="mb-4 space-y-2">
+                {order.items.map((item, itemIndex) => (
+                  <div key={itemIndex} className="flex items-center justify-between">
+                    <span className="text-sm">{item.name}</span>
+                    <span className="text-sm">${item.price.toFixed(2)}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+                <span className="font-semibold">Total: ${order.total.toFixed(2)}</span>
                 <div className="flex space-x-2">
-                  <button className="rounded-md border border-gray-300 px-3 py-1 text-sm hover:bg-gray-50">
+                  <Button
+                    variant="outline"
+                    size="small"
+                    onClick={() => handleTrackOrder(order.id)}
+                  >
                     View Details
-                  </button>
-                  <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
-                    Reorder
-                  </button>
+                  </Button>
+                  {order.status === 'Delivered' && (
+                    <Button
+                      size="small"
+                      onClick={() => handleReorder(order)}
+                    >
+                      Reorder
+                    </Button>
+                  )}
+                  {order.status === 'Processing' && (
+                    <Button
+                      size="small"
+                      onClick={() => handleTrackOrder(order.id)}
+                    >
+                      Track Order
+                    </Button>
+                  )}
                 </div>
               </div>
-            </div>
-          </div>
+            </Card>
+          ))}
         </div>
-      </section>
+      </div>
     </>
   );
 }
 
-OrdersIndexPage.getLayout = getLayout;
+OrdersIndexPage.getLayout = function getLayout(page: React.ReactElement) {
+  return <DashboardLayout>{page}</DashboardLayout>;
+};
 
 export const getStaticProps: GetStaticProps = async () => {
   return {

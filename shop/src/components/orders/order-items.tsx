@@ -81,16 +81,15 @@ export const OrderItems = ({
 
   const orderTableColumns = [
     {
-      title: <span className="ltr:pl-20 rtl:pr-20">{t('text-item')}</span>,
-      dataIndex: '',
-      key: 'items',
-      align: alignLeft,
-      width: 250,
-      ellipsis: true,
+      title: <span className="ltr:pl-20 rtl:pr-20">Item</span>,
+      dataIndex: 'name',
+      key: 'name',
+      align: 'left',
+      width: 200,
       render: OrderItemList,
     },
     {
-      title: t('text-quantity'),
+      title: 'Quantity',
       dataIndex: 'pivot',
       key: 'pivot',
       align: 'center',
@@ -100,7 +99,7 @@ export const OrderItems = ({
       },
     },
     {
-      title: t('text-price'),
+      title: 'Price',
       dataIndex: 'pivot',
       key: 'price',
       align: alignRight,

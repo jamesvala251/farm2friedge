@@ -1,6 +1,7 @@
 import { Image } from '@/components/ui/image';
 import cn from 'classnames';
 import dynamic from 'next/dynamic';
+import Rating from '@/components/ui/rating';
 const AddToCart = dynamic(
   () =>
     import('@/components/products/add-to-cart/add-to-cart').then(
@@ -114,6 +115,23 @@ const Argon: React.FC<ArgonProps> = ({ product, className }) => {
             {name}
           </h3>
         </div>
+        
+        {/* Rating Section */}
+        <div className="mb-2">
+          <Rating
+            rating={product.ratings || 0}
+            totalReviews={product.total_reviews || 0}
+            size="sm"
+            showCount={false}
+            className="mb-1"
+          />
+          {product.total_reviews > 0 && (
+            <span className="text-xs text-gray-500">
+              ({product.total_reviews} {product.total_reviews === 1 ? 'review' : 'reviews'})
+            </span>
+          )}
+        </div>
+        
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <span className="text-sm font-bold text-heading md:text-base">

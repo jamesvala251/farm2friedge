@@ -9,12 +9,10 @@ import { Routes } from '@/config/routes';
 import usePrice from '@/lib/use-price';
 import { useCart } from '@/store/quick-cart/cart.context';
 import { formatString } from '@/lib/format-string';
-import { useTranslation } from 'next-i18next';
 import { useAtom } from 'jotai';
 import { drawerAtom } from '@/store/drawer-atom';
 
 const CartSidebarView = () => {
-  const { t } = useTranslation('common');
   const { items, totalUniqueItems, total, language } = useCart();
   const [_, closeSidebar] = useAtom(drawerAtom);
   const router = useRouter();
@@ -42,14 +40,14 @@ const CartSidebarView = () => {
         <div className="flex font-semibold text-accent">
           <CartCheckBagIcon className="shrink-0" width={24} height={22} />
           <span className="flex ltr:ml-2 rtl:mr-2">
-            {formatString(totalUniqueItems, t('text-item'))}
+            {formatString(totalUniqueItems, 'item')}
           </span>
         </div>
         <button
           onClick={() => closeSidebar({ display: false, view: '' })}
           className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 text-muted transition-all duration-200 hover:bg-accent hover:text-light focus:bg-accent focus:text-light focus:outline-0 ltr:ml-3 ltr:-mr-2 rtl:mr-3 rtl:-ml-2"
         >
-          <span className="sr-only">{t('text-close')}</span>
+          <span className="sr-only">Close</span>
           <CloseIcon className="h-3 w-3" />
         </button>
       </header>
@@ -69,7 +67,7 @@ const CartSidebarView = () => {
           >
             <EmptyCartIcon width={140} height={176} />
             <h4 className="mt-6 text-base font-semibold">
-              {t('text-no-products')}
+              No products
             </h4>
           </motion.div>
         )}
@@ -82,7 +80,7 @@ const CartSidebarView = () => {
           onClick={handleCheckout}
         >
           <span className="flex h-full flex-1 items-center px-5 text-light">
-            {t('text-checkout')}
+            Checkout
           </span>
           <span className="flex h-full shrink-0 items-center rounded-full bg-light px-5 text-accent">
             {totalPrice}

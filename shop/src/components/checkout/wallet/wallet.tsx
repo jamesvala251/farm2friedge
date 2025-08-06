@@ -4,7 +4,7 @@ import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { payableAmountAtom, walletAtom } from '@/store/checkout';
 import Checkbox from '@/components/ui/forms/checkbox/checkbox';
-import { useTranslation } from 'next-i18next';
+
 interface Props {
   totalPrice: number;
   walletAmount: number;
@@ -12,7 +12,6 @@ interface Props {
 }
 
 const Wallet = ({ totalPrice, walletAmount, walletCurrency }: Props) => {
-  const { t } = useTranslation('common');
   const [use_wallet, setUseWallet] = useAtom(walletAtom);
   const [calculatePayableAmount, setCalculatePayableAmount] =
     useAtom(payableAmountAtom);
@@ -52,14 +51,14 @@ const Wallet = ({ totalPrice, walletAmount, walletCurrency }: Props) => {
         {/* <p>Wallet</p> */}
         <div className="flex justify-between text-sm text-body">
           <span>
-            {t('text-wallet')}{' '}
-            <span className="lowercase">{t('text-points')}</span>
+            Wallet{' '}
+            <span className="lowercase">points</span>
           </span>
           <span>{walletAmount}</span>
         </div>
         <div className="flex justify-between text-sm text-body">
           <span>
-            {t('text-wallet')} {t('text-currency')}
+            Wallet currency
           </span>
           <span>{currentWalletCurrency}</span>
         </div>
@@ -67,7 +66,7 @@ const Wallet = ({ totalPrice, walletAmount, walletCurrency }: Props) => {
 
       <Checkbox
         name="use_wallet"
-        label={t('text-wallet-use')}
+        label="Use Wallet"
         className="mt-3"
         onChange={setUseWallet}
         checked={use_wallet}
@@ -77,7 +76,7 @@ const Wallet = ({ totalPrice, walletAmount, walletCurrency }: Props) => {
       {use_wallet && (
         <div className="mt-4 flex justify-between border-t-4 border-double border-border-base pt-3">
           <span className="text-base font-semibold text-heading">
-            {t('text-payable')}
+            Payable
           </span>
           <span className="text-base font-semibold text-heading">
             {payableAmount}

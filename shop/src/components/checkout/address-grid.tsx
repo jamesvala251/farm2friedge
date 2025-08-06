@@ -4,7 +4,6 @@ import { useAtom, WritableAtom } from 'jotai';
 import { useEffect } from 'react';
 import AddressCard from '@/components/address/address-card';
 import { AddressHeader } from '@/components/address/address-header';
-import { useTranslation } from 'next-i18next';
 import type { Address } from '@/types';
 
 interface AddressesProps {
@@ -26,7 +25,6 @@ export const AddressGrid: React.FC<AddressesProps> = ({
   count,
   type,
 }) => {
-  const { t } = useTranslation('common');
   const [selectedAddress, setAddress] = useAtom(atom);
   const { openModal } = useModalAction();
   useEffect(() => {
@@ -55,7 +53,7 @@ export const AddressGrid: React.FC<AddressesProps> = ({
       {!addresses?.length ? (
         <div className="grid grid-cols-1 gap-4">
           <span className="relative rounded border border-border-200 bg-gray-100 px-5 py-6 text-center text-base">
-            {t('text-no-address')}
+            No address found
           </span>
         </div>
       ) : (

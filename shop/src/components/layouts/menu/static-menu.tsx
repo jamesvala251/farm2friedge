@@ -1,10 +1,8 @@
 import { ArrowDownIcon } from '@/components/icons/arrow-down';
 import Link from '@/components/ui/link';
-import { useTranslation } from 'next-i18next';
 import { siteSettings } from '@/config/site';
 
 const StaticMenu = () => {
-  const { t } = useTranslation('common');
   const { headerLinks } = siteSettings;
   return (
     <>
@@ -15,14 +13,20 @@ const StaticMenu = () => {
             className="flex items-center font-normal text-heading no-underline transition duration-200 hover:text-accent focus:text-accent"
           >
             {icon && <span className="ltr:mr-2 rtl:ml-2">{icon}</span>}
-            {t(label)}
+            {label === 'text-about-us' ? 'About Us' :
+             label === 'text-contact-us' ? 'Contact Us' :
+             label === 'text-faq' ? 'FAQ' :
+             label === 'text-terms' ? 'Terms' :
+             label === 'text-privacy' ? 'Privacy' :
+             label === 'text-help' ? 'Help' :
+             label}
           </Link>
         </li>
       ))}
       <li className="menuItem group relative mx-3 cursor-pointer py-3 xl:mx-4">
         <div className="flex items-center gap-2 group-hover:text-accent">
           <span className="text-brand-dark group-hover:text-brand relative inline-flex items-center py-2 font-normal rtl:left-0">
-            {t('text-pages')}
+            Pages
           </span>
           <ArrowDownIcon className="mt-1" />
         </div>
@@ -38,7 +42,13 @@ const StaticMenu = () => {
                   href={href}
                   className="flex items-center font-normal text-heading no-underline transition duration-200 hover:text-accent focus:text-accent"
                 >
-                  {t(label)}
+                  {label === 'text-about-us' ? 'About Us' :
+                   label === 'text-contact-us' ? 'Contact Us' :
+                   label === 'text-faq' ? 'FAQ' :
+                   label === 'text-terms' ? 'Terms' :
+                   label === 'text-privacy' ? 'Privacy' :
+                   label === 'text-help' ? 'Help' :
+                   label}
                 </Link>
               </li>
             ))}

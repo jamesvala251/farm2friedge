@@ -95,11 +95,12 @@ const ActiveFilters = () => {
   // Vendor filter
   if (router.query.vendor) {
     // Find vendor from products data
-    const vendor = categories?.find(cat => cat.slug === router.query.vendor);
-    if (vendor) {
+    const { products } = useProducts({ limit: 1000 });
+    const productWithVendor = products?.find((product: any) => (product as any).vendor?.slug === router.query.vendor);
+    if ((productWithVendor as any)?.vendor) {
       activeFilters.push({
         type: 'vendor',
-        label: vendor.name,
+        label: (productWithVendor as any).vendor.name,
         value: router.query.vendor as string,
         icon: '🏪'
       });

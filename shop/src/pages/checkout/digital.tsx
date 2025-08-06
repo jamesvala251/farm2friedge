@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-import { useTranslation } from 'next-i18next';
 import { getLayout as getSiteLayout } from '@/components/layouts/layout';
 import Seo from '@/components/seo/seo';
 import { useUser } from '@/framework/user';
@@ -12,7 +11,6 @@ const CheckoutCart = dynamic(
 );
 
 const CheckoutDigitalPage = () => {
-  const { t } = useTranslation('common');
   const { me } = useUser();
 
   return (
@@ -23,11 +21,11 @@ const CheckoutDigitalPage = () => {
           <ContactGrid
             className="bg-light p-5 shadow-700 md:p-8"
             contact={me?.profile?.contact}
-            label={t('text-contact-number')}
+            label="Contact Number"
           />
           <div className="mt-3 w-full bg-white">
             <span className="mb-[1px] block w-full border-b border-gray-100 py-6 px-8 text-lg font-semibold capitalize text-gray-800 lg:text-xl">
-              {t('text-your-order')}
+              Your Order
             </span>
             <div className="w-full px-8 py-7">
               <CheckoutCart hideTitle={true} />

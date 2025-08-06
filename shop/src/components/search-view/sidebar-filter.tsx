@@ -1,5 +1,5 @@
 import { CustomDisclosure } from '@/components/ui/disclosure';
-import Search from '@/components/ui/search/search';
+import Search from '@/components/ui/search/search-with-suggestion';
 import { useRouter } from 'next/router';
 import Sorting from './sorting';
 import PriceFilter from '@/components/search-view/price-filter';

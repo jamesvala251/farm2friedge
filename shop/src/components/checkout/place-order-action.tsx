@@ -12,7 +12,6 @@ import {
   calculatePaidTotal,
   calculateTotal,
 } from '@/store/quick-cart/cart.utils';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useLogout, useUser } from '@/framework/user';
 import { PaymentGateway } from '@/types';
@@ -24,7 +23,6 @@ export const PlaceOrderAction: React.FC<{
   className?: string;
   children?: React.ReactNode;
 }> = (props) => {
-  const { t } = useTranslation('common');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { createOrder, isLoading } = useCreateOrder();
   const { locale }: any = useRouter();
@@ -155,7 +153,7 @@ export const PlaceOrderAction: React.FC<{
       )}
       {!isAllRequiredFieldSelected && (
         <div className="mt-3">
-          <ValidationError message={t('text-place-order-helper-text')} />
+          <ValidationError message="Please fill all required fields to place order." />
         </div>
       )}
     </>

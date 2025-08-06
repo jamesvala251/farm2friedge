@@ -21,7 +21,11 @@ export default function DashboardLayout({
         )}
       >
         <DashboardSidebar className="hidden shrink-0 ltr:mr-8 rtl:ml-8 lg:block lg:w-80" />
-        {children}
+        <div className="flex-1 min-w-0">
+          <div className="bg-gray-50 rounded-lg shadow-md border border-gray-300 p-6 lg:p-8">
+            {children}
+          </div>
+        </div>
       </div>
     </GeneralLayout>
   );

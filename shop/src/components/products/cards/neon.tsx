@@ -7,6 +7,7 @@ import { productPlaceholder } from '@/lib/placeholders';
 import { PlusIcon } from '@/components/icons/plus-icon';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import Rating from '@/components/ui/rating';
 
 const AddToCart = dynamic(
   () =>
@@ -98,6 +99,17 @@ const Neon: React.FC<NeonProps> = ({ product, className }) => {
           </div>
         )}
         {/* End of product price */}
+
+        {/* Rating Section */}
+        <div className="mb-2">
+          <Rating
+            rating={product.ratings || 0}
+            totalReviews={product.total_reviews || 0}
+            size="sm"
+            showCount={false}
+            className="mb-1"
+          />
+        </div>
 
         <h3 className="text-xs text-body md:text-sm">{name}</h3>
         {/* End of product title */}

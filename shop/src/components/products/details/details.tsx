@@ -14,7 +14,6 @@ import classNames from 'classnames';
 import { useAtom } from 'jotai';
 import isEmpty from 'lodash/isEmpty';
 import isEqual from 'lodash/isEqual';
-import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -65,7 +64,6 @@ const Details: React.FC<Props> = ({
     product_type,
   } = product ?? {};
 
-  const { t } = useTranslation('common');
   const [_, setShowStickyShortDetails] = useAtom(stickyShortDetailsAtom);
 
   const router = useRouter();
@@ -251,11 +249,11 @@ const Details: React.FC<Props> = ({
                     <>
                       {Number(quantity) > 0 ? (
                         <span className="whitespace-nowrap text-base text-body ltr:lg:ml-7 rtl:lg:mr-7">
-                          {quantity} {t('text-pieces-available')}
+                          {quantity} pieces available
                         </span>
                       ) : (
                         <div className="whitespace-nowrap text-base text-red-500">
-                          {t('text-out-stock')}
+                          Out of Stock
                         </div>
                       )}
                     </>
@@ -266,10 +264,8 @@ const Details: React.FC<Props> = ({
                 <span className="whitespace-nowrap text-base text-body ltr:lg:ml-7 rtl:lg:mr-7">
                   {selectedVariation?.is_disable ||
                   selectedVariation.quantity === 0
-                    ? t('text-out-stock')
-                    : `${selectedVariation.quantity} ${t(
-                        'text-pieces-available',
-                      )}`}
+                    ? 'Out of Stock'
+                    : `${selectedVariation.quantity} pieces available`}
                 </span>
               )}
             </div>
@@ -286,7 +282,7 @@ const Details: React.FC<Props> = ({
           {shop?.name && (
             <div className="mt-2 flex items-center">
               <span className="py-1 text-sm font-semibold capitalize text-heading ltr:mr-6 rtl:ml-6">
-                {t('common:text-sellers')}
+                Seller
               </span>
 
               <button
@@ -297,6 +293,67 @@ const Details: React.FC<Props> = ({
               </button>
             </div>
           )}
+
+          {/* Brand Information */}
+          {(product as any)?.brand?.name && (
+            <div className="mt-2 flex items-center">
+              <span className="py-1 text-sm font-semibold capitalize text-heading ltr:mr-6 rtl:ml-6">
+                Brand
+              </span>
+              <span className="text-sm text-body">
+                {(product as any).brand.name}
+              </span>
+            </div>
+          )}
+
+          {/* Tags Information */}
+          {product?.tags && product.tags.length > 0 && (
+            <div className="mt-2 flex items-start">
+              <span className="py-1 text-sm font-semibold capitalize text-heading ltr:mr-6 rtl:ml-6">
+                Tags
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {product.tags.map((tag: any, index: number) => (
+                  <span
+                    key={index}
+                    className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"
+                  >
+                    {tag.name || tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Product Type */}
+          {product?.product_type && (
+            <div className="mt-2 flex items-center">
+              <span className="py-1 text-sm font-semibold capitalize text-heading ltr:mr-6 rtl:ml-6">
+                Type
+              </span>
+              <span className="text-sm text-body capitalize">
+                {product.product_type}
+              </span>
+            </div>
+          )}
+
+          {/* Vendor Rating */}
+          {(product as any)?.vendor?.rating && (
+            <div className="mt-2 flex items-center">
+              <span className="py-1 text-sm font-semibold capitalize text-heading ltr:mr-6 rtl:ml-6">
+                Vendor Rating
+              </span>
+              <div className="flex items-center">
+                <span className="text-sm text-body ltr:mr-1 rtl:ml-1">
+                  {(product as any).vendor.rating}
+                </span>
+                <StarIcon className="h-3 w-3 text-yellow-400" />
+                <span className="text-sm text-gray-500 ltr:ml-1 rtl:mr-1">
+                  ({(product as any).vendor.total_reviews} reviews)
+                </span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -305,7 +362,7 @@ const Details: React.FC<Props> = ({
         className="border-b border-border-200 border-opacity-70 px-5 py-4 lg:px-16 lg:py-14"
       >
         <h2 className="mb-4 text-lg font-semibold tracking-tight text-heading md:mb-6">
-          {t('text-details')}
+          Details
         </h2>
         {content ? (
           <p

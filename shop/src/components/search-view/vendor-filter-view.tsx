@@ -103,15 +103,13 @@ const VendorFilter: React.FC<{ type?: any }> = ({ type }) => {
     
     const vendorMap = new Map();
     products.forEach((product: any) => {
-      if (product.shop) {
-        const vendor = product.shop;
+      if (product.vendor) {
+        const vendor = product.vendor;
         if (!vendorMap.has(vendor.id)) {
           vendorMap.set(vendor.id, {
             id: vendor.id,
             name: vendor.name,
             slug: vendor.slug,
-            rating: vendor.rating,
-            total_reviews: vendor.total_reviews,
             products_count: 1
           });
         } else {

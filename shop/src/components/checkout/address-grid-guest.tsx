@@ -4,7 +4,6 @@ import { RadioGroup } from '@headlessui/react';
 import { useAtom, WritableAtom } from 'jotai';
 import AddressCard from '@/components/address/address-card';
 import { AddressHeader } from '@/components/address/address-header';
-import { useTranslation } from 'next-i18next';
 
 interface AddressesProps {
   addresses: Address[] | undefined;
@@ -23,7 +22,6 @@ export const GuestAddressGrid: React.FC<AddressesProps> = ({
   count,
   type,
 }) => {
-  const { t } = useTranslation('common');
   const [selectedAddress, setAddress] = useAtom(atom);
   const { openModal } = useModalAction();
 
@@ -58,7 +56,7 @@ export const GuestAddressGrid: React.FC<AddressesProps> = ({
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
           <span className="relative rounded border border-border-200 bg-gray-100 px-5 py-6 text-center text-base">
-            {t('text-no-address')}
+            No address found
           </span>
         </div>
       )}

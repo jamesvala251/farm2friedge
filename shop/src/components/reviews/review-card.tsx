@@ -1,4 +1,3 @@
-import { useTranslation } from 'next-i18next';
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import cn from 'classnames';
@@ -19,7 +18,6 @@ type ReviewCardProps = {
 };
 
 export default function ReviewCard({ review }: ReviewCardProps) {
-  const { t } = useTranslation('common');
   const { openModal } = useModalAction();
   const { createFeedback } = useCreateFeedback();
   const { isAuthorized } = useUser();
@@ -68,7 +66,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
     <div className="border-t border-border-200 border-opacity-70 py-7 first:border-t-0">
       <Rating rating={rating} className="mb-2.5" />
       <div className="mb-4 flex items-center text-xs text-gray-500">
-        {t('text-by')}{' '}
+        By{' '}
         <span className="capitalize ltr:ml-1 rtl:mr-1">{user?.name}</span>
         <CheckedIcon className="h-[13px] w-[13px] text-gray-700 ltr:ml-1 rtl:mr-1" />
       </div>
@@ -94,7 +92,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
 
       <div className="flex items-center justify-between">
         <div className="mt-3.5 text-xs text-gray-400">
-          {t('text-date')}: {dayjs(created_at).format('MMMM D, YYYY')}
+          Date: {dayjs(created_at).format('MMMM D, YYYY')}
         </div>
         <div className="flex items-center space-x-6 rtl:space-x-reverse">
           <button
@@ -153,7 +151,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
                         active ? 'text-accent' : 'text-body',
                       )}
                     >
-                      {t('text-report-abuse')}
+                      Report Abuse
                     </button>
                   )}
                 </Menu.Item>

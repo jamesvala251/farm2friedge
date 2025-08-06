@@ -5,7 +5,6 @@ import Counter from '@/components/ui/counter';
 import { CloseIcon } from '@/components/icons/close-icon';
 import { fadeInOut } from '@/lib/motion/fade-in-out';
 import usePrice from '@/lib/use-price';
-import { useTranslation } from 'next-i18next';
 import { useCart } from '@/store/quick-cart/cart.context';
 
 interface CartItemProps {
@@ -13,7 +12,6 @@ interface CartItemProps {
 }
 
 const CartItem = ({ item }: CartItemProps) => {
-  const { t } = useTranslation('common');
   const {
     isInStock,
     clearItemFromCart,
@@ -85,7 +83,7 @@ const CartItem = ({ item }: CartItemProps) => {
         className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-muted transition-all duration-200 hover:bg-gray-100 hover:text-red-600 focus:bg-gray-100 focus:text-red-600 focus:outline-0 ltr:ml-3 ltr:-mr-2 rtl:mr-3 rtl:-ml-2"
         onClick={() => clearItemFromCart(item.id)}
       >
-        <span className="sr-only">{t('text-close')}</span>
+        <span className="sr-only">Close</span>
         <CloseIcon className="h-3 w-3" />
       </button>
     </motion.div>
