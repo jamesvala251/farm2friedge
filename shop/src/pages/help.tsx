@@ -1,45 +1,95 @@
-import Seo from '@/components/seo/seo';
-import NotFound from '@/components/ui/not-found';
-import { useFAQs } from '@/framework/faqs';
-import { useTranslation } from 'next-i18next';
-import { getStaticProps } from '@/framework/faq-ssr';
-export { getStaticProps };
-import { LIMIT_HUNDRED } from '@/lib/constants';
-import { getLayoutWithFooter } from '@/components/layouts/layout-with-footer';
-import PageBanner from '@/components/banners/page-banner';
-import FAQ from '@/components/faq/faq';
-import ErrorMessage from '@/components/ui/error-message';
+import type { GetStaticProps } from 'next';
+import { motion } from 'framer-motion';
+import cn from 'classnames';
+import { useRouter } from 'next/router';
+import { getLayout } from '@/components/layouts/layout';
+import Head from 'next/head';
 
 export default function HelpPage() {
-  const { t } = useTranslation();
-  const { faqs, isLoading, error } = useFAQs({
-    faq_type: 'global',
-    issued_by: 'Super Admin',
-    limit: LIMIT_HUNDRED,
-  });
-
-  if (error) return <ErrorMessage message={error.message} />;
-
   return (
     <>
-      <Seo title="Help" url="help" />
-      <section className="w-full min-h-screen pb-16 mx-auto max-w-1920 bg-light lg:pb-10 xl:pb-14">
-        <PageBanner
-          title={t('text-faq-title')}
-          breadcrumbTitle={t('text-home')}
-        />
-        <div className="w-full max-w-screen-lg px-4 py-10 mx-auto">
-          {!isLoading && !faqs.length ? (
-            <div className="min-h-full p-5 md:p-8 lg:p-12 2xl:p-16">
-              <NotFound text="text-no-faq" className="h-96" />
-            </div>
-          ) : (
-            <FAQ data={faqs as any} isLoading={isLoading} />
-          )}
+      <Head>
+        <title>Help Center - eGroceryMart</title>
+      </Head>
+      <section className="mx-auto w-full max-w-7xl px-4 py-8 lg:py-10">
+        <div className="mb-8 text-center lg:mb-12">
+          <h1 className="mb-4 text-3xl font-bold text-heading lg:text-4xl xl:text-5xl">
+            Help Center
+          </h1>
+          <p className="text-base text-body-dark">
+            Find answers to frequently asked questions
+          </p>
+        </div>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="rounded-lg border border-gray-200 p-6">
+            <h3 className="mb-4 text-xl font-semibold">Getting Started</h3>
+            <ul className="space-y-2 text-sm text-gray-600">
+              <li>• How to create an account</li>
+              <li>• How to place your first order</li>
+              <li>• How to track your order</li>
+              <li>• How to contact customer support</li>
+            </ul>
+          </div>
+          
+          <div className="rounded-lg border border-gray-200 p-6">
+            <h3 className="mb-4 text-xl font-semibold">Account & Profile</h3>
+            <ul className="space-y-2 text-sm text-gray-600">
+              <li>• How to update your profile</li>
+              <li>• How to change your password</li>
+              <li>• How to manage addresses</li>
+              <li>• How to view order history</li>
+            </ul>
+          </div>
+          
+          <div className="rounded-lg border border-gray-200 p-6">
+            <h3 className="mb-4 text-xl font-semibold">Payment & Billing</h3>
+            <ul className="space-y-2 text-sm text-gray-600">
+              <li>• Accepted payment methods</li>
+              <li>• How to add payment cards</li>
+              <li>• Understanding charges</li>
+              <li>• Refund policies</li>
+            </ul>
+          </div>
+          
+          <div className="rounded-lg border border-gray-200 p-6">
+            <h3 className="mb-4 text-xl font-semibold">Delivery</h3>
+            <ul className="space-y-2 text-sm text-gray-600">
+              <li>• Delivery timeframes</li>
+              <li>• Delivery fees</li>
+              <li>• How to track delivery</li>
+              <li>• Contact delivery partner</li>
+            </ul>
+          </div>
+          
+          <div className="rounded-lg border border-gray-200 p-6">
+            <h3 className="mb-4 text-xl font-semibold">Returns & Refunds</h3>
+            <ul className="space-y-2 text-sm text-gray-600">
+              <li>• Return policy</li>
+              <li>• How to return items</li>
+              <li>• Refund processing time</li>
+              <li>• Damaged items</li>
+            </ul>
+          </div>
+          
+          <div className="rounded-lg border border-gray-200 p-6">
+            <h3 className="mb-4 text-xl font-semibold">Contact Us</h3>
+            <ul className="space-y-2 text-sm text-gray-600">
+              <li>• Customer support hours</li>
+              <li>• Email support</li>
+              <li>• Phone support</li>
+              <li>• Live chat</li>
+            </ul>
+          </div>
         </div>
       </section>
     </>
   );
 }
 
-HelpPage.getLayout = getLayoutWithFooter;
+HelpPage.getLayout = getLayout;
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
+};

@@ -1,0 +1,1234 @@
+{
+    "pageProps": {
+        "_nextI18Next": {
+            "initialI18nStore": {
+                "en": {
+                    "common": {
+                        "404-heading": "Error code: 404",
+                        "404-sub-heading": "Oops! Looks like this isn't a page",
+                        "404-back-home": "Take me home",
+                        "nav-menu-track-order": "Track Order",
+                        "nav-menu-offer": "Offers",
+                        "nav-menu-faq": "FAQ",
+                        "nav-menu-contact": "Contact",
+                        "nav-menu-terms": "Terms & Conditions",
+                        "nav-menu-flash-sale": "Flash Sale",
+                        "nav-menu-refund-policy": "Customer Refund Policy",
+                        "nav-menu-vendor-refund-policy": "Vendor Refund Policy",
+                        "user-avatar": "user avatar",
+                        "auth-menu-profile": "Profile",
+                        "auth-menu-checkout": "Checkout",
+                        "auth-menu-my-orders": "My Orders",
+                        "auth-menu-logout": "Logout",
+                        "join-button": "Join",
+                        "change-locale": "Switch to german",
+                        "text-search": "Search",
+                        "text-burger-menu": "Burger Menu",
+                        "text-close": "close",
+                        "text-or": "Or",
+                        "text-terms": "terms",
+                        "text-policy": "policy",
+                        "text-accept": "Accept",
+                        "cookie-message": "This site uses cookies to improve your experience. By clicking, you agree to our",
+                        "text-privacy-policy": "privacy policy",
+                        "text-minus": "minus",
+                        "text-plus": "plus",
+                        "text-copy": "Copy",
+                        "text-copied": "Copied!",
+                        "text-expired": "Expired",
+                        "text-expired-at": "Expired at",
+                        "text-card-number": "Card Number",
+                        "text-read-more": "Read more",
+                        "text-less": "Less",
+                        "text-item": "Item",
+                        "text-add": "Add",
+                        "text-cart": "Cart",
+                        "text-add-cart": "Add To Shopping Cart",
+                        "text-pieces-available": "pieces available",
+                        "text-details": "Details",
+                        "text-order": "Order",
+                        "text-checkout": "Checkout",
+                        "text-phone": "Phone",
+                        "text-website": "Website",
+                        "text-apply": "Apply",
+                        "text-date": "Date",
+                        "text-order-date": "Order Date",
+                        "text-order-details": "Order Details",
+                        "text-payment-method": "Payment Method",
+                        "text-address": "Address",
+                        "text-addresses": "Addresses",
+                        "text-upload-highlight": "Upload an image",
+                        "text-upload-message": "or drag and drop",
+                        "text-img-format": "PNG, JPG",
+                        "text-shipping-address": "Shipping Address",
+                        "text-estimated-shipping": "Estimated Shipping",
+                        "text-calculated-checkout": "Calculated at checkout",
+                        "text-proceed-checkout": "Proceed to checkout",
+                        "text-shipping": "Shipping",
+                        "text-billing": "Billing",
+                        "text-billing-address": "Billing Address",
+                        "text-sub-total": "Sub Total",
+                        "text-discount": "Discount",
+                        "text-delivery-fee": "Delivery Fee",
+                        "text-deliver-time": "Delivery Time",
+                        "text-shipping-charge": "Shipping Charge",
+                        "text-free-shipping": "Free Shipping",
+                        "text-free": "Free",
+                        "text-tax": "Tax",
+                        "text-amount": "Amount",
+                        "text-total-price": "Total Price",
+                        "text-total-item": "Total Item",
+                        "text-total-amount": "Total Amount",
+                        "text-total": "Total",
+                        "text-out-stock": "Out Of Stock",
+                        "text-product-image": "Product Image",
+                        "text-select": "Reason Select",
+                        "select-refund-reason": "Please Select Your Reason",
+                        "text-by": "by",
+                        "text-load-more": "Load More",
+                        "text-categories": "Categories",
+                        "text-category": "Category",
+                        "text-delivery-schedule": "Delivery Schedule",
+                        "text-home": "Home",
+                        "text-user": "User",
+                        "text-edit": "Edit",
+                        "text-type": "Type",
+                        "text-title": "Title",
+                        "text-country": "Country",
+                        "text-city": "City",
+                        "text-state": "State",
+                        "text-zip": "ZIP",
+                        "text-street-address": "Street Address",
+                        "text-add-new": "Add New",
+                        "profile-sidebar-profile": "Profile",
+                        "profile-sidebar-password": "Change Password",
+                        "profile-sidebar-orders": "My Orders",
+                        "profile-sidebar-help": "Need Help",
+                        "profile-sidebar-logout": "Logout",
+                        "password-successful": "Password changed successfully",
+                        "error-enough-permission": "Doesn't have enough permission",
+                        "error-credential-wrong": "The credentials was wrong!",
+                        "login-helper": "Login with your email & password",
+                        "error-email-format": "The provided email address format is not valid",
+                        "error-email-required": "You must need to provide your email address",
+                        "error-password-required": "You must need to provide your password",
+                        "error-subject-required": "What subject do you want to discuss with us?",
+                        "error-description-required": "Tell us more about it",
+                        "error-select-required": "Select your reason",
+                        "text-login": "Login",
+                        "text-no-account": "Don't have any account?",
+                        "text-already-account": "Already have an account?",
+                        "text-register": "Register",
+                        "text-old-password": "Old Password",
+                        "text-new-password": "New Password",
+                        "text-confirm-password": "Confirm Password",
+                        "error-old-password-required": "Old Password is Required!",
+                        "error-new-password-required": "Password is Required!",
+                        "error-confirm-password": "Please confirm password!",
+                        "error-match-passwords": "Passwords should match!",
+                        "registration-helper": "By signing up, you agree to our",
+                        "error-name-required": "You must need to provide your name",
+                        "forgot-password-helper": "We'll send you a link to reset your password",
+                        "error-token-required": "You must need to provide your token address",
+                        "token-label": "Put your token you got from email",
+                        "text-reset-password": "Reset Password",
+                        "text-back": "Back",
+                        "text-back-to": "Back to",
+                        "text-back-to-home": "Back to Home",
+                        "text-forgot-password": "Forgot password?",
+                        "text-visit-site": "Visit This Site",
+                        "text-follow-us": "Follow Us",
+                        "text-questions-comments": "How can we improve your experience?",
+                        "text-vendor-comments": "We’re always here for you",
+                        "text-vendor-comments-subtitle": "is going to recieve an email. we’d love to hear from you.",
+                        "text-vendor-refund-title": "Vendor Refund Policy",
+                        "text-customer-refund-title": "Customer Refund Policy",
+                        "text-faq-title": "FAQs",
+                        "text-name": "Name",
+                        "text-password": "Password",
+                        "text-email": "Email",
+                        "text-subject": "Subject",
+                        "text-description": "Description",
+                        "text-contact-number": "Contact Number",
+                        "text-save": "Save",
+                        "text-update": "Update",
+                        "text-submit-email": "Submit Email",
+                        "text-submit-token": "Submit Token",
+                        "text-loading": "Loading...",
+                        "text-signing-out": "Signing out...",
+                        "error-something-wrong": "Something went wrong",
+                        "text-no-result-found": "No Result Found",
+                        "text-not-found": "Sorry, No Product Found :(",
+                        "text-no-category": "Sorry, No Category Found :(",
+                        "text-no-faq": "Sorry, No FAQs Found :(",
+                        "text-no-manufacturers": "Sorry, No Manufacturers Found :(",
+                        "text-no-refund-policy": "Sorry, No Refund Policies Found :(",
+                        "text-no-terms": "Sorry, No Terms & Conditions Found :(",
+                        "text-no-refund": "Sorry, No Refund Policies Found :(",
+                        "text-no-coupon": "Sorry, No Coupons Found :(",
+                        "text-no-flash-deal": "No flash deal found. :(",
+                        "text-related-products": "Related Products",
+                        "text-previous": "Previous",
+                        "text-next": "Next",
+                        "text-unavailable": "Unavailable",
+                        "text-remove-card": "Remove card",
+                        "text-remove-card-message": "Are you sure you want to delete this card?",
+                        "text-cancel": "cancel",
+                        "text-delete": "Delete",
+                        "text-filter": "Filter",
+                        "text-stripe": "Stripe",
+                        "text-place-order": "Place Order",
+                        "text-your-order": "Your Order",
+                        "text-cash-on-delivery": "Cash On Delivery",
+                        "text-card-info": "Card Information",
+                        "text-no-products": "No products found",
+                        "text-search-label": "grocery search at header",
+                        "text-search-placeholder": "Search your products from here",
+                        "text-search-placeholder-minimal": "Search (type at least 3 character)",
+                        "text-no-address": "No Address Found",
+                        "text-have-coupon": "Do you have coupon?",
+                        "text-enter-coupon": "Enter coupon code here",
+                        "text-coupon-required": "Coupon code is required",
+                        "text-enter-contact-number": "Enter Your Contact Number",
+                        "text-payment-gateway": "Payment Gateway",
+                        "text-order-received": "Order Received",
+                        "text-thank-you": "Thank you!.",
+                        "text-order-number": "Order Number",
+                        "text-checkbox": "I'd like to hear from Pickbazar in the future. (You can unsubscribe at any time)",
+                        "error-checkbox-required": "You must need to check this option",
+                        "placeholder-card-number": "Card Number(ex: 4242424242424242)",
+                        "placeholder-m-y": "M/Y",
+                        "placeholder-cvc": "CVC",
+                        "error-card-required": "Card Number is required",
+                        "error-expiry-date": "Valid Thru is required",
+                        "error-cvc": "CVC is required",
+                        "error-contact-required": "Contact Number is required",
+                        "error-invalid-coupon": "Invalid coupon code! please try again.",
+                        "error-minimum-amount-satisfy": "Sorry, This coupon is not applicable, Please order above",
+                        "error-type-required": "Type is required",
+                        "error-title-required": "Title is required",
+                        "error-country-required": "Country is required",
+                        "error-city-required": "City is required",
+                        "error-state-required": "State is required",
+                        "error-zip-required": "ZIP is required",
+                        "error-street-required": "Street Address is required",
+                        "error-order-unavailable": "Your ordered items are unavailable",
+                        "error-cant-process-order": "Sorry, we can't process your order :(",
+                        "error-add-both-address": "Please add both shipping and billing address",
+                        "error-cart-empty": "Your cart is empty. Go to",
+                        "error-no-orders": "You didn't order anything yet",
+                        "change-password": "Change Password",
+                        "text-submit": "Submit",
+                        "text-bio": "Bio",
+                        "profile-update-successful": "Profile Updated Successfully",
+                        "text-no-contact": "No contact found",
+                        "text-view-sub-orders": "View sub orders",
+                        "text-shops-near-you": "Shops Near You",
+                        "text-sellers": "Sellers",
+                        "text-sub-orders": "Details",
+                        "text-new": "New",
+                        "text-all-shops": "All Shops",
+                        "text-near-shops": "Near Shops",
+                        "text-tracking-number": "Tracking Number",
+                        "text-status": "Status",
+                        "text-quantity": "Quantity",
+                        "text-view": "View",
+                        "text-logo": "Logo",
+                        "NOT_FOUND": "Not Found",
+                        "nav-menu-shops": "Shops",
+                        "text-login-facebook": "Login with Facebook",
+                        "text-login-google": "Login with Google",
+                        "text-note": "Note",
+                        "text-purchase-note": "Purchase Note",
+                        "CASH_ON_DELIVERY": "Case On Delivery",
+                        "message-sub-order": "This order has products from multiple vendors. So we divided this order into multiple vendor orders.",
+                        "error-min-contact": "Contact number must be at least 8 digits",
+                        "PICKBAZAR_ERROR.NOT_FOUND": "Not Found",
+                        "PICKBAZAR_ERROR.NOT_AUTHORIZED": "Not Authorized",
+                        "PICKBAZAR_ERROR.INVALID_CREDENTIALS": "Invalid Credentials",
+                        "PICKBAZAR_ERROR.SOMETHING_WENT_WRONG": "Something went wrong",
+                        "PICKBAZAR_ERROR.PAYMENT_FAILED": "Payment Failed",
+                        "PICKBAZAR_ERROR.OPERATION_NOT": "Operation Not",
+                        "PICKBAZAR_ERROR.INSUFFICIENT_BALANCE": "Insufficient Balance",
+                        "PICKBAZAR_ERROR.WITHDRAW_MUST_BE_ATTACHED_TO_SHOP": "Withdraw must be attached to shop",
+                        "PICKBAZAR_ERROR.PLEASE_LOGIN_USING_FACEBOOK_OR_GOOGLE": "Please login using Facebook or Google",
+                        "PICKBAZAR_ERROR.ACTION_NOT_VALID": "Action not valid",
+                        "PICKBAZAR_ERROR.SHOP_NOT_APPROVED": "Shop not approved",
+                        "PICKBAZAR_ERROR.THIS_COUPON_CODE_IS_ONLY_FOR_VERIFIED_USERS": "This coupon code is only for verified users",
+                        "PICKBAZAR_ERROR.THIS_COUPON_CODE_IS_NOT_APPROVED": "Invalid coupon code! please try again.",
+                        "PICKBAZAR_ERROR.COUPON_CODE_IS_NOT_APPLICABLE_IN_THIS_SHOP_PRODUCT": "The products amount doesn't satisfy this specific shop coupon code.",
+                        "PICKBAZAR_MESSAGE.NOT_FOUND": "Not Found",
+                        "PICKBAZAR_MESSAGE.CHECK_INBOX_FOR_PASSWORD_RESET_EMAIL": "Check inbox for password reset email",
+                        "PICKBAZAR_MESSAGE.SOMETHING_WENT_WRONG": "Something went wrong",
+                        "PICKBAZAR_MESSAGE.TOKEN_IS_VALID": "Token is valid",
+                        "PICKBAZAR_MESSAGE.INVALID_TOKEN": "Token is not valid",
+                        "PICKBAZAR_MESSAGE.PASSWORD_RESET_SUCCESSFUL": "Password reset successful",
+                        "PICKBAZAR_MESSAGE.INVALID_CREDENTIALS": "Provided credentials is not valid",
+                        "PICKBAZAR_MESSAGE.EMAIL_SENT_SUCCESSFUL": "Email successfully sent",
+                        "PICKBAZAR_ERROR.YOU_HAVE_ALREADY_GIVEN_ABUSIVE_REPORT_FOR_THIS": "You've already given report",
+                        "PICKBAZAR_ERROR.MAXIMUM_QUESTION_LIMIT_EXCEEDED": "Maximum Question Limit Exceeded",
+                        "text-more-info": "More Info",
+                        "text-price": "Price",
+                        "text-no-order-found": "Sorry, No Order Found :(",
+                        "text-choose-payment": "Choose Payment Method",
+                        "text-cod-message": "Please Pay After You Receive Your Goods!",
+                        "text-login-mobile": "Login with Mobile number",
+                        "text-send-otp": "Send OTP",
+                        "text-otp-code": "OTP Code",
+                        "text-verify-code": "Verify Code",
+                        "text-otp-send-failed": "OTP Code send failed",
+                        "text-otp-verify-failed": "Otp verification failed",
+                        "contact-update-successful": "Phone number updated successfully!",
+                        "text-change-phone-number": "Change phone number",
+                        "add-phone-number": "Add phone number",
+                        "text-confirm": "Confirm",
+                        "text-check-availability": "Check Availability",
+                        "text-no-delivery-time-found": "No delivery schedules found",
+                        "otp-login-helper": "Login with your mobile number. We'll send you a code to the given mobile number to login into your account",
+                        "button-cancel": "Cancel",
+                        "button-delete": "Delete",
+                        "delete-item-confirm": "Are you sure, you want to delete?",
+                        "PICKBAZAR_ERROR.OTP_VERIFICATION_FAILED": "Verification Failed",
+                        "PICKBAZAR_ERROR.OTP_SEND_SUCCESSFUL": "Verification Successful",
+                        "PICKBAZAR_ERROR.OTP_SEND_FAIL": "OTP can't send",
+                        "text-see-more": "See more",
+                        "text-no-shops": "Sorry, No Shops Found :(",
+                        "text-view-more": "View More",
+                        "text-all-categories": "All Categories",
+                        "text-wallet": "Wallet",
+                        "text-balance": "balance",
+                        "text-currency": "currency",
+                        "text-payable": "Payable",
+                        "text-wallet-use": "Do you want to use wallet?",
+                        "text-total-points": "Total points",
+                        "text-points-used": "Points used",
+                        "text-available-points": "Available points",
+                        "text-points": "Points",
+                        "text-pending": "Pending",
+                        "text-approved": "Approved",
+                        "text-rejected": "Rejected",
+                        "text-processing": "Processing",
+                        "text-my-refunds": "My Refunds",
+                        "text-refund": "Refund",
+                        "text-shop": "Shop",
+                        "text-ask-refund": "Ask for a refund",
+                        "text-ask-refund-details": "Are you sure you want to ask for a refund?",
+                        "text-yes": "Yes",
+                        "text-view-order": "View Order",
+                        "text-refund-request-submitted": "Refund request submitted",
+                        "text-reason": "Refund Reason",
+                        "text-id": "ID",
+                        "text-paid-from-wallet": "Paid From Wallet",
+                        "text-copyright": "Copyright",
+                        "text-rights-reserved": "All rights reserved",
+                        "text-sending": "Sending",
+                        "text-enter-email": "Write your email here",
+                        "text-cta-header": "The Pickbazar App",
+                        "text-cta-description": "Make your online shop easier with our <span class=\"font-bold\">mobile app</span>",
+                        "text-showing": "Showing",
+                        "text-of": "of",
+                        "text-products": "products",
+                        "text-sort": "Sort",
+                        "text-sort-by-price": "Sort By Price",
+                        "text-sort-by-author": "Sort By Author",
+                        "text-sort-by-language": "Sort By Language",
+                        "text-sort-by-format": "Sort By Format",
+                        "text-clear-all": "Clear all",
+                        "text-view-all": "View all",
+                        "text-see-all": "See all",
+                        "text-no-authors": "Sorry, No Authors Found :(",
+                        "text-search-authors-title": "Search Our beloved authors",
+                        "text-search-authors-subtitle": "Lorem ipsum dolor sit amet, consectetu eradipiscing elit.",
+                        "text-explore-more": "Explore More",
+                        "text-born": "Born",
+                        "text-died": "Died",
+                        "text-languages": "Languages",
+                        "text-author-books": "Author Books",
+                        "text-books": "Books",
+                        "text-buy-now": "Buy Now",
+                        "text-formats": "Formats",
+                        "text-sku": "SKU",
+                        "text-author": "Author",
+                        "text-authors": "Authors",
+                        "text-publisher": "Publisher",
+                        "text-manufacturers": "Manufacturers/Publishers",
+                        "text-edition": "Edition",
+                        "text-language": "Language",
+                        "text-become-seller": "Become a Seller",
+                        "text-search-author": "Search your favorite author from here",
+                        "text-search-manufacturer": "Search manufacturers/publishers from here",
+                        "text-search-manufacturers-title": "Manufacturers/Publishers",
+                        "text-search-manufacturers-subtitle": "Lorem ipsum dolor sit amet, consectetu eradipiscing elit.",
+                        "text-tags": "Tags",
+                        "text-popular-products": "Popular Products",
+                        "text-new-arrival": "New Arrival Books",
+                        "text-by-author": "By (author)",
+                        "profile-sidebar-downloads": "Downloads",
+                        "text-downloads": "Downloads",
+                        "text-download": "Download",
+                        "text-selling-books": "Last Month's Top Selling Books",
+                        "text-purchased-on": "Purchased on",
+                        "text-key": "Key",
+                        "text-add-to-cart": "Add to Cart",
+                        "text-used": "Used",
+                        "text-available": "Available",
+                        "text-wallet-points": "Wallet Points",
+                        "text-off": "Off",
+                        "text-no-download": "Sorry, you didn't purchased any downloadable products yet.",
+                        "text-subscribe-successfully": "Congratulations! You have successfully subscribed to our newsletter.",
+                        "text-which-book": "Which Book You Like to See?",
+                        "text-top-authors": "Top Authors",
+                        "text-subscribe-now": "Subscribe Now",
+                        "text-subscribe-details": "Subscribe your email for newsletter and featured news based on your interest",
+                        "text-explore": "Explore",
+                        "text-about-us": "About us",
+                        "text-sitemap": "Sitemap",
+                        "text-bookmarks": "Bookmarks",
+                        "text-sign-join": "Sign in/Join",
+                        "text-customer-service": "Customer Service",
+                        "text-faq-help": "FAQ & Helps",
+                        "text-returns": "Returns",
+                        "text-accessibility": "Accessibility",
+                        "text-contact-us": "Contact Us",
+                        "text-store-pickup": "Store Pickup",
+                        "text-our-information": "Our information",
+                        "text-privacy-update": "Privacy policy update",
+                        "text-terms-condition": "Terms & conditions",
+                        "text-return-policy": "Return Policy",
+                        "text-top-manufacturer": "Top Manufacturers",
+                        "text-show-products": "Show Products",
+                        "text-guest-checkout": "Checkout as guest",
+                        "text-click-here": "Click here",
+                        "text-previous-step": "Previous Step",
+                        "text-downloadable": "Downloadable",
+                        "text-write-review": "Write a review",
+                        "text-product-id": "Product ID",
+                        "text-give-ratings": "Give Ratings",
+                        "text-upload-images": "Upload Images",
+                        "text-report-abuse": "Report Abuse",
+                        "text-product-reviews": "Product Reviews",
+                        "text-page": "Page",
+                        "text-pages": "Pages",
+                        "text-ratings-reviews": "Ratings & Reviews of",
+                        "text-ratings": "ratings",
+                        "text-and": "and",
+                        "text-reviews": "reviews",
+                        "text-question-answers": "Questions and Answers",
+                        "text-question-search-placeholder": "Have a question? Search for answers.",
+                        "text-ask-question": "Ask seller a question",
+                        "text-question-additional-info": "Your question should not contain contact information such as email, phone or external web links.",
+                        "profile-sidebar-my-wishlist": "My Wishlists",
+                        "text-remove": "Remove",
+                        "text-add-all-to-cart": "Add all items to cart",
+                        "text-comment": "Comment",
+                        "text-report": "Report",
+                        "text-feedback-submitted": "Feedback Submitted",
+                        "text-review-request-submitted": "Review Submitted",
+                        "text-abuse-report-submitted": "Abuse report successfully submitted",
+                        "text-question-submitted": "Successfully submitted the question. Please wait for the seller to respond.",
+                        "text-no-question-found": "No questions found",
+                        "PICKBAZAR_ERROR.ALREADY_ADDED_TO_WISHLIST_FOR_THIS_PRODUCT": "This product is already on your wishlist",
+                        "text-added-to-wishlist": "Successfully Added to Wishlist!",
+                        "text-removed-from-wishlist": "Successfully Removed from Wishlist!",
+                        "text-sort-by": "Sort By",
+                        "text-no-reviews-found": "No reviews found",
+                        "text-update-review": "Update review",
+                        "PICKBAZAR_MESSAGE.OLD_PASSWORD_INCORRECT": "Old password is incorrect",
+                        "PICKBAZAR_MESSAGE.OTP_SEND_SUCCESSFUL": "OTP sent successfully",
+                        "PICKBAZAR_MESSAGE.REQUIRED_INFO_MISSING": "Required information missing",
+                        "PICKBAZAR_MESSAGE.CONTACT_UPDATE_SUCCESSFUL": "Contact updated successfully",
+                        "PICKBAZAR_ERROR.INVALID_GATEWAY": "Invalid gateway",
+                        "PICKBAZAR_ERROR.CONTACT_UPDATE_FAILED": "Contact update failed",
+                        "PICKBAZAR_ERROR.ALREADY_REFUNDED": "Already refunded",
+                        "PICKBAZAR_ERROR.ORDER_ALREADY_HAS_REFUND_REQUEST": "Order already has refund request",
+                        "PICKBAZAR_ERROR.REFUND_ONLY_ALLOWED_FOR_MAIN_ORDER": "Refund only allowed for main order",
+                        "PICKBAZAR_ERROR.WRONG_REFUND": "Wrong refund",
+                        "PICKBAZAR_ERROR.CSV_NOT_FOUND": "CSV not found",
+                        "PICKBAZAR_ERROR.ALREADY_GIVEN_REVIEW_FOR_THIS_PRODUCT": "You have already given review for this product",
+                        "PICKBAZAR_ERROR.USER_NOT_FOUND": "User not found",
+                        "PICKBAZAR_ERROR.TOKEN_NOT_FOUND": "Token not found",
+                        "PICKBAZAR_ERROR.INVALID_COUPON_CODE": "Invalid coupon code! please try again.",
+                        "PICKBAZAR_ERROR.COUPON_CODE_IS_NOT_APPLICABLE": "Sorry, This coupon can't satisfy your order amount.",
+                        "PICKBAZAR_ERROR.ALREADY_FREE_SHIPPING_ACTIVATED": "Already free shipping activated! please try again.",
+                        "text-review-request-update-submitted": "Successfully updated the review request",
+                        "text-place-order-helper-text": "Please select and fill all the fields and place your order",
+                        "text-question": "Question",
+                        "text-answer": "Answer",
+                        "text-message": "Message",
+                        "profile-sidebar-my-questions": "My Questions",
+                        "profile-sidebar-my-reports": "My Reports",
+                        "payment-confirmed": "Payment Confirmed! Click On Place Order",
+                        "text-payment-order": "Please click Place order to make order and payment",
+                        "text-card-expiry": "Expiration date",
+                        "text-card-cvc": "CVC",
+                        "text-payment-title": "Pay your payment",
+                        "text-pay": "Pay",
+                        "text-order-status": "Order Status",
+                        "text-payment-status": "Payment Status",
+                        "insufficient_funds": "Your card has insufficient funds.",
+                        "order-pending": "Order Pending",
+                        "order-processing": "Order Processing",
+                        "order-completed": "Order Completed",
+                        "order-cancelled": "Order Cancelled",
+                        "order-failed": "Order Failed",
+                        "order-at-local-facility": "Order At Local Facility",
+                        "order-out-for-delivery": "Order Out For Delivery",
+                        "order-refunded": "Order Refunded",
+                        "payment-pending": "Payment Pending",
+                        "payment-processing": "Payment Processing",
+                        "payment-success": "Payment Success",
+                        "payment-failed": "Payment Failed",
+                        "payment-reversal": "Payment Reversal",
+                        "payment-wallet": "Wallet Payment",
+                        "payment-cash-on-delivery": "Cash On Delivery",
+                        "payment-cash": "Cash",
+                        "payment-awaiting-for-approval": "Payment Awaiting",
+                        "payment-refunded": "Payment Refunded",
+                        "text-pay-now": "Pay Now",
+                        "text-stripe-card-desc-title": "What you will get on Stripe",
+                        "text-stripe-card-desc-one": "We have 24 hours refund policy.",
+                        "text-stripe-card-desc-two": "Unlimited shopping card for E-Commerce.",
+                        "text-stripe-card-desc-three": "No limit for daily transaction.",
+                        "text-no-payment-configure": "No Payment Enable Yet!!",
+                        "profile-sidebar-my-cards": "My Cards",
+                        "profile-add-cards": "Add Card",
+                        "profile-new-cards": "New Card",
+                        "text-paypal": "Paypal",
+                        "text-map-cant-load": "Map cannot be loaded right now, sorry.",
+                        "set-default-card-message": "Successfully set default card",
+                        "card-successfully-deleted": "Successfully deleted",
+                        "card-successfully-add": "Card added successfully",
+                        "default-btn-text": "Default",
+                        "text-no-card-found": "No card found",
+                        "text-card-owner-name": "Card Owner Name",
+                        "text-card-expire": "Expire Date",
+                        "text-company": "Company",
+                        "text-save-card": "Save Card",
+                        "text-add-default-card": "Add as a default card",
+                        "text-expire-date-placeholder": "MM / YY",
+                        "error-verify-token": "Error in verifying token",
+                        "email-not-verified": "Your email it not verified yet.",
+                        "email-not-description": "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.",
+                        "resend-verification-button-text": "Resend Verification Email",
+                        "successfully-email-updated": "Email updated Successfully",
+                        "payment-successful": "Payment successful",
+                        "payment-not-successful": "Payment is not successful",
+                        "something-wrong": "Something wrong happened",
+                        "pay-latter": "Pay Later",
+                        "text-set-as-default": "Set As Default",
+                        "text-best-selling": "Best Selling Products",
+                        "placeholder-search-location": "Search location form here",
+                        "text-location": "Location",
+                        "text-access-denied": "Access Denied",
+                        "text-access-denied-message": "You don't have the permission to access this page.",
+                        "text-return-home": "Return to home",
+                        "email-send-successfully": "Email Send successfully",
+                        "error-comment-required": "Comment is required",
+                        "error-select-rating": "Select at-least one rating",
+                        "error-rating-required": "Rating is required",
+                        "text-amount-due": "Amount Due",
+                        "text-available-flash-sale": "Available Flash Sale",
+                        "percentage": "Percentage",
+                        "fixed_rate": "Fixed Rate",
+                        "text-title-days": "days",
+                        "text-title-hours": "hours",
+                        "text-title-minutes": "minutes",
+                        "text-title-seconds": "seconds",
+                        "text-title-change-language": "Change Language",
+                        "text-title-language": "Language",
+                        "text-maintenance-mode-title": "Maintenance Mode Begins In",
+                        "text-offers-title": "Offers",
+                        "text-already-review": "Already reviewed",
+                        "profile-sidebar-notifications": "Notifications",
+                        "text-mark-as-all-read": "Mark all as read",
+                        "text-see-all-notifications": "Sell all notifications",
+                        "text-notification-not-found": "No notifications found 🧐",
+                        "text-check-all-notifications": "Check all notification.",
+                        "text-mark-as-read": "Mark as read",
+                        "text-marked-as-read": "Marked as read",
+                        "text-created-at": "Created At",
+                        "text-notification-read-message": "Notification read successfully.",
+                        "text-notifications-read-message": "All notifications read successfully.",
+                        "text-news": "news",
+                        "placeholder-your-name": "Your name...",
+                        "placeholder-your-email": "Your email...",
+                        "placeholder-subject": "Your subject...",
+                        "placeholder-message": "Your message...",
+                        "text-commission": "Commission",
+                        "text-send-message": "Send Message",
+                        "text-download-unavailable": "Unavailable"
+                    }
+                }
+            },
+            "initialLocale": "en",
+            "ns": [
+                "common"
+            ],
+            "userConfig": {
+                "i18n": {
+                    "defaultLocale": "en",
+                    "locales": [
+                        "en"
+                    ],
+                    "localeDetection": false
+                },
+                "react": {
+                    "useSuspense": false
+                },
+                "localePath": "D:\\Ankit Work\\2.Jaswant WALA\\NZ-Grocery-New\\webapp\\pickbazar-react\\shop\\public\\locales",
+                "reloadOnPrerender": false,
+                "interpolation": {
+                    "escapeValue": false
+                },
+                "load": "languageOnly",
+                "cache": {
+                    "enabled": true,
+                    "expirationTime": 3600000
+                },
+                "debug": false,
+                "saveMissing": false,
+                "missingKeyHandler": false,
+                "default": {
+                    "i18n": {
+                        "defaultLocale": "en",
+                        "locales": [
+                            "en"
+                        ],
+                        "localeDetection": false
+                    },
+                    "react": {
+                        "useSuspense": false
+                    },
+                    "localePath": "D:\\Ankit Work\\2.Jaswant WALA\\NZ-Grocery-New\\webapp\\pickbazar-react\\shop\\public\\locales",
+                    "reloadOnPrerender": false,
+                    "interpolation": {
+                        "escapeValue": false
+                    },
+                    "load": "languageOnly",
+                    "cache": {
+                        "enabled": true,
+                        "expirationTime": 3600000
+                    },
+                    "debug": false,
+                    "saveMissing": false,
+                    "missingKeyHandler": false
+                }
+            }
+        },
+        "dehydratedState": {
+            "mutations": [],
+            "queries": [
+                {
+                    "state": {
+                        "data": {
+                            "siteTitle": "eGroceryMart",
+                            "siteSubtitle": "Fresh Groceries Delivered to Your Doorstep",
+                            "currency": "USD",
+                            "currencyToUSD": 1,
+                            "logo": {
+                                "id": 1,
+                                "original": "/images/logo.png",
+                                "thumbnail": "/images/logo-thumbnail.png"
+                            },
+                            "useOtp": false,
+                            "contactDetails": {
+                                "contact": "+1-555-123-4567",
+                                "website": "https://egrocerymart.com",
+                                "socials": [
+                                    {
+                                        "icon": "FacebookIcon",
+                                        "url": "https://facebook.com/egrocerymart"
+                                    },
+                                    {
+                                        "icon": "TwitterIcon",
+                                        "url": "https://twitter.com/egrocerymart"
+                                    },
+                                    {
+                                        "icon": "InstagramIcon",
+                                        "url": "https://instagram.com/egrocerymart"
+                                    }
+                                ]
+                            },
+                            "minimumOrderAmount": 20,
+                            "deliveryTime": [
+                                {
+                                    "title": "Express Delivery",
+                                    "description": "90 min express delivery"
+                                },
+                                {
+                                    "title": "Standard Delivery",
+                                    "description": "Same day delivery"
+                                }
+                            ],
+                            "freeShippingAmount": 50,
+                            "freeShipping": true,
+                            "locationToProximity": 10,
+                            "freeDeliveryAmount": 50,
+                            "deliveryTimeType": "fixed",
+                            "taxClass": "food-grocery",
+                            "shippingClass": "global"
+                        },
+                        "dataUpdateCount": 1,
+                        "dataUpdatedAt": 1754462827677,
+                        "error": null,
+                        "errorUpdateCount": 0,
+                        "errorUpdatedAt": 0,
+                        "fetchFailureCount": 0,
+                        "fetchMeta": null,
+                        "isFetching": false,
+                        "isInvalidated": false,
+                        "isPaused": false,
+                        "status": "success"
+                    },
+                    "queryKey": [
+                        "/settings",
+                        {
+                            "language": "en"
+                        }
+                    ],
+                    "queryHash": "[\"/settings\",{\"language\":\"en\"}]"
+                },
+                {
+                    "state": {
+                        "data": [
+                            {
+                                "id": 1,
+                                "name": "Grocery",
+                                "slug": "grocery",
+                                "banners": [
+                                    {
+                                        "id": 1,
+                                        "title": "Fresh Groceries Delivered",
+                                        "description": "Get fresh groceries delivered to your doorstep within 90 minutes",
+                                        "image": {
+                                            "id": 1,
+                                            "original": "/img/banners/banner-1.jpg",
+                                            "thumbnail": "/img/banners/banner-1.jpg"
+                                        },
+                                        "button_text": "Shop Now",
+                                        "button_url": "/products"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "title": "Organic Fruits & Vegetables",
+                                        "description": "Fresh organic produce delivered daily from local farms",
+                                        "image": {
+                                            "id": 2,
+                                            "original": "/img/banners/banner-2.jpg",
+                                            "thumbnail": "/img/banners/banner-2.jpg"
+                                        },
+                                        "button_text": "View Organic",
+                                        "button_url": "/category/organic-products"
+                                    }
+                                ],
+                                "promotional_sliders": [
+                                    {
+                                        "id": 1,
+                                        "title": "Fresh Fruits Sale",
+                                        "description": "Get 20% off on all fresh fruits",
+                                        "original": "/promotion/promo-1.png",
+                                        "url": "/category/fruits-vegetables"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "title": "Dairy Products",
+                                        "description": "Fresh dairy products at best prices",
+                                        "original": "/promotion/promo-2.png",
+                                        "url": "/category/dairy-eggs"
+                                    },
+                                    {
+                                        "id": 3,
+                                        "title": "Bakery Fresh",
+                                        "description": "Freshly baked bread and pastries",
+                                        "original": "/promotion/promo-3.png",
+                                        "url": "/category/bakery"
+                                    },
+                                    {
+                                        "id": 4,
+                                        "title": "Organic Vegetables",
+                                        "description": "Fresh organic vegetables from local farms",
+                                        "original": "/promotion/promo-4.png",
+                                        "url": "/category/organic-products"
+                                    },
+                                    {
+                                        "id": 5,
+                                        "title": "Premium Meat & Seafood",
+                                        "description": "Quality meat and fresh seafood",
+                                        "original": "/promotion/promo-5.png",
+                                        "url": "/category/meat-seafood"
+                                    }
+                                ],
+                                "settings": {
+                                    "isHome": true,
+                                    "layoutType": "default",
+                                    "productCard": "neon",
+                                    "enableBestSelling": true,
+                                    "enableNewArrival": true,
+                                    "enableCategories": true,
+                                    "enableCoupons": true,
+                                    "enableHero": true,
+                                    "enableFeatures": true,
+                                    "enableTestimonials": true,
+                                    "enableNewsletter": true
+                                }
+                            }
+                        ],
+                        "dataUpdateCount": 1,
+                        "dataUpdatedAt": 1754462827691,
+                        "error": null,
+                        "errorUpdateCount": 0,
+                        "errorUpdatedAt": 0,
+                        "fetchFailureCount": 0,
+                        "fetchMeta": null,
+                        "isFetching": false,
+                        "isInvalidated": false,
+                        "isPaused": false,
+                        "status": "success"
+                    },
+                    "queryKey": [
+                        "/types",
+                        {
+                            "limit": 15,
+                            "language": "en"
+                        }
+                    ],
+                    "queryHash": "[\"/types\",{\"language\":\"en\",\"limit\":15}]"
+                },
+                {
+                    "state": {
+                        "data": {
+                            "data": [
+                                {
+                                    "id": 1,
+                                    "name": "Fruits & Vegetables",
+                                    "slug": "fruits-vegetables",
+                                    "parent": null,
+                                    "children": [
+                                        {
+                                            "id": 101,
+                                            "name": "Fresh Fruits",
+                                            "slug": "fresh-fruits",
+                                            "products_count": 2
+                                        },
+                                        {
+                                            "id": 102,
+                                            "name": "Fresh Vegetables",
+                                            "slug": "fresh-vegetables",
+                                            "products_count": 2
+                                        },
+                                        {
+                                            "id": 103,
+                                            "name": "Organic Produce",
+                                            "slug": "organic-produce",
+                                            "products_count": 1
+                                        }
+                                    ],
+                                    "image": "/images/categories/fruits-vegetables.jpg",
+                                    "icon": "🍎",
+                                    "type": {
+                                        "id": 1,
+                                        "name": "Grocery",
+                                        "slug": "grocery"
+                                    },
+                                    "products_count": 4
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Dairy & Eggs",
+                                    "slug": "dairy-eggs",
+                                    "parent": null,
+                                    "children": [
+                                        {
+                                            "id": 201,
+                                            "name": "Milk & Milk Products",
+                                            "slug": "milk-products",
+                                            "products_count": 2
+                                        },
+                                        {
+                                            "id": 202,
+                                            "name": "Cheese & Butter",
+                                            "slug": "cheese-butter",
+                                            "products_count": 1
+                                        },
+                                        {
+                                            "id": 203,
+                                            "name": "Fresh Eggs",
+                                            "slug": "fresh-eggs",
+                                            "products_count": 1
+                                        }
+                                    ],
+                                    "image": "/images/categories/dairy-eggs.jpg",
+                                    "icon": "🥛",
+                                    "type": {
+                                        "id": 1,
+                                        "name": "Grocery",
+                                        "slug": "grocery"
+                                    },
+                                    "products_count": 3
+                                },
+                                {
+                                    "id": 3,
+                                    "name": "Meat & Seafood",
+                                    "slug": "meat-seafood",
+                                    "parent": null,
+                                    "children": [
+                                        {
+                                            "id": 301,
+                                            "name": "Fresh Meat",
+                                            "slug": "fresh-meat",
+                                            "products_count": 1
+                                        },
+                                        {
+                                            "id": 302,
+                                            "name": "Fresh Fish",
+                                            "slug": "fresh-fish",
+                                            "products_count": 1
+                                        },
+                                        {
+                                            "id": 303,
+                                            "name": "Frozen Seafood",
+                                            "slug": "frozen-seafood",
+                                            "products_count": 0
+                                        }
+                                    ],
+                                    "image": "/images/categories/meat-seafood.jpg",
+                                    "icon": "🥩",
+                                    "type": {
+                                        "id": 1,
+                                        "name": "Grocery",
+                                        "slug": "grocery"
+                                    },
+                                    "products_count": 2
+                                },
+                                {
+                                    "id": 4,
+                                    "name": "Pantry & Staples",
+                                    "slug": "pantry-staples",
+                                    "parent": null,
+                                    "children": [
+                                        {
+                                            "id": 401,
+                                            "name": "Rice & Grains",
+                                            "slug": "rice-grains",
+                                            "products_count": 1
+                                        },
+                                        {
+                                            "id": 402,
+                                            "name": "Cooking Oils",
+                                            "slug": "cooking-oils",
+                                            "products_count": 0
+                                        },
+                                        {
+                                            "id": 403,
+                                            "name": "Spices & Seasonings",
+                                            "slug": "spices-seasonings",
+                                            "products_count": 0
+                                        }
+                                    ],
+                                    "image": "/images/categories/pantry-staples.jpg",
+                                    "icon": "🍚",
+                                    "type": {
+                                        "id": 1,
+                                        "name": "Grocery",
+                                        "slug": "grocery"
+                                    },
+                                    "products_count": 1
+                                },
+                                {
+                                    "id": 5,
+                                    "name": "Snacks & Beverages",
+                                    "slug": "snacks-beverages",
+                                    "parent": null,
+                                    "children": [
+                                        {
+                                            "id": 501,
+                                            "name": "Packaged Snacks",
+                                            "slug": "packaged-snacks",
+                                            "products_count": 0
+                                        },
+                                        {
+                                            "id": 502,
+                                            "name": "Soft Drinks",
+                                            "slug": "soft-drinks",
+                                            "products_count": 0
+                                        },
+                                        {
+                                            "id": 503,
+                                            "name": "Tea & Coffee",
+                                            "slug": "tea-coffee",
+                                            "products_count": 0
+                                        }
+                                    ],
+                                    "image": "/images/categories/snacks-beverages.jpg",
+                                    "icon": "🥤",
+                                    "type": {
+                                        "id": 1,
+                                        "name": "Grocery",
+                                        "slug": "grocery"
+                                    },
+                                    "products_count": 0
+                                },
+                                {
+                                    "id": 6,
+                                    "name": "Religious Items",
+                                    "slug": "religious-items",
+                                    "parent": null,
+                                    "children": [
+                                        {
+                                            "id": 601,
+                                            "name": "Puja Items",
+                                            "slug": "puja-items",
+                                            "products_count": 0
+                                        },
+                                        {
+                                            "id": 602,
+                                            "name": "Aarti & Bhajan",
+                                            "slug": "aarti-bhajan",
+                                            "products_count": 0
+                                        },
+                                        {
+                                            "id": 603,
+                                            "name": "Murtis & Idols",
+                                            "slug": "murtis-idols",
+                                            "products_count": 0
+                                        },
+                                        {
+                                            "id": 604,
+                                            "name": "Rituals & Offerings",
+                                            "slug": "rituals-offerings",
+                                            "products_count": 0
+                                        },
+                                        {
+                                            "id": 605,
+                                            "name": "Festival Items",
+                                            "slug": "festival-items",
+                                            "products_count": 0
+                                        }
+                                    ],
+                                    "image": "/images/categories/religious-items.jpg",
+                                    "icon": "🕉️",
+                                    "type": {
+                                        "id": 1,
+                                        "name": "Grocery",
+                                        "slug": "grocery"
+                                    },
+                                    "products_count": 0
+                                },
+                                {
+                                    "id": 7,
+                                    "name": "Indian Sweets",
+                                    "slug": "indian-sweets",
+                                    "parent": null,
+                                    "children": [
+                                        {
+                                            "id": 701,
+                                            "name": "Traditional Sweets",
+                                            "slug": "traditional-sweets",
+                                            "products_count": 0
+                                        },
+                                        {
+                                            "id": 702,
+                                            "name": "Festival Sweets",
+                                            "slug": "festival-sweets",
+                                            "products_count": 0
+                                        },
+                                        {
+                                            "id": 703,
+                                            "name": "Dry Fruits & Nuts",
+                                            "slug": "dry-fruits-nuts",
+                                            "products_count": 0
+                                        }
+                                    ],
+                                    "image": "/images/categories/indian-sweets.jpg",
+                                    "icon": "🍬",
+                                    "type": {
+                                        "id": 1,
+                                        "name": "Grocery",
+                                        "slug": "grocery"
+                                    },
+                                    "products_count": 0
+                                },
+                                {
+                                    "id": 8,
+                                    "name": "South Indian Groceries",
+                                    "slug": "south-indian-groceries",
+                                    "parent": null,
+                                    "children": [
+                                        {
+                                            "id": 801,
+                                            "name": "Rice Varieties",
+                                            "slug": "rice-varieties",
+                                            "products_count": 0
+                                        },
+                                        {
+                                            "id": 802,
+                                            "name": "Lentils & Pulses",
+                                            "slug": "lentils-pulses",
+                                            "products_count": 0
+                                        },
+                                        {
+                                            "id": 803,
+                                            "name": "South Indian Spices",
+                                            "slug": "south-indian-spices",
+                                            "products_count": 0
+                                        },
+                                        {
+                                            "id": 804,
+                                            "name": "Pickles & Chutneys",
+                                            "slug": "pickles-chutneys",
+                                            "products_count": 0
+                                        }
+                                    ],
+                                    "image": "/images/categories/south-indian-groceries.jpg",
+                                    "icon": "🌶️",
+                                    "type": {
+                                        "id": 1,
+                                        "name": "Grocery",
+                                        "slug": "grocery"
+                                    },
+                                    "products_count": 0
+                                },
+                                {
+                                    "id": 9,
+                                    "name": "Sri Lankan Groceries",
+                                    "slug": "sri-lankan-groceries",
+                                    "parent": null,
+                                    "children": [
+                                        {
+                                            "id": 901,
+                                            "name": "Coconut Products",
+                                            "slug": "coconut-products",
+                                            "products_count": 0
+                                        },
+                                        {
+                                            "id": 902,
+                                            "name": "Sri Lankan Spices",
+                                            "slug": "sri-lankan-spices",
+                                            "products_count": 0
+                                        },
+                                        {
+                                            "id": 903,
+                                            "name": "Traditional Items",
+                                            "slug": "traditional-items",
+                                            "products_count": 0
+                                        }
+                                    ],
+                                    "image": "/images/categories/sri-lankan-groceries.jpg",
+                                    "icon": "🥥",
+                                    "type": {
+                                        "id": 1,
+                                        "name": "Grocery",
+                                        "slug": "grocery"
+                                    },
+                                    "products_count": 0
+                                },
+                                {
+                                    "id": 10,
+                                    "name": "Philippine Groceries",
+                                    "slug": "philippine-groceries",
+                                    "parent": null,
+                                    "children": [
+                                        {
+                                            "id": 1001,
+                                            "name": "Filipino Condiments",
+                                            "slug": "filipino-condiments",
+                                            "products_count": 0
+                                        },
+                                        {
+                                            "id": 1002,
+                                            "name": "Philippine Spices",
+                                            "slug": "philippine-spices",
+                                            "products_count": 0
+                                        },
+                                        {
+                                            "id": 1003,
+                                            "name": "Traditional Snacks",
+                                            "slug": "traditional-snacks",
+                                            "products_count": 0
+                                        }
+                                    ],
+                                    "image": "/images/categories/philippine-groceries.jpg",
+                                    "icon": "🍍",
+                                    "type": {
+                                        "id": 1,
+                                        "name": "Grocery",
+                                        "slug": "grocery"
+                                    },
+                                    "products_count": 0
+                                },
+                                {
+                                    "id": 11,
+                                    "name": "Dietary Preferences",
+                                    "slug": "dietary-preferences",
+                                    "parent": null,
+                                    "children": [
+                                        {
+                                            "id": 1101,
+                                            "name": "Organic Products",
+                                            "slug": "organic-products",
+                                            "products_count": 2
+                                        },
+                                        {
+                                            "id": 1102,
+                                            "name": "Vegan Products",
+                                            "slug": "vegan-products",
+                                            "products_count": 1
+                                        },
+                                        {
+                                            "id": 1103,
+                                            "name": "Gluten-Free",
+                                            "slug": "gluten-free",
+                                            "products_count": 1
+                                        },
+                                        {
+                                            "id": 1104,
+                                            "name": "Halal Products",
+                                            "slug": "halal-products",
+                                            "products_count": 3
+                                        },
+                                        {
+                                            "id": 1105,
+                                            "name": "Kosher Products",
+                                            "slug": "kosher-products",
+                                            "products_count": 2
+                                        }
+                                    ],
+                                    "image": "/images/categories/dietary-preferences.jpg",
+                                    "icon": "🌱",
+                                    "type": {
+                                        "id": 1,
+                                        "name": "Grocery",
+                                        "slug": "grocery"
+                                    },
+                                    "products_count": 5
+                                }
+                            ]
+                        },
+                        "dataUpdateCount": 1,
+                        "dataUpdatedAt": 1754462827706,
+                        "error": null,
+                        "errorUpdateCount": 0,
+                        "errorUpdatedAt": 0,
+                        "fetchFailureCount": 0,
+                        "fetchMeta": null,
+                        "isFetching": false,
+                        "isInvalidated": false,
+                        "isPaused": false,
+                        "status": "success"
+                    },
+                    "queryKey": [
+                        "/categories",
+                        {
+                            "type": "grocery",
+                            "limit": 1000,
+                            "parent": "null",
+                            "language": "en"
+                        }
+                    ],
+                    "queryHash": "[\"/categories\",{\"language\":\"en\",\"limit\":1000,\"parent\":\"null\",\"type\":\"grocery\"}]"
+                }
+            ]
+        }
+    },
+    "__N_SSP": true
+}

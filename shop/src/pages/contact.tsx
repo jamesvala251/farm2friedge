@@ -1,143 +1,197 @@
-import { useTranslation } from 'next-i18next';
-import SuperAdminContactForm from '@/components/settings/super-admin-contact-form';
-import { Image } from '@/components/ui/image';
-import contactIllustration from '@/assets/contact-illustration.svg';
+import type { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 import { getLayout } from '@/components/layouts/layout';
-// import { formatAddress } from '@/lib/format-address';
-import { getIcon } from '@/lib/get-icon';
-// import isEmpty from 'lodash/isEmpty';
-import * as socialIcons from '@/components/icons/social';
-import Seo from '@/components/seo/seo';
-import { Routes } from '@/config/routes';
-import { useSettings } from '@/framework/settings';
-import Link from '@/components/ui/link';
-import { isObject } from 'lodash';
-import { getLayoutWithFooter } from '@/components/layouts/layout-with-footer';
-export { getStaticProps } from '@/framework/general.ssr';
+import Head from 'next/head';
 
-export const ContactPage = () => {
-  const { t } = useTranslation('common');
-  const { settings }: any = useSettings();
-
+export default function ContactPage() {
   return (
     <>
-      <Seo title={'Contact'} url={'contact'} />
-      <div className="w-full bg-gray-100">
-        <div className="mx-auto flex w-full max-w-7xl flex-col px-5 py-10 pb-20 md:flex-row md:pb-10 xl:py-14 xl:px-8 xl:pb-14 2xl:px-14">
-          {/* sidebar */}
-          <div className="order-2 w-full shrink-0 rounded-lg bg-light p-5 md:order-1 md:w-72 lg:w-96">
-            <div className="mb-8 flex w-full items-center justify-center overflow-hidden">
-              <Image
-                src={contactIllustration}
-                alt={t('nav-menu-contact')}
-                className="h-auto w-full"
-              />
-            </div>
-
-            <div className="mb-8 flex flex-col">
-              <span className="mb-3 font-semibold text-heading">
-                {t('text-address')}
-              </span>
-              <span className="text-sm text-body">
-                {settings?.contactDetails?.location?.formattedAddress ? (
-                  <Link
-                    title={settings?.contactDetails?.location?.formattedAddress}
-                    target="_blank"
-                    href={`https://www.google.com/maps/place/${settings?.contactDetails?.location?.formattedAddress}`}
-                  >
-                    {settings?.contactDetails?.location?.formattedAddress}
-                  </Link>
-                ) : (
-                  t('common:text-no-address')
-                )}
-              </span>
-            </div>
-
-            <div className="mb-8 flex flex-col">
-              <span className="mb-3 font-semibold text-heading">
-                {t('text-phone')}
-              </span>
-              <span className="text-sm text-body">
-                {settings?.contactDetails?.contact
-                  ? settings?.contactDetails?.contact
-                  : t('text-no-contact')}
-              </span>
-            </div>
-
-            <div className="mb-8 flex flex-col">
-              <span className="mb-3 font-semibold text-heading">
-                Email Address
-              </span>
-              <span className="text-sm text-body">
-                {settings?.contactDetails?.emailAddress
-                  ? settings?.contactDetails?.emailAddress
-                  : 'No Email Address'}
-              </span>
-            </div>
-            {settings?.contactDetails?.website && (
-              <div className="mb-8 flex flex-col">
-                <span className="mb-3 font-semibold text-heading">
-                  {t('text-website')}
-                </span>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-body">
-                    {settings?.contactDetails?.website}
-                  </span>
-                  <Link
-                    href={settings?.contactDetails?.website ?? Routes?.home}
-                    target="_blank"
-                    // rel="noreferrer"
-                    className="text-sm font-semibold text-accent hover:text-accent-hover focus:text-blue-500 focus:outline-none"
-                  >
-                    {t('text-visit-site')}
-                  </Link>
+      <Head>
+        <title>Contact Us - eGroceryMart</title>
+      </Head>
+      <section className="mx-auto w-full max-w-7xl px-4 py-8 lg:py-10">
+        <div className="mb-8 text-center lg:mb-12">
+          <h1 className="mb-4 text-3xl font-bold text-heading lg:text-4xl xl:text-5xl">
+            Contact Us
+          </h1>
+          <p className="text-base text-body-dark">
+            Get in touch with our customer support team
+          </p>
+        </div>
+        
+        <div className="grid gap-8 lg:grid-cols-2">
+          {/* Contact Information */}
+          <div className="space-y-6">
+            <div className="rounded-lg border border-gray-200 bg-white p-6">
+              <h2 className="mb-4 text-xl font-semibold">Contact Information</h2>
+              
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <svg className="h-6 w-6 text-accent mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <div>
+                    <h3 className="font-semibold">Address</h3>
+                    <p className="text-gray-600">123 Grocery Street, Downtown, City, State 12345</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <svg className="h-6 w-6 text-accent mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <div>
+                    <h3 className="font-semibold">Phone</h3>
+                    <p className="text-gray-600">+1 (555) 123-4567</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <svg className="h-6 w-6 text-accent mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <div>
+                    <h3 className="font-semibold">Email</h3>
+                    <p className="text-gray-600">support@egrocerymart.com</p>
+                  </div>
                 </div>
               </div>
-            )}
-
-            <div className="mb-8 flex flex-col">
-              <span className="mb-4 font-semibold text-heading">
-                {t('text-follow-us')}
-              </span>
-              <div className="flex items-center justify-start">
-                {settings?.contactDetails?.socials?.map(
-                  (item: any, index: number) =>
-                    item?.url ? (
-                      <Link
-                        key={index}
-                        href={item?.url}
-                        target="_blank"
-                        title={item?.url}
-                        // rel="noreferrer"
-                        className={`text-muted transition-colors duration-300 focus:outline-none ltr:mr-8 ltr:last:mr-0 rtl:ml-8 rtl:last:ml-0 hover:${item.hoverClass}`}
-                      >
-                        {getIcon({
-                          iconList: socialIcons,
-                          iconName: isObject(item?.icon)
-                            ? item?.icon?.value
-                            : item?.icon,
-                          className: 'w-4 h-4',
-                        })}
-                      </Link>
-                    ) : (
-                      ''
-                    )
-                )}
+            </div>
+            
+            <div className="rounded-lg border border-gray-200 bg-white p-6">
+              <h2 className="mb-4 text-xl font-semibold">Business Hours</h2>
+              
+              <div className="space-y-2">
+                <div className="flex justify-between">
+                  <span>Monday - Friday</span>
+                  <span>8:00 AM - 10:00 PM</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Saturday</span>
+                  <span>9:00 AM - 9:00 PM</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Sunday</span>
+                  <span>10:00 AM - 8:00 PM</span>
+                </div>
+              </div>
+              
+              <div className="mt-4 p-3 bg-yellow-50 rounded-lg">
+                <p className="text-sm text-yellow-800">
+                  <strong>Note:</strong> Customer support is available 24/7 for urgent issues.
+                </p>
               </div>
             </div>
           </div>
-
-          {/* Contact form */}
-          <div className="order-1 mb-8 w-full rounded-lg bg-light p-5 md:order-2 md:mb-0 md:p-8 ltr:md:ml-7 rtl:md:mr-7 ltr:lg:ml-9 rtl:lg:mr-9">
-            <h1 className="mb-7 font-body text-xl font-bold text-heading md:text-2xl">
-              {t('text-questions-comments')}
-            </h1>
-            <SuperAdminContactForm />
+          
+          {/* Contact Form */}
+          <div className="space-y-6">
+            <div className="rounded-lg border border-gray-200 bg-white p-6">
+              <h2 className="mb-4 text-xl font-semibold">Send us a Message</h2>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                  <input
+                    type="text"
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
+                    placeholder="Enter your full name"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                  <input
+                    type="email"
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
+                    placeholder="Enter your email"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                  <select className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent">
+                    <option>Select a subject</option>
+                    <option>General Inquiry</option>
+                    <option>Order Support</option>
+                    <option>Product Information</option>
+                    <option>Delivery Issues</option>
+                    <option>Refund Request</option>
+                    <option>Technical Support</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                  <textarea
+                    rows={4}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
+                    placeholder="Type your message here..."
+                  ></textarea>
+                </div>
+                
+                <button className="w-full rounded-md bg-accent px-4 py-2 text-white hover:bg-accent-hover">
+                  Send Message
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+        
+        {/* FAQ Section */}
+        <div className="mt-12">
+          <div className="rounded-lg border border-gray-200 bg-white p-6">
+            <h2 className="mb-6 text-2xl font-semibold">Frequently Asked Questions</h2>
+            
+            <div className="space-y-6">
+              <div>
+                <h3 className="mb-2 text-lg font-semibold">How do I track my order?</h3>
+                <p className="text-gray-600">
+                  You can track your order through your account dashboard or by clicking the tracking link in your order confirmation email.
+                </p>
+              </div>
+              
+              <div>
+                <h3 className="mb-2 text-lg font-semibold">What is your return policy?</h3>
+                <p className="text-gray-600">
+                  We accept returns within 7 days for damaged or spoiled items. Fresh produce cannot be returned unless it's clearly defective.
+                </p>
+              </div>
+              
+              <div>
+                <h3 className="mb-2 text-lg font-semibold">Do you offer same-day delivery?</h3>
+                <p className="text-gray-600">
+                  Yes, we offer same-day delivery for orders placed before 2 PM. Delivery windows are available during checkout.
+                </p>
+              </div>
+              
+              <div>
+                <h3 className="mb-2 text-lg font-semibold">How can I change my delivery address?</h3>
+                <p className="text-gray-600">
+                  You can update your delivery address in your account settings or contact us if you need to change it for an existing order.
+                </p>
+              </div>
+              
+              <div>
+                <h3 className="mb-2 text-lg font-semibold">What payment methods do you accept?</h3>
+                <p className="text-gray-600">
+                  We accept credit/debit cards, PayPal, and cash on delivery for orders over $20.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
+}
+
+ContactPage.getLayout = getLayout;
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
 };
-ContactPage.getLayout = getLayoutWithFooter;
-export default ContactPage;

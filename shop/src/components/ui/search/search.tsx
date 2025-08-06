@@ -1,77 +1,44 @@
-import SearchBox from '@/components/ui/search/search-box';
+import { useState } from 'react';
+import SearchBox from './search-box';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
-import { useSearch } from './search.context';
-interface Props {
-  label: string;
+
+interface SearchProps {
+  label?: string;
+  variant?: 'minimal' | 'normal' | 'with-shadow' | 'flat';
   className?: string;
   inputClassName?: string;
-  variant?: 'minimal' | 'normal' | 'with-shadow' | 'flat';
-  [key: string]: unknown;
 }
 
-const Search: React.FC<Props> = ({
-  label,
-  variant,
+const Search: React.FC<SearchProps> = ({
+  label = 'Search for products...',
+  variant = 'minimal',
   className,
   inputClassName,
-  ...props
 }) => {
-  const { t } = useTranslation();
+  const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
-  const { searchTerm, updateSearchTerm } = useSearch();
-  const handleOnChange = (e: any) => {
-    const { value } = e.target;
-    updateSearchTerm(value);
-  };
 
-  const onSearch = (e: any) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!searchTerm) return;
-    const { pathname, query } = router;
-    router.push(
-      {
-        pathname,
-        query: { ...query, text: searchTerm },
-      },
-      undefined,
-      {
-        scroll: false,
-      }
-    );
+    if (searchTerm.trim()) {
+      router.push(`/grocery/search?search=${encodeURIComponent(searchTerm.trim())}`);
+    }
   };
 
-  function clearSearch() {
-    updateSearchTerm('');
-    const { pathname, query } = router;
-    const { text, ...rest } = query;
-    if (text) {
-      router.push(
-        {
-          pathname,
-          query: { ...rest },
-        },
-        undefined,
-        {
-          scroll: false,
-        }
-      );
-    }
-  }
+  const handleClearSearch = () => {
+    setSearchTerm('');
+  };
 
   return (
     <SearchBox
       label={label}
-      onSubmit={onSearch}
-      onClearSearch={clearSearch}
-      onChange={handleOnChange}
-      value={searchTerm}
-      name="search"
-      placeholder={t('common:text-search-placeholder')}
       variant={variant}
       className={className}
       inputClassName={inputClassName}
-      {...props}
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      onSubmit={handleSubmit}
+      onClearSearch={handleClearSearch}
     />
   );
 };

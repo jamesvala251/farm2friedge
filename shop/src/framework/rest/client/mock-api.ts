@@ -1022,8 +1022,8 @@ const mockResponses = {
 // Mock API interceptor
 export class MockApiClient {
   static async get<T>(url: string, params?: any): Promise<T> {
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 100));
+    // Reduced network delay for better performance
+    await new Promise(resolve => setTimeout(resolve, 10));
     
     // Extract endpoint from URL
     const endpoint = url.replace(process.env.NEXT_PUBLIC_REST_API_ENDPOINT || '', '');
@@ -1051,8 +1051,8 @@ export class MockApiClient {
   }
 
   static async post<T>(url: string, data?: any): Promise<T> {
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 200));
+    // Reduced network delay for better performance
+    await new Promise(resolve => setTimeout(resolve, 20));
     
     // Handle different POST requests
     const endpoint = url.replace(process.env.NEXT_PUBLIC_REST_API_ENDPOINT || '', '');
@@ -1084,12 +1084,12 @@ export class MockApiClient {
   }
 
   static async put<T>(url: string, data?: any): Promise<T> {
-    await new Promise(resolve => setTimeout(resolve, 150));
+    await new Promise(resolve => setTimeout(resolve, 15));
     return { success: true, data } as T;
   }
 
   static async delete<T>(url: string): Promise<T> {
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise(resolve => setTimeout(resolve, 10));
     return { success: true } as T;
   }
 }

@@ -11,7 +11,6 @@ import { useProducts } from '@/framework/product';
 import { drawerAtom } from '@/store/drawer-atom';
 import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import StickyBox from 'react-sticky-box';
 
@@ -50,11 +49,42 @@ export default function SearchPage() {
 
   const { layout } = useLayout();
 
-  if (error) return <ErrorMessage message={error.message} />;
+  // Better error handling
+  if (error) {
+    console.error('Search page error:', error);
+    return (
+      <div className="w-full">
+        <ErrorMessage message={error.message || 'Something went wrong. Please try again.'} />
+      </div>
+    );
+  }
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="w-full">
+        <div className="flex flex-col items-center justify-between mb-7 md:flex-row">
+          <div className="animate-pulse bg-gray-200 h-6 w-32 rounded"></div>
+          <div className="max-w-xs mt-4 md:mt-0">
+            <div className="animate-pulse bg-gray-200 h-10 w-full rounded"></div>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {[...Array(8)].map((_, i) => (
+            <div key={i} className="animate-pulse">
+              <div className="bg-gray-200 h-48 rounded-lg mb-4"></div>
+              <div className="bg-gray-200 h-4 rounded mb-2"></div>
+              <div className="bg-gray-200 h-4 rounded w-2/3"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full">
       <div className="flex flex-col items-center justify-between mb-7 md:flex-row">
-        {/* //FIXME: */}
         <SearchCount
           from={paginatorInfo?.firstItem ?? 0}
           to={paginatorInfo?.lastItem ?? 0}
@@ -81,7 +111,6 @@ export default function SearchPage() {
 }
 
 const GetLayout = (page: React.ReactElement) => {
-  const { t } = useTranslation('common');
   const [_, setDrawerView] = useAtom(drawerAtom);
   return (
     <GeneralLayout>
@@ -107,7 +136,7 @@ const GetLayout = (page: React.ReactElement) => {
             }
             className="flex items-center justify-center h-full p-2 focus:text-accent focus:outline-0"
           >
-            <span className="sr-only">{t('text-filter')}</span>
+            <span className="sr-only">Filter</span>
             <FilterIcon width="17.05" height="18" />
           </motion.button>
         </MobileNavigation>

@@ -7,7 +7,6 @@ import { useNotificationRead } from '@/framework/notify-logs';
 import dayjs from 'dayjs';
 import { CheckedIconWithCircle } from '@/components/icons/checked';
 import { useCallback, useState } from 'react';
-import { useTranslation } from 'next-i18next';
 
 type NotificationListsProps = {
   notifications: NotifyLogs[];
@@ -23,7 +22,6 @@ const NotificationLists: React.FC<NotificationListsProps> = ({
   showButton = false,
   ...rest
 }) => {
-  const { t } = useTranslation();
   const { readNotification, isLoading } = useNotificationRead();
   const [loadingId, setLoadingId] = useState<string>();
   const readingNotification = useCallback(({ id }: { id: string }) => {
@@ -81,8 +79,8 @@ const NotificationLists: React.FC<NotificationListsProps> = ({
             >
               <CheckedIconWithCircle className="text-[#6B7280]" />
               {!Boolean(notification?.is_read)
-                ? t('text-mark-as-read')
-                : t('text-marked-as-read')}
+                ? 'Mark as Read'
+                : 'Marked as Read'}
               {currentButtonLoading ? (
                 <span className="h-4 w-4 ltr:ml-2 rtl:mr-2 rounded-full border-2 border-transparent border-t-2 border-t-current animate-spin" />
               ) : (

@@ -1,108 +1,139 @@
-import type { NextPageWithLayout, Shop } from '@/types';
-import Button from '@/components/ui/button';
-import NotFound from '@/components/ui/not-found';
-import { useTranslation } from 'next-i18next';
-import rangeMap from '@/lib/range-map';
-import { useShops } from '@/framework/shop';
-import ErrorMessage from '@/components/ui/error-message';
-import { SHOPS_LIMIT } from '@/lib/constants';
-import { useGetSearchNearShops } from '@/framework/shop';
-export { getStaticProps } from '@/framework/shops-page.ssr';
+import type { GetStaticProps } from 'next';
+import { motion } from 'framer-motion';
+import cn from 'classnames';
 import { useRouter } from 'next/router';
-import NearShopCard from '@/components/ui/cards/near-shop';
-import NearShopLoader from '@/components/ui/loaders/near-shop-loader';
-import { getLayoutWithFooter } from '@/components/layouts/layout-with-footer';
+import { getLayout } from '@/components/layouts/layout';
+import Head from 'next/head';
 
-const ShopsPage: NextPageWithLayout = () => {
-  const { t } = useTranslation('common');
-  const { query } = useRouter();
-  const limit = SHOPS_LIMIT;
-  const { shops, isLoading, isLoadingMore, hasMore, loadMore, error } =
-    useShops({
-      limit,
-      is_active: 1,
-    });
-
-  const { data, isLoading: nearShopLoading } = useGetSearchNearShops({
-    //@ts-ignore
-    lat: query?.lat?.toString() as string,
-    //@ts-ignore
-    lng: query?.lng?.toString() as string,
-  });
-
-  if (isLoading || nearShopLoading) {
-    return (
-      <div className="container grid grid-cols-1 gap-6 px-4 pt-6 mx-auto sm:grid-cols-2 lg:grid-cols-2 lg:pt-10 2xl:grid-cols-3">
-        <>
-          {rangeMap(limit, (i) => (
-            <NearShopLoader key={i} />
-          ))}
-        </>
-      </div>
-    );
-  }
-
-  if (!data?.length) {
-    return (
-      <>
-        <div className="min-h-full px-4 pt-6 pb-8 bg-gray-100 lg:p-8">
-          <NotFound className="max-w-lg mx-auto" text="No Shops Nearby Found" />
+export default function ShopsSearchPage() {
+  return (
+    <>
+      <Head>
+        <title>Search Shops - eGroceryMart</title>
+      </Head>
+      <section className="mx-auto w-full max-w-7xl px-4 py-8 lg:py-10">
+        <div className="mb-8 text-center lg:mb-12">
+          <h1 className="mb-4 text-3xl font-bold text-heading lg:text-4xl xl:text-5xl">
+            Search Shops
+          </h1>
+          <p className="text-base text-body-dark">
+            Find shops near you or search by location
+          </p>
         </div>
-        <div className="bg-light">
-          <div className="mx-auto flex w-full max-w-[1492px] flex-col p-8 pt-14">
-            <h3 className="mb-8 text-2xl font-bold text-heading">
-              {t('text-all-shops')}
-            </h3>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3">
-              {shops.map((shop) => (
-                <NearShopCard
-                  key={shop.id}
-                  //@ts-ignore
-                  shop={shop}
-                />
-              ))}
+        
+        {/* Search Section */}
+        <div className="mb-8 rounded-lg border border-gray-200 bg-white p-6">
+          <div className="grid gap-4 md:grid-cols-2">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Search by Name</label>
+              <input
+                type="text"
+                placeholder="Enter shop name..."
+                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Location</label>
+              <input
+                type="text"
+                placeholder="Enter city or address..."
+                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-accent focus:outline-none focus:ring-accent"
+              />
+            </div>
+          </div>
+          <div className="mt-4 text-center">
+            <button className="rounded-md bg-accent px-6 py-2 text-white hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">
+              Search Shops
+            </button>
+          </div>
+        </div>
+        
+        {/* Results Section */}
+        <div className="mb-8">
+          <h2 className="mb-4 text-xl font-semibold">All Shops</h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+              <div className="mb-4 h-32 w-full rounded-lg bg-gray-200"></div>
+              <h3 className="mb-2 text-lg font-semibold">Fresh Market</h3>
+              <p className="mb-2 text-sm text-gray-600">Fresh fruits, vegetables, and dairy products</p>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-gray-500">⭐ 4.5 (120 reviews)</span>
+                <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                  Visit Shop
+                </button>
+              </div>
+            </div>
+            
+            <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+              <div className="mb-4 h-32 w-full rounded-lg bg-gray-200"></div>
+              <h3 className="mb-2 text-lg font-semibold">Organic Corner</h3>
+              <p className="mb-2 text-sm text-gray-600">100% organic and natural products</p>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-gray-500">⭐ 4.8 (85 reviews)</span>
+                <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                  Visit Shop
+                </button>
+              </div>
+            </div>
+            
+            <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+              <div className="mb-4 h-32 w-full rounded-lg bg-gray-200"></div>
+              <h3 className="mb-2 text-lg font-semibold">Quick Mart</h3>
+              <p className="mb-2 text-sm text-gray-600">Convenience store with everyday essentials</p>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-gray-500">⭐ 4.2 (95 reviews)</span>
+                <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                  Visit Shop
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </>
-    );
-  }
-
-  if (!isLoading && !shops?.length) {
-    return (
-      <div className="min-h-full px-4 pt-6 pb-8 bg-gray-100 lg:p-8">
-        <NotFound text="text-no-shops" />
-      </div>
-    );
-  }
-
-  if (error) return <ErrorMessage message={error.message} />;
-
-  return (
-    <div className="min-h-screen bg-light">
-      <div className="mx-auto flex w-full max-w-[1492px] flex-col p-8 pt-14">
-        <h3 className="mb-8 text-2xl font-bold text-heading">
-          {t('text-near-shops')}
-        </h3>
-
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3">
-          {data?.map(
-            (shop) =>
-              // @ts-ignore
-              shop?.distance && <NearShopCard key={shop.id} shop={shop!} />,
-          )}
-        </div>
-        {hasMore && (
-          <div className="flex items-center justify-center mt-8 lg:mt-12">
-            <Button onClick={loadMore} loading={isLoadingMore}>
-              {t('text-load-more')}
-            </Button>
+        
+        {/* Near You Section */}
+        <div>
+          <h2 className="mb-4 text-xl font-semibold">Near You</h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+              <div className="mb-4 h-32 w-full rounded-lg bg-gray-200"></div>
+              <h3 className="mb-2 text-lg font-semibold">Local Grocery</h3>
+              <p className="mb-2 text-sm text-gray-600">0.5 km away • Fresh local produce</p>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-gray-500">⭐ 4.3 (67 reviews)</span>
+                <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                  Visit Shop
+                </button>
+              </div>
+            </div>
+            
+            <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+              <div className="mb-4 h-32 w-full rounded-lg bg-gray-200"></div>
+              <h3 className="mb-2 text-lg font-semibold">Corner Store</h3>
+              <p className="mb-2 text-sm text-gray-600">1.2 km away • 24/7 convenience</p>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-gray-500">⭐ 4.1 (45 reviews)</span>
+                <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                  Visit Shop
+                </button>
+              </div>
+            </div>
           </div>
-        )}
-      </div>
-    </div>
+        </div>
+        
+        <div className="mt-8 text-center">
+          <button className="rounded-md bg-accent px-6 py-3 text-white hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">
+            Load More
+          </button>
+        </div>
+      </section>
+    </>
   );
-};
-ShopsPage.getLayout = getLayoutWithFooter;
+}
 
-export default ShopsPage;
+ShopsSearchPage.getLayout = getLayout;
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
+};

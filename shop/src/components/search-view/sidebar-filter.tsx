@@ -1,5 +1,4 @@
 import { CustomDisclosure } from '@/components/ui/disclosure';
-import { useTranslation } from 'next-i18next';
 import Search from '@/components/ui/search/search';
 import { useRouter } from 'next/router';
 import Sorting from './sorting';
@@ -20,7 +19,6 @@ const FieldWrapper = ({ children, title }: any) => (
 );
 
 function ClearFiltersButton() {
-  const { t } = useTranslation('common');
   const router = useRouter();
 
   function clearFilters() {
@@ -45,7 +43,7 @@ function ClearFiltersButton() {
       className="text-sm font-semibold text-body transition-colors hover:text-red-500 focus:text-red-500 focus:outline-0 lg:m-0"
       onClick={clearFilters}
     >
-      {t('text-clear-all')}
+      Clear All
     </button>
   );
 }
@@ -55,7 +53,6 @@ const SidebarFilter: React.FC<{
 }> = ({ type, className }) => {
   const router = useRouter();
   const { isRTL } = useIsRTL();
-  const { t } = useTranslation('common');
   const [_, closeSidebar] = useAtom(drawerAtom);
 
   return (
@@ -77,11 +74,11 @@ const SidebarFilter: React.FC<{
               })}
               strokeWidth={1.7}
             />
-            <span className="sr-only">{t('text-close')}</span>
+            <span className="sr-only">Close</span>
           </button>
 
           <h3 className="text-xl font-semibold text-heading lg:text-2xl">
-            {t('text-filter')}
+            Filters
           </h3>
         </div>
 
@@ -89,35 +86,27 @@ const SidebarFilter: React.FC<{
       </div>
 
       <div className="flex-1 px-5">
-        <FieldWrapper title="text-search">
+        <FieldWrapper title="Search">
           <Search variant="minimal" label="search" />
         </FieldWrapper>
 
         {router.route !== '/[searchType]/search' && (
-          <FieldWrapper title="text-sort">
+          <FieldWrapper title="Sort">
             <Sorting />
           </FieldWrapper>
         )}
 
-        <FieldWrapper title="text-categories">
-          <CategoryFilter type={type} />
+        <FieldWrapper title="Categories">
+          <CategoryFilter />
         </FieldWrapper>
 
-        <FieldWrapper title="text-sort-by-price">
+        <FieldWrapper title="Price Range">
           <PriceFilter />
         </FieldWrapper>
 
-        <FieldWrapper title="text-tags">
-          <TagFilter type={type} />
+        <FieldWrapper title="Tags">
+          <TagFilter />
         </FieldWrapper>
-      </div>
-      <div className="sticky bottom-0 z-10 mt-auto border-t border-gray-200 bg-white p-5 lg:hidden">
-        <Button
-          className="w-full"
-          onClick={() => closeSidebar({ display: false, view: '' })}
-        >
-          Show Products
-        </Button>
       </div>
     </div>
   );

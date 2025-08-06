@@ -16,21 +16,26 @@ interface Props {
 
 const CategoryFilterView = ({ categories }: Props) => {
   const { t } = useTranslation('common');
-
   const router = useRouter();
+  
+  // Get selected values from URL parameters
   const selectedValues = useMemo(
     () =>
       router.query.category ? (router.query.category as string).split(',') : [],
     [router.query.category]
   );
+  
   const selectedSubValues = useMemo(
     () =>
       router.query.subcategory ? (router.query.subcategory as string).split(',') : [],
     [router.query.subcategory]
   );
-  const [state, setState] = useState<string[]>(() => selectedValues);
-  const [subState, setSubState] = useState<string[]>(() => selectedSubValues);
   
+  // Initialize state with URL parameters
+  const [state, setState] = useState<string[]>(selectedValues);
+  const [subState, setSubState] = useState<string[]>(selectedSubValues);
+  
+  // Update state when URL parameters change
   useEffect(() => {
     setState(selectedValues);
   }, [selectedValues]);
@@ -40,23 +45,25 @@ const CategoryFilterView = ({ categories }: Props) => {
   }, [selectedSubValues]);
 
   function handleChange(values: string[]) {
+    setState(values);
     router.push({
       pathname: router.pathname,
       query: {
         ...router.query,
         category: values.join(','),
       },
-    });
+    }, undefined, { scroll: false });
   }
 
   function handleSubChange(values: string[]) {
+    setSubState(values);
     router.push({
       pathname: router.pathname,
       query: {
         ...router.query,
         subcategory: values.join(','),
       },
-    });
+    }, undefined, { scroll: false });
   }
 
   return (
@@ -74,6 +81,7 @@ const CategoryFilterView = ({ categories }: Props) => {
                   name={category.slug}
                   value={category.slug}
                   theme="secondary"
+                  checked={state.includes(category.slug)}
                 />
                 
                 {/* Sub-categories */}
@@ -87,6 +95,7 @@ const CategoryFilterView = ({ categories }: Props) => {
                         value={subCategory.slug}
                         theme="secondary"
                         className="text-sm"
+                        checked={subState.includes(subCategory.slug)}
                       />
                     ))}
                   </div>

@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-const { i18n } = require('./next-i18next.config');
 
 // const runtimeCaching = require('next-pwa/cache');
 // const withPWA = require('next-pwa')({
@@ -10,7 +9,7 @@ const { i18n } = require('./next-i18next.config');
 
 module.exports = {
   reactStrictMode: true,
-  i18n,
+  // REMOVED i18n completely
   // Suppress React warnings in development
   eslint: {
     ignoreDuringBuilds: true,
@@ -22,6 +21,7 @@ module.exports = {
     // number of pages that should be kept simultaneously without being disposed
     pagesBufferLength: 2,
   },
+  // Optimize images
   images: {
     domains: [
       'pickbazarlaravel.s3.ap-southeast-1.amazonaws.com',
@@ -32,13 +32,26 @@ module.exports = {
       'i.pravatar.cc',
       'images.unsplash.com',
     ],
+    // Optimize image loading
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
-  ...(process.env.FRAMEWORK_PROVIDER === 'graphql' && {
-    webpack(config, options) {
+  // Optimize webpack
+  webpack: (config, { dev, isServer }) => {
+    // Optimize for development
+    if (dev && !isServer) {
+      config.watchOptions = {
+        poll: 1000,
+        aggregateTimeout: 300,
+      };
+    }
+    
+    // Add GraphQL support if needed
+    if (process.env.FRAMEWORK_PROVIDER === 'graphql') {
       config.module.rules.push({
         test: /\.graphql$/,
         exclude: /node_modules/,
-        use: [options.defaultLoaders.babel, { loader: 'graphql-let/loader' }],
+        use: [config.defaultLoaders.babel, { loader: 'graphql-let/loader' }],
       });
 
       config.module.rules.push({
@@ -46,10 +59,11 @@ module.exports = {
         type: 'json',
         use: 'yaml-loader',
       });
+    }
 
-      return config;
-    },
-  }),
+    return config;
+  },
+  // Production optimizations
   ...(process.env.APPLICATION_MODE === 'production' && {
     typescript: {
       ignoreBuildErrors: true,
@@ -57,5 +71,9 @@ module.exports = {
     eslint: {
       ignoreDuringBuilds: true,
     },
+    // Enable compression
+    compress: true,
+    // Optimize bundle
+    swcMinify: true,
   }),
 };

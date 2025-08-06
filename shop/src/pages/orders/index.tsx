@@ -1,91 +1,126 @@
-import OrderList, { useSelectedOrder } from '@/components/orders/order-list';
-import Seo from '@/components/seo/seo';
-import ErrorMessage from '@/components/ui/error-message';
-import { useOrders } from '@/framework/order';
-import Spinner from '@/components/ui/loaders/spinner/spinner';
-import isEmpty from 'lodash/isEmpty';
-import OrderDetails from '@/components/orders/order-details';
-import OrderListMobile from '@/components/orders/order-list-mobile';
-import NotFound from '@/components/ui/not-found';
-import { getLayout as getSiteLayout } from '@/components/layouts/layout';
-import DashboardSidebar from '@/components/dashboard/sidebar';
+import type { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
+import { getLayout } from '@/components/layouts/layout';
+import Head from 'next/head';
 
-export { getStaticProps } from '@/framework/general.ssr';
-
-function NoOrderFound() {
-  return (
-    <div className="my-auto flex h-[80vh] w-full items-center justify-center rounded bg-light p-5 md:p-8">
-      <NotFound text="text-no-order-found" />
-    </div>
-  );
-}
-
-export default function OrdersPage() {
-  const {
-    orders,
-    isLoading,
-    error,
-    hasMore,
-    loadMore,
-    isLoadingMore,
-    isFetching,
-  } = useOrders();
-  const [selectedOrder] = useSelectedOrder();
-  const isLoadingStatus = !isLoadingMore && !isLoading && isFetching;
-
-  const ordersItem: any = orders;
-
-  if (error) return <ErrorMessage message={error.message} />;
-
-  if (isLoading && isEmpty(ordersItem)) {
-    return (
-      <div className="my-auto flex h-[80vh] w-full items-center justify-center rounded bg-light p-5 md:p-8">
-        <Spinner simple className="w-10 h-10" />
-      </div>
-    );
-  }
-
-  if (!isLoading && isEmpty(ordersItem)) {
-    return <NoOrderFound />;
-  }
+export default function OrdersIndexPage() {
   return (
     <>
-      <Seo noindex={true} nofollow={true} />
-      <div className="hidden w-full overflow-hidden lg:flex">
-        <OrderList
-          orders={ordersItem}
-          isLoadingMore={isLoadingMore}
-          loadMore={loadMore}
-          hasMore={hasMore}
-        />
-        {selectedOrder && (
-          <OrderDetails
-            order={
-              ordersItem.find((order: any) => order.id === selectedOrder.id)!
-            }
-            loadingStatus={isLoadingStatus}
-          />
-        )}
-      </div>
-      <OrderListMobile
-        isLoadingMore={isLoadingMore}
-        onLoadMore={loadMore}
-        hasNextPage={hasMore}
-        orders={ordersItem}
-        loadingStatus={isLoadingStatus}
-      />
+      <Head>
+        <title>My Orders - eGroceryMart</title>
+      </Head>
+      <section className="mx-auto w-full max-w-7xl px-4 py-8 lg:py-10">
+        <div className="mb-8 text-center lg:mb-12">
+          <h1 className="mb-4 text-3xl font-bold text-heading lg:text-4xl xl:text-5xl">
+            My Orders
+          </h1>
+          <p className="text-base text-body-dark">
+            Track your order history and current orders
+          </p>
+        </div>
+        
+        <div className="space-y-6">
+          {/* Current Order */}
+          <div className="rounded-lg border border-gray-200 bg-white p-6">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-lg font-semibold">Current Order</h2>
+              <span className="rounded-full bg-yellow-100 px-3 py-1 text-sm font-medium text-yellow-800">
+                Processing
+              </span>
+            </div>
+            
+            <div className="mb-4">
+              <p className="text-sm text-gray-600">Order #ORD-12345</p>
+              <p className="text-sm text-gray-600">Placed on: {new Date().toLocaleDateString()}</p>
+            </div>
+            
+            <div className="mb-4 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Fresh Tomatoes</span>
+                <span className="text-sm">$2.99</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Organic Bananas</span>
+                <span className="text-sm">$1.49</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Whole Milk</span>
+                <span className="text-sm">$3.99</span>
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+              <span className="font-semibold">Total: $8.47</span>
+              <button className="rounded-md bg-accent px-4 py-2 text-white hover:bg-accent-hover">
+                Track Order
+              </button>
+            </div>
+          </div>
+          
+          {/* Past Orders */}
+          <div className="rounded-lg border border-gray-200 bg-white p-6">
+            <h2 className="mb-4 text-lg font-semibold">Past Orders</h2>
+            
+            <div className="space-y-4">
+              <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+                <div>
+                  <p className="font-medium">Order #ORD-12344</p>
+                  <p className="text-sm text-gray-600">Delivered on Dec 15, 2024</p>
+                  <p className="text-sm text-gray-600">Total: $12.99</p>
+                </div>
+                <div className="flex space-x-2">
+                  <button className="rounded-md border border-gray-300 px-3 py-1 text-sm hover:bg-gray-50">
+                    View Details
+                  </button>
+                  <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                    Reorder
+                  </button>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+                <div>
+                  <p className="font-medium">Order #ORD-12343</p>
+                  <p className="text-sm text-gray-600">Delivered on Dec 10, 2024</p>
+                  <p className="text-sm text-gray-600">Total: $8.75</p>
+                </div>
+                <div className="flex space-x-2">
+                  <button className="rounded-md border border-gray-300 px-3 py-1 text-sm hover:bg-gray-50">
+                    View Details
+                  </button>
+                  <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                    Reorder
+                  </button>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium">Order #ORD-12342</p>
+                  <p className="text-sm text-gray-600">Delivered on Dec 5, 2024</p>
+                  <p className="text-sm text-gray-600">Total: $15.50</p>
+                </div>
+                <div className="flex space-x-2">
+                  <button className="rounded-md border border-gray-300 px-3 py-1 text-sm hover:bg-gray-50">
+                    View Details
+                  </button>
+                  <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                    Reorder
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
 
-const getLayout = (page: React.ReactElement) =>
-  getSiteLayout(
-    <div className="flex flex-col items-start w-full px-5 py-10 mx-auto max-w-1920 bg-light lg:bg-gray-100 xl:flex-row xl:py-14 xl:px-8 2xl:px-14">
-      <DashboardSidebar className="hidden shrink-0 ltr:mr-8 rtl:ml-8 xl:block xl:w-80" />
-      {page}
-    </div>
-  );
+OrdersIndexPage.getLayout = getLayout;
 
-// OrdersPage.authenticationRequired = true;
-
-OrdersPage.getLayout = getLayout;
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
+};

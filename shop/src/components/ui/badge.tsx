@@ -1,52 +1,25 @@
 import cn from 'classnames';
-import { useTranslation } from 'next-i18next';
-import { twMerge } from 'tailwind-merge';
 
-type BadgeProps = {
+interface BadgeProps {
+  text: string;
   className?: string;
-  color?: string;
-  textColor?: string;
-  text?: string;
-  style?: any;
-  animate?: boolean;
-};
+  variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+}
 
-const Badge: React.FC<BadgeProps> = ({
-  className,
-  color: colorOverride,
-  textColor: textColorOverride,
-  text,
-  style,
-  animate = false,
-}) => {
-  const { t } = useTranslation();
-
-  const classes = {
-    root: 'px-3 py-1 rounded-full text-sm',
-    default: 'bg-accent',
-    animate: 'animate-pulse',
-    text: 'text-light',
+const Badge: React.FC<BadgeProps> = ({ text, className, variant = 'primary' }) => {
+  const baseClasses = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium';
+  
+  const variantClasses = {
+    primary: 'bg-blue-100 text-blue-800',
+    secondary: 'bg-gray-100 text-gray-800',
+    success: 'bg-green-100 text-green-800',
+    warning: 'bg-yellow-100 text-yellow-800',
+    danger: 'bg-red-100 text-red-800',
   };
 
   return (
-    <span
-      className={twMerge(
-        cn(
-          classes.root,
-          {
-            [classes.default]: !colorOverride,
-            [classes.text]: !textColorOverride,
-            [classes.animate]: animate,
-          },
-          colorOverride,
-          textColorOverride,
-          className,
-          'inline-flex'
-        )
-      )}
-      style={style}
-    >
-      {t(text!)}
+    <span className={cn(baseClasses, variantClasses[variant], className)}>
+      {text}
     </span>
   );
 };

@@ -7,7 +7,6 @@ import type {
   BestSellingProductQueryOptions,
 } from '@/types';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 import invariant from 'tiny-invariant';
@@ -24,19 +23,15 @@ type ParsedQueryParams = {
 };
 
 // This function gets called at build time
-export const getStaticPaths: GetStaticPaths<ParsedQueryParams> = async ({
-  locales,
-}) => {
-  invariant(locales, 'locales is not defined');
+export const getStaticPaths: GetStaticPaths<ParsedQueryParams> = async () => {
   const data = await client.types.all({ limit: 100 });
-  const paths = data?.flatMap((type) =>
-    locales?.map((locale) => ({ params: { pages: [type.slug] }, locale }))
-  );
+  const paths = data?.map((type) => ({ 
+    params: { pages: [type.slug] }
+  }));
+  
   // We'll pre-render only these paths at build time also with the slash route.
   return {
-    paths: paths.concat(
-      locales?.map((locale) => ({ params: { pages: [] }, locale }))
-    ),
+    paths: paths.concat([{ params: { pages: [] } }]),
     fallback: 'blocking',
   };
 };
@@ -44,14 +39,18 @@ export const getStaticPaths: GetStaticPaths<ParsedQueryParams> = async ({
 export const getStaticProps: GetStaticProps<
   HomePageProps,
   ParsedQueryParams
-> = async ({ locale, params }) => {
+> = async ({ params }) => {
   const queryClient = new QueryClient();
+  
+  // Use hardcoded English locale
+  const hardcodedLocale = 'en';
+  
   await queryClient.prefetchQuery(
-    [API_ENDPOINTS.SETTINGS, { language: locale }],
+    [API_ENDPOINTS.SETTINGS, { language: hardcodedLocale }],
     ({ queryKey }) => client.settings.all(queryKey[1] as SettingsQueryOptions)
   );
   const types = await queryClient.fetchQuery(
-    [API_ENDPOINTS.TYPES, { limit: TYPES_PER_PAGE, language: locale }],
+    [API_ENDPOINTS.TYPES, { limit: TYPES_PER_PAGE, language: hardcodedLocale }],
     ({ queryKey }) => client.types.all(queryKey[1] as TypeQueryOptions)
   );
 
@@ -73,7 +72,7 @@ export const getStaticProps: GetStaticProps<
   }
 
   await queryClient.prefetchQuery(
-    [API_ENDPOINTS.TYPES, { slug: pageType, language: locale }],
+    [API_ENDPOINTS.TYPES, { slug: pageType, language: hardcodedLocale }],
     ({ queryKey }: any) => client.types.get(queryKey[1])
   );
   const productVariables = {
@@ -83,7 +82,7 @@ export const getStaticProps: GetStaticProps<
   await queryClient.prefetchInfiniteQuery(
     [
       API_ENDPOINTS.PRODUCTS,
-      { limit: PRODUCTS_PER_PAGE, type: pageType, language: locale },
+      { limit: PRODUCTS_PER_PAGE, type: pageType, language: hardcodedLocale },
     ],
     ({ queryKey }) => client.products.all(queryKey[1] as any)
   );
@@ -92,7 +91,7 @@ export const getStaticProps: GetStaticProps<
     type_slug: pageType,
     limit: 10,
     with: 'type;author',
-    language: locale,
+    language: hardcodedLocale,
   };
 
   // Only prefetch popular products for `book` demo
@@ -112,52 +111,33 @@ export const getStaticProps: GetStaticProps<
     );
   }
 
-  const categoryVariables = {
-    type: pageType,
-    limit: CATEGORIES_PER_PAGE,
-    language: locale,
-    parent:
-      types.find((t) => t.slug === pageType)?.settings.layoutType === 'minimal'
-        ? 'all'
-        : 'null',
-  };
-  await queryClient.prefetchInfiniteQuery(
-    [API_ENDPOINTS.CATEGORIES, categoryVariables],
-    ({ queryKey }) =>
-      client.categories.all(queryKey[1] as CategoryQueryOptions),
+  await queryClient.prefetchQuery(
+    [API_ENDPOINTS.CATEGORIES, { limit: CATEGORIES_PER_PAGE, language: hardcodedLocale }],
+    ({ queryKey }) => client.categories.all(queryKey[1] as CategoryQueryOptions)
   );
+
+  await queryClient.prefetchInfiniteQuery(
+    [
+      API_ENDPOINTS.PRODUCTS,
+      { limit: PRODUCTS_PER_PAGE, language: hardcodedLocale },
+    ],
+    ({ queryKey }) => client.products.all(queryKey[1] as any)
+  );
+
   return {
     props: {
-      variables: {
-        popularProducts: popularProductVariables,
-        products: productVariables,
-        categories: categoryVariables,
-        bestSellingProducts: popularProductVariables,
-        layoutSettings: {
-          ...types.find((t) => t.slug === pageType)?.settings,
-        },
-        types: {
-          type: pageType,
-        },
-      },
-      layout:
-        types.find((t) => t.slug === pageType)?.settings.layoutType ??
-        'default',
-      ...(await serverSideTranslations(locale!, ['common', 'banner'])),
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+      variables: {
+        products: productVariables,
+        categories: { limit: CATEGORIES_PER_PAGE, language: hardcodedLocale },
+        types: { type: pageType },
+        layoutSettings: types.find((t) => t.slug === pageType)?.settings || {},
+      },
+      layout: 'default',
+      types: {
+        type: pageType,
+      },
     },
-    revalidate: 120,
+    revalidate: 60,
   };
 };
-
-/* Fix : locales: 14kB,
-popularProducts: 30kB,
-category: 22kB,
-groups: 8kB,
-group: 2kB,
-settings: 2kB,
-perProduct: 4.2 * 30 = 120kB,
-total = 14 + 30 + 22 + 8 + 2 + 2 + 120 = 198kB
-others: 225 - 198 = 27kB
-
- */

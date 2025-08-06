@@ -1,95 +1,135 @@
-import Seo from '@/components/seo/seo';
-import Button from '@/components/ui/button';
-import NotFound from '@/components/ui/not-found';
-import { useTranslation } from 'next-i18next';
-import rangeMap from '@/lib/range-map';
-import CouponLoader from '@/components/ui/loaders/coupon-loader';
-import { useCoupons } from '@/framework/coupon';
-import ErrorMessage from '@/components/ui/error-message';
-import CouponCard from '@/components/ui/cards/coupon';
-import dynamic from 'next/dynamic';
-import { getLayoutWithFooter } from '@/components/layouts/layout-with-footer';
-import PageBanner from '@/components/banners/page-banner';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import type { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import { useShop } from '@/framework/shop';
-import { useSettings } from '@/framework/settings';
-import { Routes } from '@/config/routes';
-const CartCounterButton = dynamic(
-  () => import('@/components/cart/cart-counter-button'),
-  { ssr: false },
-);
+import { getLayout } from '@/components/layouts/layout';
+import Head from 'next/head';
 
 export default function ShopOffersPage() {
-  const { t } = useTranslation('common');
   const router = useRouter();
-  const {
-    query: { slug },
-  } = useRouter();
-  const { data: shopData } = useShop({ slug: slug as string });
-  const { settings } = useSettings();
-  const shopId = shopData?.id!;
-
-  !settings?.enableCoupons ? router.replace(Routes.shops) : null;
-
-  const { isLoading, isLoadingMore, hasMore, coupons, error, loadMore } =
-    useCoupons({
-      shop_id: shopId,
-    });
-  const isValidCoupon = coupons.filter(
-    (item: any) => Boolean(item?.is_approve) && Boolean(item?.is_valid),
-  );
-
-  if (error) return <ErrorMessage message={error.message} />;
-  if (!isLoading && !coupons.length) {
-    return (
-      <div className="max-w-lg min-h-full px-4 pt-6 pb-8 mx-auto bg-gray-100 lg:p-10">
-        <NotFound text="text-no-coupon" />
-      </div>
-    );
-  }
+  const { slug } = router.query;
 
   return (
     <>
-      <Seo title="Offers" url="offers" />
-      <PageBanner
-        title={t('text-offers-title')}
-        breadcrumbTitle={t('text-home')}
-      />
-      <div className="w-full px-4 py-12 mx-auto bg-gray-100 max-w-1920 lg:py-14 lg:px-8 xl:py-24 xl:px-16 2xl:px-20">
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 xl:gap-8 2xl:grid-cols-6">
-          {isLoading && !isValidCoupon.length ? (
-            rangeMap(6, (i) => (
-              <CouponLoader key={i} uniqueKey={`coupon-${i}`} />
-            ))
-          ) : isValidCoupon.length ? (
-            isValidCoupon.map((item) => (
-              <CouponCard key={item.id} coupon={item as any} />
-            ))
-          ) : (
-            <div className="max-w-lg mx-auto bg-gray-100 col-span-full">
-              <NotFound text="text-no-coupon" />
-            </div>
-          )}
+      <Head>
+        <title>Shop Offers - eGroceryMart</title>
+      </Head>
+      <section className="mx-auto w-full max-w-7xl px-4 py-8 lg:py-10">
+        <div className="mb-8 text-center lg:mb-12">
+          <h1 className="mb-4 text-3xl font-bold text-heading lg:text-4xl xl:text-5xl">
+            Special Offers
+          </h1>
+          <p className="text-base text-body-dark">
+            Exclusive deals and discounts from {slug}
+          </p>
         </div>
-        {hasMore && (
-          <div className="flex items-center justify-center mt-8 lg:mt-12">
-            <Button onClick={loadMore} loading={isLoadingMore}>
-              {t('text-load-more')}
-            </Button>
+        
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {/* Sample offers */}
+          <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+            <div className="mb-4 h-32 w-full rounded-lg bg-red-100 flex items-center justify-center">
+              <span className="text-2xl font-bold text-red-600">20% OFF</span>
+            </div>
+            <h3 className="mb-2 text-lg font-semibold">Fresh Vegetables</h3>
+            <p className="mb-4 text-sm text-gray-600">Get 20% off on all fresh vegetables this week</p>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-500">Valid until: Dec 31, 2024</span>
+              <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                Shop Now
+              </button>
+            </div>
           </div>
-        )}
-      </div>
-
-      <CartCounterButton />
+          
+          <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+            <div className="mb-4 h-32 w-full rounded-lg bg-green-100 flex items-center justify-center">
+              <span className="text-2xl font-bold text-green-600">BUY 2 GET 1</span>
+            </div>
+            <h3 className="mb-2 text-lg font-semibold">Organic Fruits</h3>
+            <p className="mb-4 text-sm text-gray-600">Buy 2 organic fruits and get 1 free</p>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-500">Valid until: Dec 25, 2024</span>
+              <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                Shop Now
+              </button>
+            </div>
+          </div>
+          
+          <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+            <div className="mb-4 h-32 w-full rounded-lg bg-blue-100 flex items-center justify-center">
+              <span className="text-2xl font-bold text-blue-600">FREE DELIVERY</span>
+            </div>
+            <h3 className="mb-2 text-lg font-semibold">Orders Over $50</h3>
+            <p className="mb-4 text-sm text-gray-600">Free delivery on orders above $50</p>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-500">Always available</span>
+              <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                Shop Now
+              </button>
+            </div>
+          </div>
+          
+          <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+            <div className="mb-4 h-32 w-full rounded-lg bg-yellow-100 flex items-center justify-center">
+              <span className="text-2xl font-bold text-yellow-600">15% OFF</span>
+            </div>
+            <h3 className="mb-2 text-lg font-semibold">Dairy Products</h3>
+            <p className="mb-4 text-sm text-gray-600">15% discount on all dairy products</p>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-500">Valid until: Dec 28, 2024</span>
+              <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                Shop Now
+              </button>
+            </div>
+          </div>
+          
+          <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+            <div className="mb-4 h-32 w-full rounded-lg bg-purple-100 flex items-center justify-center">
+              <span className="text-2xl font-bold text-purple-600">FLASH SALE</span>
+            </div>
+            <h3 className="mb-2 text-lg font-semibold">Bakery Items</h3>
+            <p className="mb-4 text-sm text-gray-600">Flash sale on fresh bakery items</p>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-500">Today only</span>
+              <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                Shop Now
+              </button>
+            </div>
+          </div>
+          
+          <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+            <div className="mb-4 h-32 w-full rounded-lg bg-orange-100 flex items-center justify-center">
+              <span className="text-2xl font-bold text-orange-600">25% OFF</span>
+            </div>
+            <h3 className="mb-2 text-lg font-semibold">Spices & Condiments</h3>
+            <p className="mb-4 text-sm text-gray-600">25% off on premium spices</p>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-500">Valid until: Dec 30, 2024</span>
+              <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                Shop Now
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-8 text-center">
+          <button className="rounded-md bg-accent px-6 py-3 text-white hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">
+            Load More
+          </button>
+        </div>
+      </section>
     </>
   );
 }
 
-export const getServerSideProps = async ({ locale }: any) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common'])),
-  },
-});
+ShopOffersPage.getLayout = getLayout;
 
-ShopOffersPage.getLayout = getLayoutWithFooter;
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
+};
+
+export const getStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  };
+};

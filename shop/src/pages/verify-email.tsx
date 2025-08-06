@@ -1,84 +1,71 @@
-import {
-  useLogout,
-  useResendVerificationEmail,
-  useUser,
-} from '@/framework/user';
-import Button from '@/components/ui/button';
-import Card from '@/components/ui/cards/card';
-import { useTranslation } from 'next-i18next';
-import Logo from '@/components/ui/logo';
-import { useToken } from '@/lib/hooks/use-token';
+import type { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import Link from '@/components/ui/link';
-import { Routes } from '@/config/routes';
+import { useLogout } from '@/framework/user';
+import { getLayout } from '@/components/layouts/layout';
+import Head from 'next/head';
 
-export { getStaticProps } from '@/framework/general.ssr';
-
-const VerifyEmail = () => {
-  const { getEmailVerified } = useToken();
+export default function VerifyEmailPage() {
   const router = useRouter();
-  const { emailVerified } = getEmailVerified();
   const { mutate: logout, isLoading: isLogoutLoader } = useLogout();
-  useUser();
 
-  if (emailVerified) {
-    router.push('/profile');
-  }
-  const handleLogout = () => {
+  function handleLogout() {
     logout();
-    router.push(Routes.home);
-  };
-
-  const { t } = useTranslation('common');
-  const { mutate: verifyEmail, isLoading: isVerifying } =
-    useResendVerificationEmail();
+  }
 
   return (
-    <section className="relative flex min-h-screen w-full items-center justify-center bg-[#F4F6F7] py-5 px-4 md:py-8">
-      <div className="max-w-[36rem]">
-        <Card className="text-center !shadow-900 md:px-[4.375rem] md:py-[2.875rem]">
-          <Logo />
-
-          <h2 className="mb-5 mt-2 text-2xl font-semibold">
-            {t('common:email-not-verified')}
-          </h2>
-
-          <p className="mb-16 text-lg text-[#969FAF]">
-            {t('email-not-description')}
+    <>
+      <Head>
+        <title>Verify Email - eGroceryMart</title>
+      </Head>
+      <div className="flex min-h-screen flex-col items-center justify-center p-4">
+        <div className="w-full max-w-md text-center">
+          <div className="mb-8">
+            <svg className="mx-auto h-16 w-16 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+            </svg>
+          </div>
+          
+          <h1 className="mb-4 text-2xl font-bold text-gray-900">
+            Email Not Verified
+          </h1>
+          
+          <p className="mb-8 text-gray-600">
+            Please check your email and click the verification link to activate your account.
           </p>
-
-          <div className="space-y-3">
-            <Button
-              onClick={() => verifyEmail()}
-              disabled={isVerifying || !!isLogoutLoader}
-              loading={isVerifying}
-              className="!h-13 w-full hover:bg-accent-hover"
+          
+          <div className="space-y-4">
+            <button
+              className="w-full rounded-lg bg-accent px-4 py-2 text-white hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+              onClick={() => router.push('/auth/resend-verification')}
             >
-              {t('resend-verification-button-text')}
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              className="!h-13 w-full"
+              Resend Verification Email
+            </button>
+            
+            <button
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
               onClick={() => handleLogout()}
-              disabled={!!isVerifying || isLogoutLoader}
-              loading={isLogoutLoader}
+              disabled={isLogoutLoader}
             >
-              {t('auth-menu-logout')}
-            </Button>
-          </div>
-          <div className="mt-4">
-            <Link
-              href={Routes.home}
-              className="inline-flex items-center text-bolder underline hover:text-body-dark hover:no-underline focus:outline-none sm:text-base"
+              Logout
+            </button>
+            
+            <button
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              onClick={() => router.push('/')}
             >
-              {t('404-back-home')}
-            </Link>
+              Back to Home
+            </button>
           </div>
-        </Card>
+        </div>
       </div>
-    </section>
+    </>
   );
+}
+
+VerifyEmailPage.getLayout = getLayout;
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
 };
-VerifyEmail.authenticationRequired = true;
-export default VerifyEmail;

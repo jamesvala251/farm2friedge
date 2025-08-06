@@ -1,60 +1,53 @@
-import React from 'react';
+import { useState } from 'react';
 import Link from '@/components/ui/link';
-import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import cn from 'classnames';
 
-interface MenuItem {
-  id: number | string;
-  path: string;
-  label: string;
-  columnItemItems?: MenuItem[];
+interface MegaMenuProps {
+  items: any[];
+  className?: string;
 }
-type MegaMenuProps = {
-  columns: {
-    id: number | string;
-    columnItems: MenuItem[];
-  }[];
-};
 
-const MegaMenu: React.FC<MegaMenuProps> = ({ columns }) => {
-  const { t } = useTranslation('menu');
+const MegaMenu: React.FC<MegaMenuProps> = ({ items, className }) => {
+  const [activeItem, setActiveItem] = useState<string | null>(null);
+  const router = useRouter();
+
   return (
-    <div className="megaMenu shadow-header bg-white absolute border border-gray-200 ltr:left-0 rtl:right-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible shadow-md">
-      <div className="grid grid-cols-5">
-        {columns?.map((column) => (
-          <ul
-            className="even:bg-gray-50 pb-7 2xl:pb-8 pt-6 2xl:pt-7"
-            key={column.id}
+    <div className={cn('relative', className)}>
+      <div className="flex space-x-8">
+        {items.map((item) => (
+          <div
+            key={item.id}
+            className="relative"
+            onMouseEnter={() => setActiveItem(item.id)}
+            onMouseLeave={() => setActiveItem(null)}
           >
-            {column?.columnItems?.map((columnItem) => (
-              <React.Fragment key={columnItem.id}>
-                <li className="mb-1.5">
+            <Link
+              href={item.href}
+              className="flex items-center space-x-1 text-gray-700 hover:text-accent transition-colors"
+            >
+              <span>{item.name}</span>
+              {item.children && (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              )}
+            </Link>
+            
+            {item.children && activeItem === item.id && (
+              <div className="absolute top-full left-0 w-64 bg-white shadow-lg border border-gray-200 rounded-lg py-2 z-50">
+                {item.children.map((child: any) => (
                   <Link
-                    href={columnItem.path}
-                    className="block text-sm py-1.5 text-heading font-semibold px-5 xl:px-8 2xl:px-10 transition-colors hover:text-accent"
+                    key={child.id}
+                    href={child.href}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-accent"
                   >
-                    {t(columnItem.label)}
+                    {child.name}
                   </Link>
-                </li>
-                {columnItem?.columnItemItems?.map((item: any) => (
-                  <li
-                    key={item.id}
-                    className={
-                      columnItem?.columnItemItems?.length === item.id
-                        ? 'border-b border-gray-200 pb-3.5 mb-3'
-                        : ''
-                    }
-                  >
-                    <Link
-                      href={item.path}
-                      className="transition-colors text-body text-sm block py-1.5 px-5 xl:px-8 2xl:px-10 hover:text-accent"
-                    >
-                      {t(item.label)}
-                    </Link>
-                  </li>
                 ))}
-              </React.Fragment>
-            ))}
-          </ul>
+              </div>
+            )}
+          </div>
         ))}
       </div>
     </div>

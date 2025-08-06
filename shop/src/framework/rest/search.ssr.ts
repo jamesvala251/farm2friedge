@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import invariant from 'tiny-invariant';
 import { QueryClient } from 'react-query';
 import { API_ENDPOINTS } from '@/framework/client/api-endpoints';
@@ -13,12 +12,15 @@ import {
 import { TYPES_PER_PAGE } from '@/framework/client/variables';
 
 export const getServerSideProps: GetServerSideProps = async ({
-  locale,
   params,
 }) => {
   invariant(params, 'params is required');
   const { searchType } = params;
   const queryClient = new QueryClient();
+  
+  // Use hardcoded English locale
+  const locale = 'en';
+  
   await queryClient.prefetchQuery(
     [API_ENDPOINTS.SETTINGS, { language: locale }],
     ({ queryKey }) => client.settings.all(queryKey[1] as SettingsQueryOptions)
@@ -43,7 +45,6 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   return {
     props: {
-      ...(await serverSideTranslations(locale!, ['common'])),
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
     },
   };

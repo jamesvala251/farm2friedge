@@ -1,18 +1,17 @@
-import { useTranslation } from 'next-i18next';
+import React from 'react';
 
 interface Props {
   from: number;
   to: number;
   total: number;
+  className?: string;
 }
 
-const SearchCount = ({ from, to, total }: Props) => {
-  const { t } = useTranslation('common');
-
+const SearchCount: React.FC<Props> = ({ from, to, total, className }) => {
   return (
-    <span className="text-sm font-semibold text-heading">{`${t(
-      'text-showing'
-    )} ${from} - ${to} ${t('text-of')} ${total} ${t('text-products')}`}</span>
+    <div className={className}>
+      Showing {from} to {to} of {total} results
+    </div>
   );
 };
 

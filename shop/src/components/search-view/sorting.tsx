@@ -1,122 +1,68 @@
-import Scrollbar from '@/components/ui/scrollbar';
-import Select from '@/components/ui/select/select';
-import { RadioGroup } from '@headlessui/react';
+import { Fragment, useState } from 'react';
+import { Listbox, Transition } from '@headlessui/react';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-import { useTranslation } from 'next-i18next';
-import { useIsRTL } from '@/lib/locals';
-interface Plan {
-  id: number | string;
-  key: string;
-  label: string;
-  value: string;
-  orderBy: string;
-  sortedBy: 'ASC' | 'DESC';
-}
-const plans: Plan[] = [
-  {
-    id: '1',
-    key: 'sorting',
-    label: 'New Released',
-    value: 'created_at',
-    orderBy: 'created_at',
-    sortedBy: 'DESC',
-  },
-  {
-    id: '2',
-    key: 'sorting',
-    label: 'Sort by Price: Low to High',
-    value: 'min_price',
-    orderBy: 'min_price',
-    sortedBy: 'ASC',
-  },
-  {
-    id: '3',
-    key: 'sorting',
-    label: 'Sort by Price: High to Low',
-    value: 'max_price',
-    orderBy: 'max_price',
-    sortedBy: 'DESC',
-  },
+import cn from 'classnames';
+
+const sort = [
+  { id: 1, name: 'Most Popular' },
+  { id: 2, name: 'Price: Low to High' },
+  { id: 3, name: 'Price: High to Low' },
+  { id: 4, name: 'Newest First' },
+  { id: 5, name: 'Oldest First' },
 ];
 
-type Props = {
-  variant?: 'radio' | 'dropdown';
-};
-
-const Sorting: React.FC<Props> = ({ variant = 'radio' }) => {
+export default function Sorting() {
   const router = useRouter();
-  const { t } = useTranslation('common');
-  const { isRTL } = useIsRTL();
-  const [selected, setSelected] = useState(
-    () =>
-      plans.find((plan) => plan.orderBy === router.query.orderBy) ?? plans[0]
-  );
+  const [selected, setSelected] = useState(sort[0]);
 
-  useEffect(() => {
-    if (!router.query.orderBy) {
-      setSelected(plans[0]);
-    }
-  }, [router.query.orderBy]);
-
-  function handleChange(values: Plan) {
-    const { orderBy, sortedBy } = values;
+  const handleSort = (sortItem: any) => {
+    setSelected(sortItem);
     router.push({
       pathname: router.pathname,
-      query: {
-        ...router.query,
-        orderBy,
-        sortedBy,
-      },
+      query: { ...router.query, sort: sortItem.name },
     });
-    setSelected(values);
-  }
+  };
 
   return (
-    <>
-      {variant === 'dropdown' && (
-        <Select
-          defaultValue={selected}
-          isRtl={isRTL}
-          options={plans}
-          isSearchable={false}
-          // @ts-ignore
-          onChange={handleChange}
-        />
-      )}
-      {variant === 'radio' && (
-        <Scrollbar style={{ maxHeight: '400px' }}>
-          <RadioGroup value={selected} onChange={handleChange}>
-            <RadioGroup.Label className="sr-only">
-              {t('text-sort')}
-            </RadioGroup.Label>
-            <div className="space-y-4">
-              {plans.map((plan) => (
-                <RadioGroup.Option key={plan.id} value={plan}>
-                  {({ checked }) => (
-                    <>
-                      <div className="flex w-full cursor-pointer items-center">
-                        <span
-                          className={`h-[18px] w-[18px] rounded-full bg-white ltr:mr-3 rtl:ml-3 ${
-                            checked
-                              ? 'border-[5px] border-gray-800'
-                              : 'border border-gray-600'
-                          }`}
-                        />
-                        <RadioGroup.Label as="p" className="text-sm text-body">
-                          {plan.label}
-                        </RadioGroup.Label>
-                      </div>
-                    </>
-                  )}
-                </RadioGroup.Option>
-              ))}
-            </div>
-          </RadioGroup>
-        </Scrollbar>
-      )}
-    </>
+    <Listbox value={selected} onChange={handleSort}>
+      <div className="relative">
+        <Listbox.Button className="relative w-full cursor-pointer rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+          <span className="block truncate">{selected.name}</span>
+          <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+            <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </span>
+        </Listbox.Button>
+        <Transition
+          as={Fragment}
+          leave="transition ease-in duration-100"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            {sort.map((person) => (
+              <Listbox.Option
+                key={person.id}
+                className={({ active }) =>
+                  `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                    active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
+                  }`
+                }
+                value={person}
+              >
+                {({ selected }) => (
+                  <>
+                    <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                      {person.name}
+                    </span>
+                  </>
+                )}
+              </Listbox.Option>
+            ))}
+          </Listbox.Options>
+        </Transition>
+      </div>
+    </Listbox>
   );
-};
-
-export default Sorting;
+}

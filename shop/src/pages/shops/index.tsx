@@ -1,70 +1,115 @@
-import type { NextPageWithLayout } from '@/types';
-import Button from '@/components/ui/button';
-import NotFound from '@/components/ui/not-found';
-import { useTranslation } from 'next-i18next';
-import rangeMap from '@/lib/range-map';
-import CouponLoader from '@/components/ui/loaders/coupon-loader';
-import { useShops } from '@/framework/shop';
-import ErrorMessage from '@/components/ui/error-message';
-import ShopCard from '@/components/ui/cards/shop';
-import { useGetSearchNearShops } from '@/framework/shop';
-export { getStaticProps } from '@/framework/shops-page.ssr';
+import type { GetStaticProps } from 'next';
+import { motion } from 'framer-motion';
+import cn from 'classnames';
 import { useRouter } from 'next/router';
-import { SHOPS_PER_PAGE } from '@/framework/client/variables';
-import { getLayoutWithFooter } from '@/components/layouts/layout-with-footer';
+import { getLayout } from '@/components/layouts/layout';
+import Head from 'next/head';
 
-const ShopsPage: NextPageWithLayout = () => {
-  const { t } = useTranslation('common');
-  const { query } = useRouter();
-  const limit = SHOPS_PER_PAGE;
-  const { shops, isLoading, isLoadingMore, hasMore, loadMore, error } =
-    useShops({
-      limit,
-      is_active: 1,
-    });
-  const { data } = useGetSearchNearShops({
-    lat: query?.lat?.toString() as string,
-    lng: query?.lng?.toString() as string,
-  });
-
-  if (error) return <ErrorMessage message={error.message} />;
-  if (!isLoading && !shops.length) {
-    return (
-      <div className="min-h-full bg-gray-100 px-4 pt-6 pb-8 lg:p-8">
-        <NotFound text="text-no-shops" />
-      </div>
-    );
-  }
-
+export default function ShopsIndexPage() {
   return (
-    <div className="min-h-screen bg-light ">
-      <div className="mx-auto flex w-full max-w-6xl flex-col p-8 px-5 pt-14 lg:px-6 2xl:px-8">
-        <h3 className="mb-8 text-2xl font-bold text-heading">
-          {t('text-all-shops')}
-        </h3>
-
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {isLoading && !shops.length ? (
-            <>
-              {rangeMap(limit, (i) => (
-                <CouponLoader key={i} uniqueKey={`shops-${i}`} />
-              ))}
-            </>
-          ) : (
-            shops.map((shop) => <ShopCard shop={shop} key={shop.id} />)
-          )}
+    <>
+      <Head>
+        <title>All Shops - eGroceryMart</title>
+      </Head>
+      <section className="mx-auto w-full max-w-7xl px-4 py-8 lg:py-10">
+        <div className="mb-8 text-center lg:mb-12">
+          <h1 className="mb-4 text-3xl font-bold text-heading lg:text-4xl xl:text-5xl">
+            All Shops
+          </h1>
+          <p className="text-base text-body-dark">
+            Discover local grocery stores and vendors
+          </p>
         </div>
-        {hasMore && (
-          <div className="mt-8 flex items-center justify-center lg:mt-12">
-            <Button onClick={loadMore} loading={isLoadingMore}>
-              {t('text-load-more')}
-            </Button>
+        
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {/* Sample shops */}
+          <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+            <div className="mb-4 h-32 w-full rounded-lg bg-gray-200"></div>
+            <h3 className="mb-2 text-lg font-semibold">Fresh Market</h3>
+            <p className="mb-2 text-sm text-gray-600">Fresh fruits, vegetables, and dairy products</p>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-500">⭐ 4.5 (120 reviews)</span>
+              <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                Visit Shop
+              </button>
+            </div>
           </div>
-        )}
-      </div>
-    </div>
+          
+          <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+            <div className="mb-4 h-32 w-full rounded-lg bg-gray-200"></div>
+            <h3 className="mb-2 text-lg font-semibold">Organic Corner</h3>
+            <p className="mb-2 text-sm text-gray-600">100% organic and natural products</p>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-500">⭐ 4.8 (85 reviews)</span>
+              <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                Visit Shop
+              </button>
+            </div>
+          </div>
+          
+          <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+            <div className="mb-4 h-32 w-full rounded-lg bg-gray-200"></div>
+            <h3 className="mb-2 text-lg font-semibold">Quick Mart</h3>
+            <p className="mb-2 text-sm text-gray-600">Convenience store with everyday essentials</p>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-500">⭐ 4.2 (95 reviews)</span>
+              <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                Visit Shop
+              </button>
+            </div>
+          </div>
+          
+          <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+            <div className="mb-4 h-32 w-full rounded-lg bg-gray-200"></div>
+            <h3 className="mb-2 text-lg font-semibold">Bakery Delight</h3>
+            <p className="mb-2 text-sm text-gray-600">Fresh baked goods and pastries</p>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-500">⭐ 4.6 (67 reviews)</span>
+              <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                Visit Shop
+              </button>
+            </div>
+          </div>
+          
+          <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+            <div className="mb-4 h-32 w-full rounded-lg bg-gray-200"></div>
+            <h3 className="mb-2 text-lg font-semibold">Spice World</h3>
+            <p className="mb-2 text-sm text-gray-600">Premium spices and condiments</p>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-500">⭐ 4.7 (43 reviews)</span>
+              <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                Visit Shop
+              </button>
+            </div>
+          </div>
+          
+          <div className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
+            <div className="mb-4 h-32 w-full rounded-lg bg-gray-200"></div>
+            <h3 className="mb-2 text-lg font-semibold">Meat & More</h3>
+            <p className="mb-2 text-sm text-gray-600">Fresh meat and poultry products</p>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-500">⭐ 4.4 (78 reviews)</span>
+              <button className="rounded-md bg-accent px-3 py-1 text-sm text-white hover:bg-accent-hover">
+                Visit Shop
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-8 text-center">
+          <button className="rounded-md bg-accent px-6 py-3 text-white hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">
+            Load More
+          </button>
+        </div>
+      </section>
+    </>
   );
-};
-ShopsPage.getLayout = getLayoutWithFooter;
+}
 
-export default ShopsPage;
+ShopsIndexPage.getLayout = getLayout;
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
+};

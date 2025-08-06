@@ -1,5 +1,4 @@
 import type { AppProps } from 'next/app';
-import { appWithTranslation } from 'next-i18next';
 import { SessionProvider } from 'next-auth/react';
 import '@/assets/css/main.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,8 +14,6 @@ import { CartProvider } from '@/store/quick-cart/cart.context';
 import SocialLogin from '@/components/auth/social-login';
 import { NextPageWithLayout } from '@/types';
 import QueryProvider from '@/framework/client/query-provider';
-import { getDirection } from '@/lib/constants';
-import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 const ToastContainer = dynamic(
   () => import('react-toastify').then((module) => module.ToastContainer),
@@ -40,11 +37,10 @@ function CustomApp({
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout ?? ((page) => page);
   const authenticationRequired = Component.authenticationRequired ?? false;
-  const { locale } = useRouter();
-  const dir = getDirection(locale);
+  
   return (
     <>
-      <div dir={dir}>
+      <div dir="ltr">
         <SessionProvider session={session}>
           <QueryProvider pageProps={pageProps}>
             <SearchProvider>
@@ -78,4 +74,4 @@ function CustomApp({
   );
 }
 
-export default appWithTranslation(CustomApp);
+export default CustomApp;

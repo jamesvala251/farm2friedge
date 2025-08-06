@@ -1,29 +1,32 @@
 const invariant = require('tiny-invariant');
 const path = require('path');
 
-invariant(
-  process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE,
-  'NEXT_PUBLIC_DEFAULT_LANGUAGE is required, but not set, check your .env file'
-);
-
-const isMultilangEnable =
-  process.env.NEXT_PUBLIC_ENABLE_MULTI_LANG === 'true' &&
-  !!process.env.NEXT_PUBLIC_AVAILABLE_LANGUAGES;
-
-function generateLocales() {
-  if (isMultilangEnable) {
-    return process.env.NEXT_PUBLIC_AVAILABLE_LANGUAGES.split(',');
-  }
-
-  return [process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE];
-}
+// For Demo - Keep English Only
+const DEFAULT_LANGUAGE = 'en';
 
 module.exports = {
   i18n: {
-    defaultLocale: process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE ?? 'en',
-    locales: generateLocales(),
+    defaultLocale: DEFAULT_LANGUAGE,
+    locales: [DEFAULT_LANGUAGE], // Only English
+    localeDetection: false, // Disable automatic locale detection
   },
   react: { useSuspense: false },
   localePath: path.resolve('./public/locales'),
-  reloadOnPrerender: process.env.NODE_ENV === 'development',
+  // Disable reload on prerender for better performance
+  reloadOnPrerender: false,
+  // Add interpolation configuration
+  interpolation: {
+    escapeValue: false,
+  },
+  // Optimize loading - only load English
+  load: 'languageOnly',
+  // Cache translations
+  cache: {
+    enabled: true,
+    expirationTime: 60 * 60 * 1000, // 1 hour
+  },
+  // Disable unnecessary features for demo
+  debug: false,
+  saveMissing: false,
+  missingKeyHandler: false,
 };
