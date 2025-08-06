@@ -42,7 +42,7 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
   const reverseBanners = useReverse({ items: banners as Banner[] });
   return (
     <div
-      className={cn('textClass relative hidden lg:block bg-white', {
+      className={cn('textClass relative block bg-white mt-4 lg:mt-16', { // Reduced mobile margin, kept desktop margin
         '!block': layout === 'minimal',
       })}
     >
@@ -68,7 +68,7 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
               <SwiperSlide key={idx}>
                 <div
                   className={cn('relative w-full rounded-lg overflow-hidden', {
-                    'h-[300px] md:h-[400px] lg:h-[450px]': layout === 'classic',
+                    'h-[200px] sm:h-[250px] md:h-[300px] lg:h-[400px] xl:h-[450px]': layout === 'classic', // Added responsive heights
                     'max-h-140': layout === 'standard',
                     'max-h-[320px] md:max-h-[680px]': layout === 'minimal',
                   })}

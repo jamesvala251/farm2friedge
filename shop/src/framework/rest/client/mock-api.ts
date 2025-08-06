@@ -15,8 +15,18 @@ const mockData = {
       sale_price: 2.49,
       quantity: 50,
       unit: "kg",
-      image: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&h=400&fit=crop",
-      gallery: ["https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&h=400&fit=crop"],
+      image: {
+        id: 1,
+        original: "/img/Apples.webp",
+        thumbnail: "/img/Apples.webp"
+      },
+      gallery: [
+        {
+          id: 1,
+          original: "/img/Apples.webp",
+          thumbnail: "/img/Apples.webp"
+        }
+      ],
       category: {
         id: 1,
         name: "Fruits & Vegetables",
@@ -58,8 +68,18 @@ const mockData = {
       sale_price: 3.49,
       quantity: 100,
       unit: "liter",
-      image: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&h=400&fit=crop",
-      gallery: ["https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&h=400&fit=crop"],
+      image: {
+        id: 2,
+        original: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&h=400&fit=crop",
+        thumbnail: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200&h=200&fit=crop"
+      },
+      gallery: [
+        {
+          id: 2,
+          original: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200&h=200&fit=crop"
+        }
+      ],
       category: {
         id: 2,
         name: "Dairy & Eggs",
@@ -99,10 +119,20 @@ const mockData = {
       description: "Nutritious whole grain bread, perfect for sandwiches",
       price: 4.99,
       sale_price: 4.49,
-      quantity: 30,
+      quantity: 75,
       unit: "pack",
-      image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=400&fit=crop",
-      gallery: ["https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=400&fit=crop"],
+      image: {
+        id: 3,
+        original: "/img/grain_free.webp",
+        thumbnail: "/img/grain_free.webp"
+      },
+      gallery: [
+        {
+          id: 3,
+          original: "/img/grain_free.webp",
+          thumbnail: "/img/grain_free.webp"
+        }
+      ],
       category: {
         id: 3,
         name: "Bakery",
@@ -110,8 +140,273 @@ const mockData = {
       },
       type: {
         id: 3,
-        name: "Fresh",
-        slug: "fresh"
+        name: "Bakery",
+        slug: "bakery"
+      },
+      shop: {
+        id: 2,
+        name: "Bakery Corner",
+        slug: "bakery-corner",
+        rating: 4.3,
+        total_reviews: 89
+      },
+      ratings: 4.2,
+      total_reviews: 67,
+      in_stock: true,
+      is_taxable: true,
+      min_price: 4.49,
+      max_price: 4.99,
+      variations: [],
+      variation_options: [],
+      meta: [],
+      tags: ["bakery", "whole-grain", "healthy"],
+      product_type: "simple",
+      status: "publish",
+      created_at: "2024-01-01T00:00:00.000000Z",
+      updated_at: "2024-01-01T00:00:00.000000Z"
+    },
+    {
+      id: 4,
+      name: "Organic Tomatoes",
+      slug: "organic-tomatoes",
+      description: "Fresh organic tomatoes, perfect for salads and cooking",
+      price: 1.99,
+      sale_price: 1.79,
+      quantity: 200,
+      unit: "kg",
+      image: {
+        id: 4,
+        original: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400&h=400&fit=crop",
+        thumbnail: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200&h=200&fit=crop"
+      },
+      gallery: [
+        {
+          id: 4,
+          original: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=200&h=200&fit=crop"
+        }
+      ],
+      category: {
+        id: 1,
+        name: "Fruits & Vegetables",
+        slug: "fruits-vegetables"
+      },
+      type: {
+        id: 1,
+        name: "Organic",
+        slug: "organic"
+      },
+      shop: {
+        id: 1,
+        name: "Fresh Grocery Store",
+        slug: "fresh-grocery-store",
+        rating: 4.5,
+        total_reviews: 156
+      },
+      ratings: 4.6,
+      total_reviews: 94,
+      in_stock: true,
+      is_taxable: true,
+      min_price: 1.79,
+      max_price: 1.99,
+      variations: [],
+      variation_options: [],
+      meta: [],
+      tags: ["organic", "vegetables", "fresh"],
+      product_type: "simple",
+      status: "publish",
+      created_at: "2024-01-01T00:00:00.000000Z",
+      updated_at: "2024-01-01T00:00:00.000000Z"
+    },
+    {
+      id: 5,
+      name: "Free Range Eggs",
+      slug: "free-range-eggs",
+      description: "Fresh free range eggs from happy chickens",
+      price: 5.99,
+      sale_price: 5.49,
+      quantity: 150,
+      unit: "dozen",
+      image: {
+        id: 5,
+        original: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=400&h=400&fit=crop",
+        thumbnail: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=200&h=200&fit=crop"
+      },
+      gallery: [
+        {
+          id: 5,
+          original: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=200&h=200&fit=crop"
+        }
+      ],
+      category: {
+        id: 2,
+        name: "Dairy & Eggs",
+        slug: "dairy-eggs"
+      },
+      type: {
+        id: 2,
+        name: "Dairy",
+        slug: "dairy"
+      },
+      shop: {
+        id: 1,
+        name: "Fresh Grocery Store",
+        slug: "fresh-grocery-store",
+        rating: 4.5,
+        total_reviews: 156
+      },
+      ratings: 4.7,
+      total_reviews: 112,
+      in_stock: true,
+      is_taxable: true,
+      min_price: 5.49,
+      max_price: 5.99,
+      variations: [],
+      variation_options: [],
+      meta: [],
+      tags: ["eggs", "free-range", "fresh"],
+      product_type: "simple",
+      status: "publish",
+      created_at: "2024-01-01T00:00:00.000000Z",
+      updated_at: "2024-01-01T00:00:00.000000Z"
+    },
+    {
+      id: 6,
+      name: "Fresh Bananas",
+      slug: "fresh-bananas",
+      description: "Sweet and ripe bananas, perfect for smoothies",
+      price: 1.49,
+      sale_price: 1.29,
+      quantity: 300,
+      unit: "kg",
+      image: {
+        id: 6,
+        original: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=400&fit=crop",
+        thumbnail: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=200&h=200&fit=crop"
+      },
+      gallery: [
+        {
+          id: 6,
+          original: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=200&h=200&fit=crop"
+        }
+      ],
+      category: {
+        id: 1,
+        name: "Fruits & Vegetables",
+        slug: "fruits-vegetables"
+      },
+      type: {
+        id: 1,
+        name: "Organic",
+        slug: "organic"
+      },
+      shop: {
+        id: 1,
+        name: "Fresh Grocery Store",
+        slug: "fresh-grocery-store",
+        rating: 4.5,
+        total_reviews: 156
+      },
+      ratings: 4.4,
+      total_reviews: 78,
+      in_stock: true,
+      is_taxable: true,
+      min_price: 1.29,
+      max_price: 1.49,
+      variations: [],
+      variation_options: [],
+      meta: [],
+      tags: ["fruits", "bananas", "fresh"],
+      product_type: "simple",
+      status: "publish",
+      created_at: "2024-01-01T00:00:00.000000Z",
+      updated_at: "2024-01-01T00:00:00.000000Z"
+    },
+    {
+      id: 7,
+      name: "Greek Yogurt",
+      slug: "greek-yogurt",
+      description: "Creamy Greek yogurt, high in protein",
+      price: 4.49,
+      sale_price: 3.99,
+      quantity: 80,
+      unit: "pack",
+      image: {
+        id: 7,
+        original: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=400&fit=crop",
+        thumbnail: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200&h=200&fit=crop"
+      },
+      gallery: [
+        {
+          id: 7,
+          original: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200&h=200&fit=crop"
+        }
+      ],
+      category: {
+        id: 2,
+        name: "Dairy & Eggs",
+        slug: "dairy-eggs"
+      },
+      type: {
+        id: 2,
+        name: "Dairy",
+        slug: "dairy"
+      },
+      shop: {
+        id: 1,
+        name: "Fresh Grocery Store",
+        slug: "fresh-grocery-store",
+        rating: 4.5,
+        total_reviews: 156
+      },
+      ratings: 4.6,
+      total_reviews: 95,
+      in_stock: true,
+      is_taxable: true,
+      min_price: 3.99,
+      max_price: 4.49,
+      variations: [],
+      variation_options: [],
+      meta: [],
+      tags: ["yogurt", "greek", "protein"],
+      product_type: "simple",
+      status: "publish",
+      created_at: "2024-01-01T00:00:00.000000Z",
+      updated_at: "2024-01-01T00:00:00.000000Z"
+    },
+    {
+      id: 8,
+      name: "Organic Carrots",
+      slug: "organic-carrots",
+      description: "Fresh organic carrots, perfect for juicing",
+      price: 2.29,
+      sale_price: 1.99,
+      quantity: 180,
+      unit: "kg",
+      image: {
+        id: 8,
+        original: "/img/Peeled-Carrots.webp",
+        thumbnail: "/img/Peeled-Carrots.webp"
+      },
+      gallery: [
+        {
+          id: 8,
+          original: "/img/Peeled-Carrots.webp",
+          thumbnail: "/img/Peeled-Carrots.webp"
+        }
+      ],
+      category: {
+        id: 1,
+        name: "Fruits & Vegetables",
+        slug: "fruits-vegetables"
+      },
+      type: {
+        id: 1,
+        name: "Organic",
+        slug: "organic"
       },
       shop: {
         id: 1,
@@ -124,71 +419,38 @@ const mockData = {
       total_reviews: 67,
       in_stock: true,
       is_taxable: true,
-      min_price: 4.49,
-      max_price: 4.99,
+      min_price: 1.99,
+      max_price: 2.29,
       variations: [],
       variation_options: [],
       meta: [],
-      tags: ["bakery", "whole grain", "healthy"],
+      tags: ["organic", "carrots", "vegetables"],
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
       updated_at: "2024-01-01T00:00:00.000000Z"
     },
     {
-      id: 4,
-      name: "Organic Bananas",
-      slug: "organic-bananas",
-      description: "Sweet organic bananas, rich in potassium",
-      price: 1.99,
-      sale_price: 1.79,
-      quantity: 75,
-      unit: "kg",
-      image: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=400&fit=crop",
-      gallery: ["https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=400&fit=crop"],
-      category: {
-        id: 1,
-        name: "Fruits & Vegetables",
-        slug: "fruits-vegetables"
+      id: 9,
+      name: "Fresh Cheese",
+      slug: "fresh-cheese",
+      description: "Creamy fresh cheese, perfect for cooking",
+      price: 6.99,
+      sale_price: 6.49,
+      quantity: 60,
+      unit: "pack",
+      image: {
+        id: 9,
+        original: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=400&h=400&fit=crop",
+        thumbnail: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=200&h=200&fit=crop"
       },
-      type: {
-        id: 1,
-        name: "Organic",
-        slug: "organic"
-      },
-      shop: {
-        id: 1,
-        name: "Fresh Grocery Store",
-        slug: "fresh-grocery-store",
-        rating: 4.5,
-        total_reviews: 156
-      },
-      ratings: 4.6,
-      total_reviews: 156,
-      in_stock: true,
-      is_taxable: true,
-      min_price: 1.79,
-      max_price: 1.99,
-      variations: [],
-      variation_options: [],
-      meta: [],
-      tags: ["organic", "fruits", "potassium"],
-      product_type: "simple",
-      status: "publish",
-      created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
-    },
-    {
-      id: 5,
-      name: "Fresh Eggs",
-      slug: "fresh-eggs",
-      description: "Farm fresh eggs, perfect for breakfast",
-      price: 5.99,
-      sale_price: 5.49,
-      quantity: 200,
-      unit: "dozen",
-      image: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=400&h=400&fit=crop",
-      gallery: ["https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=400&h=400&fit=crop"],
+      gallery: [
+        {
+          id: 9,
+          original: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=200&h=200&fit=crop"
+        }
+      ],
       category: {
         id: 2,
         name: "Dairy & Eggs",
@@ -198,135 +460,6 @@ const mockData = {
         id: 2,
         name: "Dairy",
         slug: "dairy"
-      },
-      shop: {
-        id: 1,
-        name: "Fresh Grocery Store",
-        slug: "fresh-grocery-store",
-        rating: 4.5,
-        total_reviews: 156
-      },
-      ratings: 4.7,
-      total_reviews: 234,
-      in_stock: true,
-      is_taxable: true,
-      min_price: 5.49,
-      max_price: 5.99,
-      variations: [],
-      variation_options: [],
-      meta: [],
-      tags: ["eggs", "fresh", "protein"],
-      product_type: "simple",
-      status: "publish",
-      created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
-    },
-    {
-      id: 6,
-      name: "Fresh Tomatoes",
-      slug: "fresh-tomatoes",
-      description: "Ripe and juicy tomatoes, perfect for salads and cooking",
-      price: 3.49,
-      sale_price: 2.99,
-      quantity: 40,
-      unit: "kg",
-      image: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400&h=400&fit=crop",
-      gallery: ["https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400&h=400&fit=crop"],
-      category: {
-        id: 1,
-        name: "Fruits & Vegetables",
-        slug: "fruits-vegetables"
-      },
-      type: {
-        id: 3,
-        name: "Fresh",
-        slug: "fresh"
-      },
-      shop: {
-        id: 1,
-        name: "Fresh Grocery Store",
-        slug: "fresh-grocery-store",
-        rating: 4.5,
-        total_reviews: 156
-      },
-      ratings: 4.4,
-      total_reviews: 98,
-      in_stock: true,
-      is_taxable: true,
-      min_price: 2.99,
-      max_price: 3.49,
-      variations: [],
-      variation_options: [],
-      meta: [],
-      tags: ["vegetables", "fresh", "salad"],
-      product_type: "simple",
-      status: "publish",
-      created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
-    },
-    {
-      id: 7,
-      name: "Chicken Breast",
-      slug: "chicken-breast",
-      description: "Fresh boneless chicken breast, perfect for healthy meals",
-      price: 12.99,
-      sale_price: 11.99,
-      quantity: 25,
-      unit: "kg",
-      image: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400&h=400&fit=crop",
-      gallery: ["https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400&h=400&fit=crop"],
-      category: {
-        id: 4,
-        name: "Meat & Seafood",
-        slug: "meat-seafood"
-      },
-      type: {
-        id: 1,
-        name: "Grocery",
-        slug: "grocery"
-      },
-      shop: {
-        id: 1,
-        name: "Fresh Grocery Store",
-        slug: "fresh-grocery-store",
-        rating: 4.5,
-        total_reviews: 156
-      },
-      ratings: 4.6,
-      total_reviews: 187,
-      in_stock: true,
-      is_taxable: true,
-      min_price: 11.99,
-      max_price: 12.99,
-      variations: [],
-      variation_options: [],
-      meta: [],
-      tags: ["meat", "protein", "healthy"],
-      product_type: "simple",
-      status: "publish",
-      created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
-    },
-    {
-      id: 8,
-      name: "Brown Rice",
-      slug: "brown-rice",
-      description: "Nutritious brown rice, rich in fiber and minerals",
-      price: 4.49,
-      sale_price: 3.99,
-      quantity: 60,
-      unit: "kg",
-      image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=400&fit=crop",
-      gallery: ["https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=400&fit=crop"],
-      category: {
-        id: 5,
-        name: "Pantry & Staples",
-        slug: "pantry-staples"
-      },
-      type: {
-        id: 1,
-        name: "Organic",
-        slug: "organic"
       },
       shop: {
         id: 1,
@@ -336,58 +469,15 @@ const mockData = {
         total_reviews: 156
       },
       ratings: 4.5,
-      total_reviews: 145,
+      total_reviews: 83,
       in_stock: true,
       is_taxable: true,
-      min_price: 3.99,
-      max_price: 4.49,
-      variations: [],
-      variation_options: [],
-      meta: [],
-      tags: ["rice", "organic", "fiber"],
-      product_type: "simple",
-      status: "publish",
-      created_at: "2024-01-01T00:00:00.000000Z",
-      updated_at: "2024-01-01T00:00:00.000000Z"
-    },
-    {
-      id: 9,
-      name: "Greek Yogurt",
-      slug: "greek-yogurt",
-      description: "Creamy Greek yogurt, high in protein",
-      price: 6.99,
-      sale_price: 5.99,
-      quantity: 45,
-      unit: "pack",
-      image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=400&fit=crop",
-      gallery: ["https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=400&fit=crop"],
-      category: {
-        id: 2,
-        name: "Dairy & Eggs",
-        slug: "dairy-eggs"
-      },
-      type: {
-        id: 2,
-        name: "Dairy",
-        slug: "dairy"
-      },
-      shop: {
-        id: 1,
-        name: "Fresh Grocery Store",
-        slug: "fresh-grocery-store",
-        rating: 4.5,
-        total_reviews: 156
-      },
-      ratings: 4.8,
-      total_reviews: 203,
-      in_stock: true,
-      is_taxable: true,
-      min_price: 5.99,
+      min_price: 6.49,
       max_price: 6.99,
       variations: [],
       variation_options: [],
       meta: [],
-      tags: ["yogurt", "protein", "healthy"],
+      tags: ["cheese", "fresh", "dairy"],
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
@@ -395,15 +485,25 @@ const mockData = {
     },
     {
       id: 10,
-      name: "Fresh Spinach",
-      slug: "fresh-spinach",
-      description: "Fresh organic spinach, packed with nutrients",
-      price: 2.99,
-      sale_price: 2.49,
-      quantity: 35,
+      name: "Organic Spinach",
+      slug: "organic-spinach",
+      description: "Fresh organic spinach, rich in iron",
+      price: 3.49,
+      sale_price: 2.99,
+      quantity: 120,
       unit: "bunch",
-      image: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=400&h=400&fit=crop",
-      gallery: ["https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=400&h=400&fit=crop"],
+      image: {
+        id: 10,
+        original: "/img/BabySpinach.webp",
+        thumbnail: "/img/BabySpinach.webp"
+      },
+      gallery: [
+        {
+          id: 10,
+          original: "/img/BabySpinach.webp",
+          thumbnail: "/img/BabySpinach.webp"
+        }
+      ],
       category: {
         id: 1,
         name: "Fruits & Vegetables",
@@ -421,16 +521,16 @@ const mockData = {
         rating: 4.5,
         total_reviews: 156
       },
-      ratings: 4.3,
-      total_reviews: 76,
+      ratings: 4.4,
+      total_reviews: 71,
       in_stock: true,
       is_taxable: true,
-      min_price: 2.49,
-      max_price: 2.99,
+      min_price: 2.99,
+      max_price: 3.49,
       variations: [],
       variation_options: [],
       meta: [],
-      tags: ["vegetables", "organic", "nutrients"],
+      tags: ["organic", "spinach", "leafy-greens"],
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
@@ -438,24 +538,34 @@ const mockData = {
     },
     {
       id: 11,
-      name: "Croissants",
-      slug: "croissants",
-      description: "Buttery French croissants, baked fresh daily",
-      price: 3.99,
-      sale_price: 3.49,
-      quantity: 20,
+      name: "Fresh Butter",
+      slug: "fresh-butter",
+      description: "Creamy fresh butter, perfect for baking",
+      price: 4.99,
+      sale_price: 4.49,
+      quantity: 90,
       unit: "pack",
-      image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=400&fit=crop",
-      gallery: ["https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=400&fit=crop"],
+      image: {
+        id: 11,
+        original: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=400&fit=crop",
+        thumbnail: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=200&h=200&fit=crop"
+      },
+      gallery: [
+        {
+          id: 11,
+          original: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=200&h=200&fit=crop"
+        }
+      ],
       category: {
-        id: 3,
-        name: "Bakery",
-        slug: "bakery"
+        id: 2,
+        name: "Dairy & Eggs",
+        slug: "dairy-eggs"
       },
       type: {
-        id: 3,
-        name: "Fresh",
-        slug: "fresh"
+        id: 2,
+        name: "Dairy",
+        slug: "dairy"
       },
       shop: {
         id: 1,
@@ -465,15 +575,15 @@ const mockData = {
         total_reviews: 156
       },
       ratings: 4.7,
-      total_reviews: 134,
+      total_reviews: 104,
       in_stock: true,
       is_taxable: true,
-      min_price: 3.49,
-      max_price: 3.99,
+      min_price: 4.49,
+      max_price: 4.99,
       variations: [],
       variation_options: [],
       meta: [],
-      tags: ["bakery", "pastry", "breakfast"],
+      tags: ["butter", "fresh", "dairy"],
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
@@ -481,42 +591,52 @@ const mockData = {
     },
     {
       id: 12,
-      name: "Salmon Fillet",
-      slug: "salmon-fillet",
-      description: "Fresh Atlantic salmon fillet, rich in omega-3",
-      price: 18.99,
-      sale_price: 16.99,
-      quantity: 15,
+      name: "Organic Onions",
+      slug: "organic-onions",
+      description: "Fresh organic onions, essential for cooking",
+      price: 1.79,
+      sale_price: 1.49,
+      quantity: 250,
       unit: "kg",
-      image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&h=400&fit=crop",
-      gallery: ["https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&h=400&fit=crop"],
+      image: {
+        id: 12,
+        original: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&h=400&fit=crop",
+        thumbnail: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=200&h=200&fit=crop"
+      },
+      gallery: [
+        {
+          id: 12,
+          original: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&h=400&fit=crop",
+          thumbnail: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=200&h=200&fit=crop"
+        }
+      ],
       category: {
-        id: 4,
-        name: "Meat & Seafood",
-        slug: "meat-seafood"
+        id: 1,
+        name: "Fruits & Vegetables",
+        slug: "fruits-vegetables"
       },
       type: {
         id: 1,
-        name: "Grocery",
-        slug: "grocery"
+        name: "Organic",
+        slug: "organic"
       },
       shop: {
-        id: 2,
-        name: "Ocean Fresh Seafood",
-        slug: "ocean-fresh-seafood",
-        rating: 4.8,
-        total_reviews: 89
+        id: 1,
+        name: "Fresh Grocery Store",
+        slug: "fresh-grocery-store",
+        rating: 4.5,
+        total_reviews: 156
       },
-      ratings: 4.9,
-      total_reviews: 267,
+      ratings: 4.2,
+      total_reviews: 56,
       in_stock: true,
       is_taxable: true,
-      min_price: 16.99,
-      max_price: 18.99,
+      min_price: 1.49,
+      max_price: 1.79,
       variations: [],
       variation_options: [],
       meta: [],
-      tags: ["fish", "omega-3", "protein"],
+      tags: ["organic", "onions", "vegetables"],
       product_type: "simple",
       status: "publish",
       created_at: "2024-01-01T00:00:00.000000Z",
@@ -768,30 +888,6 @@ const mockData = {
           },
           button_text: "View Organic",
           button_url: "/category/organic-products"
-        },
-        {
-          id: 3,
-          title: "Fresh Dairy & Eggs",
-          description: "Farm fresh dairy products and organic eggs",
-          image: {
-            id: 3,
-            original: "/img/banners/banner-3.jpg",
-            thumbnail: "/img/banners/banner-3.jpg"
-          },
-          button_text: "Shop Dairy",
-          button_url: "/category/dairy-eggs"
-        },
-        {
-          id: 4,
-          title: "Premium Meat & Seafood",
-          description: "Quality meat and fresh seafood from trusted suppliers",
-          image: {
-            id: 4,
-            original: "/img/banners/banner-4.jpg",
-            thumbnail: "/img/banners/banner-4.jpg"
-          },
-          button_text: "Shop Meat",
-          button_url: "/category/meat-seafood"
         }
       ],
       promotional_sliders: [
@@ -799,43 +895,36 @@ const mockData = {
           id: 1,
           title: "Fresh Fruits Sale",
           description: "Get 20% off on all fresh fruits",
-          original: "https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=400&h=200&fit=crop&bg=white",
+          original: "/promotion/promo-1.png",
           url: "/category/fruits-vegetables"
         },
         {
           id: 2,
           title: "Dairy Products",
           description: "Fresh dairy products at best prices",
-          original: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&h=200&fit=crop&bg=white",
+          original: "/promotion/promo-2.png",
           url: "/category/dairy-eggs"
         },
         {
           id: 3,
           title: "Bakery Fresh",
           description: "Freshly baked bread and pastries",
-          original: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=200&fit=crop&bg=white",
+          original: "/promotion/promo-3.png",
           url: "/category/bakery"
         },
         {
           id: 4,
           title: "Organic Vegetables",
           description: "Fresh organic vegetables from local farms",
-          original: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=200&fit=crop&bg=white",
+          original: "/promotion/promo-4.png",
           url: "/category/organic-products"
         },
         {
           id: 5,
           title: "Premium Meat & Seafood",
           description: "Quality meat and fresh seafood",
-          original: "https://images.unsplash.com/photo-1607082349566-187342175e2f?w=400&h=200&fit=crop&bg=white",
+          original: "/promotion/promo-5.png",
           url: "/category/meat-seafood"
-        },
-        {
-          id: 6,
-          title: "Free Delivery Offer",
-          description: "Free delivery on orders above $50",
-          original: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=200&fit=crop&bg=white",
-          url: "/products"
         }
       ],
       settings: {
