@@ -28,8 +28,7 @@ const ProductContentPage: NextPage = () => {
                 Coming Soon!
               </h2>
               <p className="text-gray-600 mb-6">
-                We're working hard to bring you a comprehensive product content management system. 
-                This feature will allow you to:
+                We&apos;re building a comprehensive content management system to help you manage product information, images, and descriptions efficiently.
               </p>
               <ul className="text-left text-gray-600 space-y-2 mb-8">
                 <li className="flex items-center gap-2">

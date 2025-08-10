@@ -150,7 +150,7 @@ const OrderManagementPage = () => {
         <Card className="p-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Today's Orders</p>
+              <p className="text-sm text-gray-600">Today&apos;s Orders</p>
               <p className="text-2xl font-bold text-green-600">{orders.filter(o => o.orderDate === '2024-01-15').length}</p>
             </div>
             <div className="w-8 h-8 text-green-500 text-2xl">📅</div>

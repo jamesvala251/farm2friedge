@@ -28,8 +28,7 @@ const PaymentManagementPage: NextPage = () => {
                 Coming Soon!
               </h2>
               <p className="text-gray-600 mb-6">
-                We're building a comprehensive payment management system to help you 
-                monitor and control all financial transactions. This feature will include:
+                We&apos;re building a comprehensive payment management system to help you track, process, and manage all financial transactions efficiently.
               </p>
               <ul className="text-left text-gray-600 space-y-2 mb-8">
                 <li className="flex items-center gap-2">

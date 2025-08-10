@@ -28,7 +28,7 @@ const MarketingToolsPage: NextPage = () => {
                 Coming Soon!
               </h2>
               <p className="text-gray-600 mb-6">
-                We're developing powerful marketing tools to help you grow your business 
+                We&apos;re developing powerful marketing tools to help you grow your business 
                 and engage customers effectively. This platform will feature:
               </p>
               <ul className="text-left text-gray-600 space-y-2 mb-8">

@@ -1,30 +1,39 @@
-import { useRouter } from 'next/router';
-import { useSettingsQuery } from '@/data/settings';
-import VisitStore from '@/components/layouts/topbar/visit-store';
-import SearchBar from '@/components/layouts/topbar/search-bar';
+import React from 'react';
 import MessageBar from '@/components/layouts/topbar/message-bar';
 import StoreNoticeBar from '@/components/layouts/topbar/store-notice-bar';
 import RecentOrderBar from '@/components/layouts/topbar/recent-order-bar';
-import { useMeQuery } from '@/data/user';
+
+// Mock data for demo purposes
+const mockUser = {
+  id: 1,
+  name: 'Admin User',
+  email: 'admin@egrocerymart.com',
+  role: 'SUPER_ADMIN'
+};
+
+const mockSettings = {
+  options: {
+    pushNotification: {
+      all: {
+        message: false,        // Hidden
+        storeNotice: false,    // Hidden
+        order: false           // Hidden
+      }
+    }
+  }
+};
 
 type IProps = {};
 
 const DashboardTopBar = ({}: IProps) => {
-  const { locale } = useRouter();
-  const { data, isLoading: meLoading, error: meError } = useMeQuery();
-  const {
-    // @ts-ignore
-    settings: { options },
-  } = useSettingsQuery({
-    language: locale!,
-  });
+  const data = mockUser; // Mock user data
+  const options = mockSettings.options; // Mock settings
 
   return (
     <>
-      <div className="mb-6 overflow-hidden rounded shadow">
-        <VisitStore />
-        <SearchBar />
-
+      {/* Completely hidden - no topbar content */}
+      <div className="hidden">
+        {/* All components are hidden */}
         {options?.pushNotification?.all?.message ? (
           <MessageBar user={data} />
         ) : (

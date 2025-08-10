@@ -1,26 +1,24 @@
-import { HomeIcon } from '@/components/icons/home-icon';
-import { Routes } from '@/config/routes';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-// import { useTranslation } from 'react-i18next'; // REMOVED - Pure English static content
+import React from 'react';
+import { ExternalLinkIcon } from '@/components/icons/external-link';
 
 const VisitStore = () => {
-  // const { t } = useTranslation(); // REMOVED - Pure English static content
-  const { pathname, query } = useRouter();
-  const slug = (pathname === '/[shop]' && `shops/${query?.shop}`) || '/';
-
   return (
-    <>
-      <Link
-        href={Routes.visitStore(slug as string)}
+    <div className="flex items-center justify-between bg-green-50 px-4 py-3 text-sm">
+      <div className="flex items-center space-x-3">
+        <ExternalLinkIcon className="h-5 w-5 text-green-600" />
+        <span className="text-green-900">
+          Visit your <strong>eGroceryMart Store</strong> to see customer view
+        </span>
+      </div>
+      <a
+        href="/store"
         target="_blank"
-        className="inline-flex h-9 flex-shrink-0 items-center justify-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-3.5 py-0 text-sm font-medium leading-none text-accent outline-none transition duration-300 ease-in-out hover:border-transparent hover:bg-accent-hover hover:text-white focus:shadow focus:outline-none"
-        rel="noreferrer"
+        rel="noopener noreferrer"
+        className="text-green-600 hover:text-green-800 font-medium"
       >
-        <HomeIcon />
-        {slug === '/' ? 'Visit Site' : 'Visit Store'}
-      </Link>
-    </>
+        Visit Store →
+      </a>
+    </div>
   );
 };
 

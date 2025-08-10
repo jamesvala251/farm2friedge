@@ -2,7 +2,7 @@ import Navbar from '@/components/layouts/navigation/top-navbar';
 import { miniSidebarInitialValue } from '@/utils/constants';
 import Footer from '@/components/layouts/footer/footer-bar';
 import MobileNavigation from '@/components/layouts/navigation/mobile-navigation';
-import { siteSettings } from '@/settings/site.settings';
+import DashboardTopBar from '@/components/layouts/topbar/dashboard-topbar';
 import SidebarItem from '@/components/layouts/navigation/sidebar-item';
 import { useRouter } from 'next/router';
 import { useAtom } from 'jotai';
@@ -247,47 +247,51 @@ const AdminLayout: React.FC<{ children?: React.ReactNode }> = ({
 
   return (
     <div
-      className="flex min-h-screen flex-col bg-gray-100"
+      className="flex min-h-screen flex-col bg-gray-100 transition-colors duration-150"
       dir="ltr"
     >
       <Navbar />
-      <div className="relative flex min-h-screen">
-        {/* Sidebar */}
+      <MobileNavigation>
+        <SideBarGroup />
+      </MobileNavigation>
+
+      <div className="flex flex-1">
         <aside
           className={cn(
-            'fixed top-16 left-0 z-50 h-[calc(100vh-64px)] bg-white shadow-sm transition-all duration-300 ease-in-out',
-            miniSidebar && width >= RESPONSIVE_WIDTH
-              ? 'w-20'
-              : 'w-72'
+            'fixed bottom-0 z-10 hidden h-full w-72 bg-white shadow transition-[width] duration-300 ltr:left-0 ltr:right-auto rtl:right-0 rtl:left-auto lg:block',
+            'pt-20',
+            miniSidebar && width >= RESPONSIVE_WIDTH ? 'lg:w-24' : 'lg:w-76'
           )}
         >
-          <div className="flex h-full flex-col">
-            {/* Removed extra logo section - logo already in top navbar */}
-            
-            <Scrollbar className="h-full w-full">
-              <div className="flex h-full flex-col">
-                <SideBarGroup />
-              </div>
+          <div className="sidebar-scrollbar h-full w-full overflow-x-hidden">
+            <Scrollbar
+              className="h-full w-full"
+              options={{
+                scrollbars: {
+                  autoHide: 'never',
+                },
+              }}
+            >
+              <SideBarGroup />
             </Scrollbar>
           </div>
         </aside>
-
-        {/* Main Content */}
         <main
           className={cn(
-            'relative flex w-full flex-col justify-start transition-[padding] duration-300 pt-[72px] lg:pt-20',
-            miniSidebar && width >= RESPONSIVE_WIDTH 
-              ? 'ltr:xl:pl-20 rtl:xl:pr-20 ltr:lg:pl-20 rtl:lg:pr-20' 
+            'relative flex w-full flex-col justify-start transition-[padding] duration-300',
+            'pt-[72px] lg:pt-20',
+            miniSidebar && width >= RESPONSIVE_WIDTH
+              ? 'ltr:lg:pl-24 rtl:lg:pr-24'
               : 'ltr:xl:pl-76 rtl:xl:pr-76 ltr:lg:pl-72 rtl:lg:pr-72 rtl:lg:pl-0'
           )}
         >
           <div className="h-full p-5 md:p-8">
+            <DashboardTopBar />
             {children}
           </div>
           <Footer />
         </main>
       </div>
-      <MobileNavigation />
     </div>
   );
 };
