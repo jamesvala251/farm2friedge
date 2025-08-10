@@ -62,7 +62,7 @@ const RegistrationForm = () => {
       },
 
       {
-        onSuccess: (data) => {
+        onSuccess: (data: any) => {
           if (data?.token) {
             if (hasAccess(allowedRoles, data?.permissions)) {
               setAuthCredentials(data?.token, data?.permissions, data?.role);

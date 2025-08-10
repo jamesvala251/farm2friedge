@@ -91,7 +91,7 @@ const LoginForm = () => {
             </div>
 
             <div className="text-center text-sm text-body sm:text-base">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Link
                 href={Routes.register}
                 className="font-semibold text-accent underline transition-colors duration-200 ms-1 hover:text-accent-hover hover:no-underline focus:text-accent-700 focus:no-underline focus:outline-none"

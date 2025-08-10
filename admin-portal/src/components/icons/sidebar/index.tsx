@@ -45,3 +45,13 @@ export { LogOutIcon } from '@/components/icons/logout';
 export { MyShopOwnerIcon } from '@/components/icons/sidebar/my-shop';
 export { ChatOwnerIcon } from '@/components/icons/sidebar/chat';
 export { StoreNoticeOwnerIcon } from '@/components/icons/sidebar/store-notice';
+
+// Add missing icons for sidebar navigation
+export { CheckMark as CheckmarkIcon } from '@/components/icons/checkmark';
+export { CoinIcon } from '@/components/icons/coin-icon';
+export { WalletPointsIcon } from '@/components/icons/wallet-point';
+export { EmailIcon } from '@/components/icons/email';
+export { UploadIcon } from '@/components/icons/upload-icon';
+export { WorldIcon } from '@/components/icons/worldIcon';
+export { Bell as NotificationIcon } from '@/components/icons/bell';
+export { FinancialIcon } from '@/components/icons/sidebar/financial';

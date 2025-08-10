@@ -54,7 +54,7 @@ const ChangePasswordForm = () => {
             });
           });
         },
-        onSuccess: (data) => {
+        onSuccess: (data: any) => {
           if (!data?.success) {
             setError('oldPassword', {
               type: 'manual',

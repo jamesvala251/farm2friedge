@@ -68,7 +68,7 @@ const SidebarItemMap = ({ menuItems }: any) => {
         }: {
           href: string;
           label: string;
-          icon: string;
+          icon: React.ComponentType<any>;
           childMenu: any;
         }) => (
           <SidebarItem
@@ -152,20 +152,20 @@ const SideBarGroup = () => {
         },
         {
           href: '/products/reviews',
-          label: 'Reviews',
+          label: 'Product Reviews',
           icon: 'ReviewIcon',
           childMenu: []
         },
         {
           href: '/products/attributes',
-          label: 'Attributes',
+          label: 'Attributes & Tags',
           icon: 'AttributeIcon',
           childMenu: []
         },
         {
-          href: '/products/tags',
-          label: 'Tags',
-          icon: 'TagIcon',
+          href: '/products/quality',
+          label: 'Quality Control',
+          icon: 'CheckmarkIcon',
           childMenu: []
         }
       ]
@@ -198,6 +198,12 @@ const SideBarGroup = () => {
           label: 'Refunds',
           icon: 'RefundsIcon',
           childMenu: []
+        },
+        {
+          href: '/orders/analytics',
+          label: 'Order Analytics',
+          icon: 'TransactionsIcon',
+          childMenu: []
         }
       ]
     },
@@ -207,27 +213,33 @@ const SideBarGroup = () => {
       icon: 'FinancialIcon',
       childMenu: [
         {
-          href: '/financial/transactions',
-          label: 'Transactions',
+          href: '/financial/revenue',
+          label: 'Platform Revenue',
           icon: 'TransactionsIcon',
           childMenu: []
         },
         {
-          href: '/financial/withdrawals',
-          label: 'Withdrawals',
+          href: '/financial/commissions',
+          label: 'Commission Tracking',
+          icon: 'CoinIcon',
+          childMenu: []
+        },
+        {
+          href: '/financial/payouts',
+          label: 'Vendor Payouts',
           icon: 'WithdrawIcon',
           childMenu: []
         },
         {
           href: '/financial/taxes',
-          label: 'Taxes',
+          label: 'Tax Management',
           icon: 'TaxesIcon',
           childMenu: []
         },
         {
-          href: '/financial/commissions',
-          label: 'Commissions',
-          icon: 'FinancialIcon',
+          href: '/financial/reports',
+          label: 'Financial Reports',
+          icon: 'DiaryIcon',
           childMenu: []
         }
       ]
@@ -239,7 +251,7 @@ const SideBarGroup = () => {
       childMenu: [
         {
           href: '/marketing/coupons',
-          label: 'Coupons',
+          label: 'Platform Coupons',
           icon: 'CouponsIcon',
           childMenu: []
         },
@@ -250,9 +262,21 @@ const SideBarGroup = () => {
           childMenu: []
         },
         {
-          href: '/marketing/notifications',
-          label: 'Notifications',
-          icon: 'NotificationIcon',
+          href: '/marketing/email-campaigns',
+          label: 'Email Campaigns',
+          icon: 'EmailIcon',
+          childMenu: []
+        },
+        {
+          href: '/marketing/loyalty',
+          label: 'Loyalty Program',
+          icon: 'WalletPointsIcon',
+          childMenu: []
+        },
+        {
+          href: '/marketing/banners',
+          label: 'Promotional Banners',
+          icon: 'UploadIcon',
           childMenu: []
         }
       ]
@@ -260,18 +284,24 @@ const SideBarGroup = () => {
     'Analytics & Reports': {
       href: '/analytics',
       label: 'Analytics & Reports',
-      icon: 'DashboardIcon',
+      icon: 'TransactionsIcon',
       childMenu: [
         {
-          href: '/analytics/sales',
-          label: 'Sales Analytics',
+          href: '/analytics/platform',
+          label: 'Platform Analytics',
           icon: 'TransactionsIcon',
           childMenu: []
         },
         {
-          href: '/analytics/users',
-          label: 'User Analytics',
-          icon: 'UsersIcon',
+          href: '/analytics/vendors',
+          label: 'Vendor Performance',
+          icon: 'VendorsIcon',
+          childMenu: []
+        },
+        {
+          href: '/analytics/customers',
+          label: 'Customer Analytics',
+          icon: 'CustomersIcon',
           childMenu: []
         },
         {
@@ -281,9 +311,9 @@ const SideBarGroup = () => {
           childMenu: []
         },
         {
-          href: '/analytics/vendors',
-          label: 'Vendor Analytics',
-          icon: 'VendorsIcon',
+          href: '/analytics/market-insights',
+          label: 'Market Insights',
+          icon: 'InformationIcon',
           childMenu: []
         }
       ]
@@ -300,28 +330,65 @@ const SideBarGroup = () => {
           childMenu: []
         },
         {
-          href: '/content/terms',
-          label: 'Terms & Conditions',
+          href: '/content/policies',
+          label: 'Policy Updates',
           icon: 'TermsIcon',
           childMenu: []
         },
         {
-          href: '/content/store-notices',
-          label: 'Store Notices',
-          icon: 'StoreNoticeIcon',
+          href: '/content/announcements',
+          label: 'News & Announcements',
+          icon: 'NotificationIcon',
           childMenu: []
         },
         {
-          href: '/content/questions',
-          label: 'Questions',
-          icon: 'QuestionIcon',
+          href: '/content/banners',
+          label: 'Banner Management',
+          icon: 'UploadIcon',
+          childMenu: []
+        },
+        {
+          href: '/content/seo',
+          label: 'SEO Management',
+          icon: 'WorldIcon',
           childMenu: []
         }
       ]
     },
-    'Settings': {
+    'Customer Support': {
+      href: '/support',
+      label: 'Customer Support',
+      icon: 'ChatIcon',
+      childMenu: [
+        {
+          href: '/support/tickets',
+          label: 'Support Tickets',
+          icon: 'ChatIcon',
+          childMenu: []
+        },
+        {
+          href: '/support/knowledge-base',
+          label: 'Knowledge Base',
+          icon: 'InformationIcon',
+          childMenu: []
+        },
+        {
+          href: '/support/analytics',
+          label: 'Support Analytics',
+          icon: 'TransactionsIcon',
+          childMenu: []
+        },
+        {
+          href: '/support/feedback',
+          label: 'Customer Feedback',
+          icon: 'ReviewIcon',
+          childMenu: []
+        }
+      ]
+    },
+    'Platform Settings': {
       href: '/settings',
-      label: 'Settings',
+      label: 'Platform Settings',
       icon: 'SettingsIcon',
       childMenu: [
         {
@@ -331,15 +398,27 @@ const SideBarGroup = () => {
           childMenu: []
         },
         {
-          href: '/settings/maintenance',
-          label: 'Maintenance Mode',
-          icon: 'MaintenanceIcon',
+          href: '/settings/commission-rates',
+          label: 'Commission Rates',
+          icon: 'CoinIcon',
           childMenu: []
         },
         {
-          href: '/settings/shipping',
-          label: 'Shipping Settings',
-          icon: 'ShippingsIcon',
+          href: '/settings/payment',
+          label: 'Payment Settings',
+          icon: 'WalletPointsIcon',
+          childMenu: []
+        },
+        {
+          href: '/settings/security',
+          label: 'Security Settings',
+          icon: 'CheckmarkIcon',
+          childMenu: []
+        },
+        {
+          href: '/settings/maintenance',
+          label: 'Maintenance Mode',
+          icon: 'MaintenanceIcon',
           childMenu: []
         }
       ]
