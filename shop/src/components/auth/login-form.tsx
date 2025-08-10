@@ -4,7 +4,6 @@ import Alert from '@/components/ui/alert';
 import Input from '@/components/ui/forms/input';
 import PasswordInput from '@/components/ui/forms/password-input';
 import Button from '@/components/ui/button';
-import { useTranslation } from 'next-i18next';
 import * as yup from 'yup';
 import { GoogleIcon } from '@/components/icons/google';
 import { useModalAction } from '@/components/ui/modal/modal.context';
@@ -20,12 +19,11 @@ import { useSettings } from '@/framework/settings';
 const loginFormSchema = yup.object().shape({
   email: yup
     .string()
-    .email('error-email-format')
-    .required('error-email-required'),
-  password: yup.string().required('error-password-required'),
+    .email('Please enter a valid email address')
+    .required('Email is required'),
+  password: yup.string().required('Password is required'),
 });
 function LoginForm() {
-  const { t } = useTranslation('common');
   const router = useRouter();
   const { openModal } = useModalAction();
   const { settings, isLoading: settingLoading } = useSettings();
@@ -45,7 +43,7 @@ function LoginForm() {
     <>
       <Alert
         variant="error"
-        message={serverError && t(serverError)}
+        message={serverError as string | null}
         className="mb-6"
         closeable={true}
         onClose={() => setServerError(null)}
@@ -63,17 +61,17 @@ function LoginForm() {
         {({ register, formState: { errors } }) => (
           <>
             <Input
-              label={t('text-email')}
+              label="Email"
               {...register('email')}
               type="email"
               variant="outline"
               className="mb-5"
-              error={t(errors.email?.message!)}
+              error={errors.email?.message}
             />
             <PasswordInput
-              label={t('text-password')}
+              label="Password"
               {...register('password')}
-              error={t(errors.password?.message!)}
+              error={errors.password?.message}
               variant="outline"
               className="mb-5"
               forgotPageRouteOnClick={() => openModal('FORGOT_VIEW')}
@@ -84,7 +82,7 @@ function LoginForm() {
                 loading={isLoading}
                 disabled={isLoading}
               >
-                {t('text-login')}
+                Login
               </Button>
             </div>
           </>
@@ -94,7 +92,7 @@ function LoginForm() {
       <div className="relative flex flex-col items-center justify-center mt-8 mb-6 text-sm text-heading sm:mt-11 sm:mb-8">
         <hr className="w-full" />
         <span className="absolute -top-2.5 bg-light px-2 ltr:left-2/4 ltr:-ml-4 rtl:right-2/4 rtl:-mr-4">
-          {t('text-or')}
+          OR
         </span>
       </div>
       <div className="grid grid-cols-1 gap-4 mt-2">
@@ -106,7 +104,7 @@ function LoginForm() {
           }}
         >
           <GoogleIcon className="w-4 h-4 ltr:mr-3 rtl:ml-3" />
-          {t('text-login-google')}
+          Login with Google
         </Button>
 
         <Button
@@ -115,7 +113,7 @@ function LoginForm() {
           onClick={() => openModal('OTP_LOGIN')}
         >
           <MobileIcon className="h-5 text-light ltr:mr-2 rtl:ml-2" />
-          {t('text-login-mobile')}
+          Login with Mobile
         </Button>
 
         {isCheckout && guestCheckout && (
@@ -125,7 +123,7 @@ function LoginForm() {
             onClick={() => router.push(Routes.checkoutGuest)}
           >
             <AnonymousIcon className="h-6 text-light ltr:mr-2 rtl:ml-2" />
-            {t('text-guest-checkout')}
+            Guest Checkout
           </Button>
         )}
       </div>
@@ -133,12 +131,12 @@ function LoginForm() {
         <hr className="w-full" />
       </div>
       <div className="text-sm text-center text-body sm:text-base">
-        {t('text-no-account')}{' '}
+        Don't have an account?{' '}
         <button
           onClick={() => openModal('REGISTER')}
           className="font-semibold underline transition-colors duration-200 text-accent hover:text-accent-hover hover:no-underline focus:text-accent-hover focus:no-underline focus:outline-0 ltr:ml-1 rtl:mr-1"
         >
-          {t('text-register')}
+          Register
         </button>
       </div>
     </>
@@ -146,14 +144,13 @@ function LoginForm() {
 }
 
 export default function LoginView() {
-  const { t } = useTranslation('common');
   return (
     <div className="flex h-full min-h-screen w-screen flex-col justify-center bg-light py-6 px-5 sm:p-8 md:h-auto md:min-h-0 md:max-w-[480px] md:rounded-xl">
       <div className="flex justify-center">
         <Logo />
       </div>
       <p className="mt-4 mb-8 text-sm text-center text-body sm:mt-5 sm:mb-10 md:text-base">
-        {t('login-helper')}
+        Welcome back! Please enter your details to sign in to your account.
       </p>
       <LoginForm />
     </div>

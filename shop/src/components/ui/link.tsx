@@ -5,6 +5,7 @@ export interface LinkProps extends NextLinkProps {
   className?: string;
   title?: string;
   target?: string;
+  rel?: string;
   variant?: 'button';
   children?: React.ReactNode;
 }
@@ -14,6 +15,7 @@ const Link: React.FC<LinkProps> = ({
   variant,
   title,
   target,
+  rel,
   className,
   ...props
 }) => {
@@ -28,6 +30,7 @@ const Link: React.FC<LinkProps> = ({
         className
       )}
       target={target}
+      rel={rel}
       title={title}
     >
       {children}

@@ -22,7 +22,6 @@ import {
   useVerifyForgotPasswordToken,
   useResetPassword,
 } from '@/framework/user';
-import { useTranslation } from 'next-i18next';
 import Logo from '@/components/ui/logo';
 import Alert from '../ui/alert';
 import { ArrowPrevIcon } from '../icons/arrow-prev';
@@ -31,14 +30,14 @@ import { ArrowNextIcon } from '../icons/arrow-next';
 const emailFormValidation = yup.object().shape({
   email: yup
     .string()
-    .email('error-email-format')
-    .required('error-email-required'),
+    .email('Please enter a valid email address')
+    .required('Email is required'),
 });
 const tokenFormValidation = yup.object().shape({
-  token: yup.string().required('error-password-required'),
+  token: yup.string().required('Token is required'),
 });
 const passwordFormValidation = yup.object().shape({
-  password: yup.string().required(),
+  password: yup.string().required('Password is required'),
 });
 
 function EmailForm({
@@ -52,7 +51,6 @@ function EmailForm({
   isLoading: boolean;
   serverError: any;
 }) {
-  const { t } = useTranslation('common');
   return (
     <Form<Pick<ForgotPasswordUserInput, 'email'>>
       onSubmit={onSubmit}
@@ -60,16 +58,16 @@ function EmailForm({
         defaultValues: { email },
       }}
       validationSchema={emailFormValidation}
-      serverError={serverError && t(serverError)}
+      serverError={serverError}
       className="text-left"
     >
       {({ register, formState: { errors } }) => (
         <>
           <Input
-            label={t('text-email')}
+            label="Email"
             type="email"
             {...register('email')}
-            error={t(errors.email?.message!)}
+            error={errors.email?.message}
           />
           <Button
             type="submit"
@@ -77,7 +75,7 @@ function EmailForm({
             loading={isLoading}
             disabled={isLoading}
           >
-            {t('text-submit-email')}
+            Submit Email
             <ArrowNextIcon className="w-5" />
           </Button>
         </>
@@ -99,7 +97,6 @@ function TokenForm({
   serverError: any;
   handlePrevStep: () => void;
 }) {
-  const { t } = useTranslation('common');
   return (
     <Form<Pick<VerifyForgotPasswordUserInput, 'token'>>
       onSubmit={onSubmit}
@@ -112,9 +109,9 @@ function TokenForm({
       {({ register, formState: { errors } }) => (
         <>
           <Input
-            label={t('token-label')}
+            label="Verification Token"
             {...register('token')}
-            error={t(errors.token?.message!)}
+            error={errors.token?.message}
           />
           <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Button
@@ -122,7 +119,7 @@ function TokenForm({
               className="order-1 w-full !bg-cyan-500 text-sm tracking-[0.2px] hover:!bg-cyan-600"
             >
               <ArrowPrevIcon className="w-5" />
-              {t('text-previous-step')}
+              Previous Step
             </Button>
 
             <Button
@@ -130,7 +127,7 @@ function TokenForm({
               loading={isLoading}
               disabled={isLoading}
             >
-              {t('text-submit-token')}
+              Submit Token
               <ArrowNextIcon className="w-5" />
             </Button>
           </div>
@@ -148,7 +145,6 @@ function PasswordForm({
   isLoading: boolean;
   handlePrevStep: () => void;
 }) {
-  const { t } = useTranslation('common');
   return (
     <Form<Pick<ResetPasswordUserInput, 'password'>>
       onSubmit={onSubmit}
@@ -160,9 +156,9 @@ function PasswordForm({
       {({ register, formState: { errors } }) => (
         <>
           <PasswordInput
-            label={t('text-new-password')}
+            label="New Password"
             {...register('password')}
-            error={t(errors.password?.message!)}
+            error={errors.password?.message}
           />
           <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Button
@@ -170,14 +166,14 @@ function PasswordForm({
               className="order-1 w-full !bg-cyan-500 text-sm tracking-[0.2px] hover:!bg-cyan-600"
             >
               <ArrowPrevIcon className="w-5" />
-              {t('text-previous-step')}
+              Previous Step
             </Button>
             <Button
               className="w-full text-sm tracking-[0.2px] sm:order-2"
               loading={isLoading}
               disabled={isLoading}
             >
-              {t('text-reset-password')}
+              Reset Password
             </Button>
           </div>
         </>
@@ -280,7 +276,6 @@ export const updateFormState = (
   };
 };
 export default function ForgotUserPassword() {
-  const { t } = useTranslation('common');
   const { openModal } = useModalAction();
 
   return (
@@ -290,22 +285,22 @@ export default function ForgotUserPassword() {
           <Logo />
         </div>
         <p className="mt-4 mb-7 text-center text-sm leading-relaxed text-body sm:mt-5 sm:mb-10 md:text-base">
-          {t('forgot-password-helper')}
+          Enter your email address and we will send you a verification code to reset your password.
         </p>
         <RenderFormSteps />
         <div className="relative mt-9 mb-7 flex flex-col items-center justify-center text-sm text-heading sm:mt-11 sm:mb-8">
           <hr className="w-full" />
           <span className="start-2/4 -ms-4 absolute -top-2.5 bg-light px-2">
-            {t('text-or')}
+            OR
           </span>
         </div>
         <div className="text-center text-sm text-body sm:text-base">
-          {t('text-back-to')}{' '}
+          Back to{' '}
           <button
             onClick={() => openModal('LOGIN_VIEW')}
             className="ms-1 font-semibold text-accent underline transition-colors duration-200 hover:text-accent-hover hover:no-underline focus:text-accent-hover focus:no-underline focus:outline-0"
           >
-            {t('text-login')}
+            Login
           </button>
         </div>
       </div>

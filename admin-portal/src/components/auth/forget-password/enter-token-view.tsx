@@ -3,7 +3,6 @@ import Input from '@/components/ui/input';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useTranslation } from 'next-i18next';
 
 interface Props {
   onSubmit: (values: { token: string }) => void;
@@ -11,11 +10,10 @@ interface Props {
 }
 
 const schema = yup.object().shape({
-  token: yup.string().required('form:error-token-required'),
+  token: yup.string().required('Token is required'),
 });
 
 const EnterTokenView = ({ onSubmit, loading }: Props) => {
-  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -25,14 +23,14 @@ const EnterTokenView = ({ onSubmit, loading }: Props) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Input
-        label={t('form:token-label')}
+        label="Verification Token"
         {...register('token')}
         variant="outline"
         className="mb-5"
-        error={t(errors.token?.message!)}
+        error={errors.token?.message}
       />
       <Button className="h-11 w-full" loading={loading} disabled={loading}>
-        {t('form:text-submit-token')}
+        Submit Token
       </Button>
     </form>
   );

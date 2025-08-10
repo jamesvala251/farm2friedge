@@ -315,7 +315,9 @@ const Header = ({ layout }: { layout?: string }) => {
                   {isAuthorize ? <AuthorizedMenu /> : <JoinButton />}
                 </div>
                 <Link
-                  href={Routes.becomeSeller}
+                  href="http://localhost:3004"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hidden h-9 shrink-0 items-center justify-center rounded border border-transparent bg-accent px-3 py-0 text-sm font-semibold leading-none text-light outline-none transition duration-300 ease-in-out hover:bg-accent-hover focus:shadow focus:outline-none focus:ring-1 focus:ring-accent-700 sm:inline-flex"
                 >
                   Become a Seller

@@ -7,14 +7,12 @@ import {
 } from '@/data/user';
 import dynamic from 'next/dynamic';
 import Router from 'next/router';
-import { useTranslation } from 'next-i18next';
 
 const EnterEmailView = dynamic(() => import('./enter-email-view'));
 const EnterTokenView = dynamic(() => import('./enter-token-view'));
 const EnterNewPasswordView = dynamic(() => import('./enter-new-password-view'));
 
 const ForgotPassword = () => {
-  const { t } = useTranslation();
   const { mutate: forgetPassword, isLoading } = useForgetPasswordMutation();
   const { mutate: verifyToken, isLoading: verifying } =
     useVerifyForgetPasswordTokenMutation();
@@ -30,7 +28,7 @@ const ForgotPassword = () => {
         email,
       },
       {
-        onSuccess: (data) => {
+        onSuccess: (data: any) => {
           if (data?.success) {
             setVerifiedEmail(email);
           } else {
@@ -48,7 +46,7 @@ const ForgotPassword = () => {
         token,
       },
       {
-        onSuccess: (data) => {
+        onSuccess: (data: any) => {
           if (data?.success) {
             setVerifiedToken(token);
           } else {
@@ -67,7 +65,7 @@ const ForgotPassword = () => {
         password,
       },
       {
-        onSuccess: (data) => {
+        onSuccess: (data: any) => {
           if (data?.success) {
             Router.push('/');
           } else {
@@ -83,7 +81,7 @@ const ForgotPassword = () => {
       {errorMsg && (
         <Alert
           variant="error"
-          message={t(`common:${errorMsg}`)}
+          message={errorMsg}
           className="mb-6"
           closeable={true}
           onClose={() => setErrorMsg('')}

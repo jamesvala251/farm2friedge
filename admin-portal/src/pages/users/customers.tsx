@@ -1,41 +1,19 @@
-import dynamic from 'next/dynamic';
-import type { GetServerSideProps } from 'next';
-import {
-  allowedRoles,
-  getAuthCredentials,
-  hasAccess,
-  isAuthenticated,
-} from '@/utils/auth-utils';
-import { SUPER_ADMIN } from '@/utils/constants';
+import { NextPage } from 'next';
 import AdminLayout from '@/components/layouts/admin';
-import { Routes } from '@/config/routes';
-import { Config } from '@/config';
+import CustomersPage from '@/components/customers/customers';
+import Head from 'next/head';
 
-const CustomersPage = dynamic(() => import('@/components/customers/customers'));
-
-export default function Customers({
-  userPermissions,
-}: {
-  userPermissions: string[];
-}) {
+const Customers: NextPage = () => {
   return (
-    <AdminLayout>
-      <CustomersPage />
-    </AdminLayout>
+    <>
+      <Head>
+        <title>Customers - Farm2Fridge Admin</title>
+      </Head>
+      <AdminLayout>
+        <CustomersPage />
+      </AdminLayout>
+    </>
   );
-}
+};
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { locale } = ctx;
-  const generateRedirectUrl =
-    locale !== Config.defaultLanguage
-      ? `/${locale}${Routes.login}`
-      : Routes.login;
-
-  // For demo purposes, skip authentication check
-  return {
-    props: {
-      userPermissions: ['SUPER_ADMIN'], // Demo permissions
-    },
-  };
-}; 
+export default Customers; 

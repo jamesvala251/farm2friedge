@@ -11,6 +11,7 @@ import Scrollbar from '@/components/ui/scrollbar';
 import { useWindowSize } from '@/utils/use-window-size';
 import { RESPONSIVE_WIDTH } from '@/utils/constants';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 interface MenuItemsProps {
   [key: string]: {
@@ -408,6 +409,8 @@ const AdminLayout: React.FC<{ children?: React.ReactNode }> = ({
           )}
         >
           <div className="flex h-full flex-col">
+            {/* Removed extra logo section - logo already in top navbar */}
+            
             <Scrollbar className="h-full w-full">
               <div className="flex h-full flex-col">
                 <SideBarGroup />

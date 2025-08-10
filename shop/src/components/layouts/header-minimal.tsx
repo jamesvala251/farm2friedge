@@ -25,7 +25,6 @@ import { drawerAtom } from '@/store/drawer-atom';
 import cn from 'classnames';
 import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
-import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import React, { useCallback } from 'react';
 import { useWindowSize } from 'react-use';
@@ -51,7 +50,6 @@ import { Routes } from '@/config/routes';
 
 const HeaderMinimal = ({ layout }: { layout: string }) => {
   const { openModal } = useModalAction();
-  const { t } = useTranslation('common');
   const [_, setDrawerView] = useAtom(drawerAtom);
   const [displayMobileHeaderSearch, setDisplayMobileHeaderSearch] = useAtom(
     displayMobileHeaderSearchAtom,
@@ -90,7 +88,7 @@ const HeaderMinimal = ({ layout }: { layout: string }) => {
       {width >= RESPONSIVE_WIDTH && underMaintenanceIsComing && !isScrolling ? (
         <>
           <Alert
-            message={t('text-maintenance-mode-title')}
+            message="Maintenance Mode is Coming"
             variant="info"
             className="sticky top-0 left-0 z-50"
             childClassName="flex justify-center items-center w-full gap-4"
@@ -111,7 +109,7 @@ const HeaderMinimal = ({ layout }: { layout: string }) => {
       shopUnderMaintenanceIsComing &&
       !isLoading ? (
         <Alert
-          message={`${shopData?.name} ${t('text-maintenance-mode-title')}`}
+          message={`${shopData?.name} Maintenance Mode is Coming`}
           variant="info"
           className="sticky top-0 left-0 z-50"
           childClassName="flex justify-center items-center font-bold w-full gap-4"
@@ -141,7 +139,7 @@ const HeaderMinimal = ({ layout }: { layout: string }) => {
             onClick={() => handleSidebar('MAIN_MENU_VIEW')}
             className="group hidden h-full w-6 shrink-0 items-center justify-center focus:text-accent focus:outline-0 ltr:mr-6 rtl:ml-6 lg:flex xl:hidden"
           >
-            <span className="sr-only">{t('text-burger-menu')}</span>
+            <span className="sr-only">Burger Menu</span>
             <div className="flex w-full flex-col space-y-1.5">
               <span className="h-0.5 w-1/2 rounded bg-gray-600 transition-all group-hover:w-full" />
               <span className="h-0.5 w-full rounded bg-gray-600 transition-all group-hover:w-3/4" />
@@ -174,7 +172,7 @@ const HeaderMinimal = ({ layout }: { layout: string }) => {
           {displayMobileHeaderSearch && (
             <div className="absolute top-0 z-20 flex h-full w-full items-center justify-center space-x-4 border-b-accent-300 bg-light px-5 py-1.5 backdrop-blur ltr:left-0 rtl:right-0 rtl:space-x-reverse lg:border lg:bg-opacity-30">
               <SearchWithSuggestion
-                label={t('text-search-label')}
+                label="Search"
                 variant="minimal"
                 className="lg:max-w-3xl"
                 inputClassName="lg:border-accent-400"
@@ -236,8 +234,13 @@ const HeaderMinimal = ({ layout }: { layout: string }) => {
               <div className="hidden lg:inline-flex">
                 {isAuthorize ? <AuthorizedMenu /> : <JoinButton />}
               </div>
-              <Link href={Routes.becomeSeller} variant="button">
-                {t('text-become-seller')}
+              <Link 
+                href="http://localhost:3004" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                variant="button"
+              >
+                Become a Seller
               </Link>
             </div>
           </div>

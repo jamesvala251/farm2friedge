@@ -3,7 +3,6 @@ import PasswordInput from '@/components/ui/password-input';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useTranslation } from 'next-i18next';
 
 interface Props {
   onSubmit: (values: { password: string }) => void;
@@ -11,11 +10,10 @@ interface Props {
 }
 
 const schema = yup.object().shape({
-  password: yup.string().required('form:error-password-required'),
+  password: yup.string().required('Password is required'),
 });
 
 const EnterNewPasswordView = ({ onSubmit, loading }: Props) => {
-  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -25,15 +23,15 @@ const EnterNewPasswordView = ({ onSubmit, loading }: Props) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <PasswordInput
-        label={t('form:input-label-password')}
+        label="New Password"
         {...register('password')}
-        error={t(errors.password?.message!)}
+        error={errors.password?.message}
         variant="outline"
         className="mb-5"
       />
 
       <Button className="h-11 w-full" loading={loading} disabled={loading}>
-        {t('form:text-reset-password')}
+        Reset Password
       </Button>
     </form>
   );
