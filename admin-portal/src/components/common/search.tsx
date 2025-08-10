@@ -3,7 +3,6 @@ import { SearchIcon } from '@/components/icons/search-icon';
 import cn from 'classnames';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useTranslation } from 'next-i18next';
 import { twMerge } from 'tailwind-merge';
 
 const classes = {
@@ -51,7 +50,6 @@ const Search: React.FC<SearchProps> = ({
     },
   });
   const searchText = watch('searchText');
-  const { t } = useTranslation();
 
   useEffect(() => {
     if (!searchText) {
@@ -84,7 +82,7 @@ const Search: React.FC<SearchProps> = ({
       onSubmit={handleSubmit(onSearch)}
     >
       <label htmlFor="search" className="sr-only">
-        {t('form:input-label-search')}
+        Search
       </label>
       <button className="absolute top-1/2 -translate-y-1/2 p-2 text-body outline-none start-1 focus:outline-none active:outline-none">
         <SearchIcon className="h-5 w-5" />
@@ -94,7 +92,7 @@ const Search: React.FC<SearchProps> = ({
         id="search"
         {...register('searchText')}
         className={twMerge(rootClassName)}
-        placeholder={placeholderText ?? t('form:input-placeholder-search')}
+        placeholder={placeholderText ?? "Search..."}
         aria-label="Search"
         autoComplete="off"
         {...rest}

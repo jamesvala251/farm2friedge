@@ -24,7 +24,7 @@ const Logo: React.FC<React.AnchorHTMLAttributes<{}>> = ({
   const { width } = useWindowSize();
   return (
     <Link
-      href={siteSettings?.logo?.href}
+      href={siteSettings?.logo?.href || '/'}
       className={cn('inline-flex items-center gap-3', className)}
       // {...props}
     >

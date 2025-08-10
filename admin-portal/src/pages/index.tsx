@@ -7,7 +7,7 @@ import {
   isAuthenticated,
 } from '@/utils/auth-utils';
 import { SUPER_ADMIN } from '@/utils/constants';
-import AppLayout from '@/components/layouts/app';
+import AdminLayout from '@/components/layouts/admin'; // Direct import of AdminLayout
 import { Routes } from '@/config/routes';
 import { Config } from '@/config';
 
@@ -18,11 +18,16 @@ export default function Dashboard({
 }: {
   userPermissions: string[];
 }) {
-  // For demo purposes, always show admin dashboard
-  return <AdminDashboard />;
+  // For demo purposes, always show admin dashboard with layout
+  return (
+    <AdminLayout>
+      <AdminDashboard />
+    </AdminLayout>
+  );
 }
 
-Dashboard.Layout = AppLayout;
+// Remove the Layout property since we're directly wrapping
+// Dashboard.Layout = AppLayout;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { locale } = ctx;

@@ -24,6 +24,7 @@ interface UIContextType {
   openDrawer: (view: string) => void;
   setModalView: (view: string) => void;
   setUserSidebarView: (view: string) => void;
+  toggleSidebar: () => void; // Added toggleSidebar function
 }
 
 const UIContext = createContext<UIContextType | undefined>(undefined);
@@ -53,6 +54,7 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
 
   const openSidebar = () => setDisplaySidebar(true);
   const closeSidebar = () => setDisplaySidebar(false);
+  const toggleSidebar = () => setDisplaySidebar(!displaySidebar); // Added toggleSidebar implementation
   const openFilter = () => setDisplayFilter(true);
   const closeFilter = () => setDisplayFilter(false);
   const openMobileMenu = () => setDisplayMobileMenu(true);
@@ -94,6 +96,7 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
     openDrawer,
     setModalView,
     setUserSidebarView,
+    toggleSidebar, // Added toggleSidebar to value object
   };
 
   return (

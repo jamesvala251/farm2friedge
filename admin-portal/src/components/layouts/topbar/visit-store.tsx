@@ -2,10 +2,10 @@ import { HomeIcon } from '@/components/icons/home-icon';
 import { Routes } from '@/config/routes';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next'; // REMOVED - Pure English static content
 
 const VisitStore = () => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation(); // REMOVED - Pure English static content
   const { pathname, query } = useRouter();
   const slug = (pathname === '/[shop]' && `shops/${query?.shop}`) || '/';
 
@@ -18,7 +18,7 @@ const VisitStore = () => {
         rel="noreferrer"
       >
         <HomeIcon />
-        {slug === '/' ? t('text-visit-site') : t('text-visit-store')}
+        {slug === '/' ? 'Visit Site' : 'Visit Store'}
       </Link>
     </>
   );

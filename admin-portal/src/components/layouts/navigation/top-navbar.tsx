@@ -14,9 +14,9 @@ import { useModalAction } from '@/components/ui/modal/modal.context';
 import { Config } from '@/config';
 import { Routes } from '@/config/routes';
 import { useUI } from '@/contexts/ui.context';
-import { useSettingsQuery } from '@/data/settings';
-import { useShopQuery } from '@/data/shop';
-import { useMeQuery } from '@/data/user';
+// import { useSettingsQuery } from '@/data/settings'; // REMOVED - Using mock data
+// import { useShopQuery } from '@/data/shop'; // REMOVED - Using mock data
+// import { useMeQuery } from '@/data/user'; // REMOVED - Using mock data
 import {
   adminAndOwnerOnly,
   adminOnly,
@@ -34,7 +34,6 @@ import cn from 'classnames';
 import { isBefore } from 'date-fns';
 import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useWindowSize } from 'react-use';
@@ -46,13 +45,51 @@ export const isInArray = (array: Date[], value: Date) => {
   });
 };
 
+// Mock data for demo purposes
+const mockSettings = {
+  options: {
+    maintenance: {
+      start: undefined,
+      until: undefined
+    },
+    isUnderMaintenance: false,
+    pushNotification: {
+      all: {
+        order: true,
+        message: true,
+        storeNotice: true
+      }
+    }
+  }
+};
+
+const mockUser = {
+  id: 1,
+  name: 'Admin User',
+  email: 'admin@egrocerymart.com',
+  role: 'SUPER_ADMIN'
+};
+
+const mockShop = {
+  id: 1,
+  name: 'eGroceryMart',
+  slug: 'egrocerymart',
+  settings: {
+    shopMaintenance: {
+      start: undefined,
+      until: undefined
+    },
+    isShopUnderMaintenance: false
+  }
+};
+
 const Navbar = () => {
-  const { t } = useTranslation();
   const { toggleSidebar } = useUI();
   const { permissions } = getAuthCredentials();
   const { enableMultiLang } = Config;
   const { locale, query } = useRouter();
-  const { data } = useMeQuery();
+  // const { data } = useMeQuery(); // REMOVED - Using mock data
+  const data = mockUser; // Mock user data
   const { openModal } = useModalAction();
   const [searchModal, setSearchModal] = useAtom(searchModalInitialValues);
   const [miniSidebar, setMiniSidebar] = useAtom(miniSidebarInitialValue);
@@ -63,18 +100,23 @@ const Navbar = () => {
     checkIsMaintenanceModeStart,
   );
   const { width } = useWindowSize();
-  const { settings, loading } = useSettingsQuery({ language: locale! });
+  // const { settings, loading } = useSettingsQuery({ language: locale! }); // REMOVED - Using mock data
+  const settings = mockSettings; // Mock settings data
+  const loading = false; // No loading for mock data
 
-  const {
-    data: shop,
-    isLoading: shopLoading,
-    error,
-  } = useShopQuery(
-    {
-      slug: query?.shop as string,
-    },
-    { enabled: Boolean(query?.shop) },
-  );
+  // const {
+  //   data: shop,
+  //   isLoading: shopLoading,
+  //   error,
+  // } = useShopQuery( // REMOVED - Using mock data
+  //   {
+  //     slug: query?.shop as string,
+  //   },
+  //   { enabled: Boolean(query?.shop) },
+  // );
+  const shop = mockShop; // Mock shop data
+  const shopLoading = false; // No loading for mock data
+  const error = null; // No error for mock data
 
   useEffect(() => {
     if (
@@ -167,9 +209,10 @@ const Navbar = () => {
         <Alert
           message={
             (settings?.options?.isUnderMaintenance &&
-              `Site ${t('text-maintenance-mode-title')}`) ||
+              `Site Maintenance Mode`) ||
             (shop?.settings?.isShopUnderMaintenance &&
-              `${shop?.name} ${t('text-maintenance-mode-title')}`)
+              `${shop?.name} Maintenance Mode`) ||
+            ''
           }
           variant="info"
           className="sticky top-0 left-0 z-50"
@@ -178,9 +221,12 @@ const Navbar = () => {
           <CountdownTimer
             date={
               (settings?.options?.isUnderMaintenance &&
+                options?.maintenance?.start &&
                 new Date(options?.maintenance?.start)) ||
               (shop?.settings?.isShopUnderMaintenance &&
-                new Date(shop?.settings?.shopMaintenance?.start as Date))
+                shop?.settings?.shopMaintenance?.start &&
+                new Date(shop?.settings?.shopMaintenance?.start as Date)) ||
+              new Date()
             }
             className="text-blue-600 [&>p]:bg-blue-200 [&>p]:p-2 [&>p]:text-xs [&>p]:text-blue-600"
           />
@@ -190,7 +236,7 @@ const Navbar = () => {
       )}
       {width >= RESPONSIVE_WIDTH && isMaintenanceModeStart ? (
         <Alert
-          message={t('text-maintenance-mode-start-title')}
+          message="Maintenance Mode Started"
           className="py-[1.375rem]"
           childClassName="text-center w-full font-bold"
         />
@@ -256,11 +302,11 @@ const Navbar = () => {
               <>
                 <div className="hidden border-gray-200/80 px-6 py-5 border-e 2xl:block">
                   <LinkButton
-                    href={Routes.shop.create}
+                    href={Routes.shop?.create || '/shops/create'}
                     size="small"
                     className="px-3.5"
                   >
-                    {t('common:text-create-shop')}
+                    Create Shop
                   </LinkButton>
                 </div>
 

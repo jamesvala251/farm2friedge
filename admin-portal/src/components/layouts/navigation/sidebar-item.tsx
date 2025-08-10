@@ -4,7 +4,7 @@ import * as sidebarIcons from '@/components/icons/sidebar';
 import { useUI } from '@/contexts/ui.context';
 import { useRouter } from 'next/router';
 import cn from 'classnames';
-import { useTranslation } from 'next-i18next';
+// import { useTranslation } from 'next-i18next'; // REMOVED - Pure English static content
 import { ChevronRight } from '@/components/icons/chevron-right';
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -30,7 +30,7 @@ function SidebarShortItem({
 }) {
   const { closeSidebar } = useUI();
   const [dropdown, setDropdown] = useState(false);
-  const { t } = useTranslation();
+  // const { t } = useTranslation(); // REMOVED - Pure English static content
   const router = useRouter();
   const sanitizedPath = router.asPath.split('#')[0].split('?')[0];
   return (
@@ -63,10 +63,10 @@ function SidebarShortItem({
                       ? 'bg-transparent font-medium text-accent-hover'
                       : 'text-body-dark hover:text-accent focus:text-accent',
                   )}
-                  title={t(item?.label)}
+                  title={item?.label} // REMOVED t() - Direct English text
                   onClick={() => closeSidebar()}
                 >
-                  {t(item?.label)}
+                  {item?.label} {/* REMOVED t() - Direct English text */}
                 </Link>
               </div>
             );
@@ -107,7 +107,7 @@ const SidebarItem = ({
   miniSidebar?: boolean;
 }) => {
   const { closeSidebar } = useUI();
-  const { t } = useTranslation();
+  // const { t } = useTranslation(); // REMOVED - Pure English static content
   const router = useRouter();
   const { width } = useWindowSize();
 
@@ -158,6 +158,12 @@ const SidebarItem = ({
   }, [isOpen]);
 
   const { permissions: currentUserPermissions } = getAuthCredentials();
+  
+  // Safety check: if href is undefined, don't render the Link
+  if (!href) {
+    return null;
+  }
+  
   return childMenu && childMenu?.length ? (
     miniSidebar && width >= RESPONSIVE_WIDTH ? (
       <SidebarShortItem
@@ -253,10 +259,10 @@ const SidebarItem = ({
                               ? 'bg-transparent font-medium text-accent-hover'
                               : 'text-body-dark hover:text-accent focus:text-accent',
                           )}
-                          title={t(item.label)}
+                          title={item.label} // REMOVED t() - Direct English text
                           onClick={() => closeSidebar()}
                         >
-                          <span>{t(item.label)}</span>
+                          <span>{item.label}</span> {/* REMOVED t() - Direct English text */}
                         </Link>
                       </div>
                     );
