@@ -115,205 +115,65 @@ const SideBarGroup = () => {
       childMenu: [
         {
           href: '/users/customers',
-          label: 'Customers',
+          label: 'Customer Management',
           icon: 'CustomersIcon',
           childMenu: []
         },
         {
           href: '/users/vendors',
-          label: 'Vendors',
+          label: 'Vendor Management',
           icon: 'VendorsIcon',
-          childMenu: []
-        },
-        {
-          href: '/users/staff',
-          label: 'Staff Management',
-          icon: 'StaffIcon',
           childMenu: []
         }
       ]
     },
-    'Product Management': {
+    'Product Moderation': {
       href: '/products',
-      label: 'Product Management',
+      label: 'Product Moderation',
       icon: 'ProductsIcon',
       childMenu: [
         {
-          href: '/products',
-          label: 'All Products',
-          icon: 'ProductsIcon',
-          childMenu: []
-        },
-        {
-          href: '/products/categories',
-          label: 'Categories',
-          icon: 'CategoriesIcon',
-          childMenu: []
-        },
-        {
-          href: '/products/reviews',
-          label: 'Product Reviews',
-          icon: 'ReviewIcon',
-          childMenu: []
-        },
-        {
-          href: '/products/attributes',
-          label: 'Attributes & Tags',
-          icon: 'AttributeIcon',
-          childMenu: []
-        },
-        {
-          href: '/products/quality',
-          label: 'Quality Control',
+          href: '/products/approval',
+          label: 'Product Approval',
           icon: 'CheckmarkIcon',
+          childMenu: []
+        },
+        {
+          href: '/products/content',
+          label: 'Content Management',
+          icon: 'InformationIcon',
           childMenu: []
         }
       ]
     },
-    'Order Management': {
+    'Order & Payment Management': {
       href: '/orders',
-      label: 'Order Management',
+      label: 'Order & Payment Management',
       icon: 'OrdersIcon',
       childMenu: [
         {
           href: '/orders',
-          label: 'All Orders',
+          label: 'Order Management',
           icon: 'OrdersIcon',
           childMenu: []
         },
         {
-          href: '/orders/status',
-          label: 'Order Status',
-          icon: 'OrdersStatusIcon',
-          childMenu: []
-        },
-        {
-          href: '/orders/tracking',
-          label: 'Order Tracking',
-          icon: 'OrderTrackingIcon',
-          childMenu: []
-        },
-        {
-          href: '/orders/refunds',
-          label: 'Refunds',
-          icon: 'RefundsIcon',
-          childMenu: []
-        },
-        {
-          href: '/orders/analytics',
-          label: 'Order Analytics',
+          href: '/payments',
+          label: 'Payment Management',
           icon: 'TransactionsIcon',
           childMenu: []
         }
       ]
     },
-    'Financial Management': {
-      href: '/financial',
-      label: 'Financial Management',
-      icon: 'FinancialIcon',
-      childMenu: [
-        {
-          href: '/financial/revenue',
-          label: 'Platform Revenue',
-          icon: 'TransactionsIcon',
-          childMenu: []
-        },
-        {
-          href: '/financial/commissions',
-          label: 'Commission Tracking',
-          icon: 'CoinIcon',
-          childMenu: []
-        },
-        {
-          href: '/financial/payouts',
-          label: 'Vendor Payouts',
-          icon: 'WithdrawIcon',
-          childMenu: []
-        },
-        {
-          href: '/financial/taxes',
-          label: 'Tax Management',
-          icon: 'TaxesIcon',
-          childMenu: []
-        },
-        {
-          href: '/financial/reports',
-          label: 'Financial Reports',
-          icon: 'DiaryIcon',
-          childMenu: []
-        }
-      ]
-    },
-    'Marketing & Promotions': {
-      href: '/marketing',
-      label: 'Marketing & Promotions',
-      icon: 'CouponsIcon',
-      childMenu: [
-        {
-          href: '/marketing/coupons',
-          label: 'Platform Coupons',
-          icon: 'CouponsIcon',
-          childMenu: []
-        },
-        {
-          href: '/marketing/flash-deals',
-          label: 'Flash Deals',
-          icon: 'FlashDealsIcon',
-          childMenu: []
-        },
-        {
-          href: '/marketing/email-campaigns',
-          label: 'Email Campaigns',
-          icon: 'EmailIcon',
-          childMenu: []
-        },
-        {
-          href: '/marketing/loyalty',
-          label: 'Loyalty Program',
-          icon: 'WalletPointsIcon',
-          childMenu: []
-        },
-        {
-          href: '/marketing/banners',
-          label: 'Promotional Banners',
-          icon: 'UploadIcon',
-          childMenu: []
-        }
-      ]
-    },
-    'Analytics & Reports': {
+    'Analytics & Reporting': {
       href: '/analytics',
-      label: 'Analytics & Reports',
+      label: 'Analytics & Reporting',
       icon: 'TransactionsIcon',
       childMenu: [
         {
           href: '/analytics/platform',
           label: 'Platform Analytics',
           icon: 'TransactionsIcon',
-          childMenu: []
-        },
-        {
-          href: '/analytics/vendors',
-          label: 'Vendor Performance',
-          icon: 'VendorsIcon',
-          childMenu: []
-        },
-        {
-          href: '/analytics/customers',
-          label: 'Customer Analytics',
-          icon: 'CustomersIcon',
-          childMenu: []
-        },
-        {
-          href: '/analytics/products',
-          label: 'Product Analytics',
-          icon: 'ProductsIcon',
-          childMenu: []
-        },
-        {
-          href: '/analytics/market-insights',
-          label: 'Market Insights',
-          icon: 'InformationIcon',
           childMenu: []
         }
       ]
@@ -324,101 +184,15 @@ const SideBarGroup = () => {
       icon: 'InformationIcon',
       childMenu: [
         {
-          href: '/content/faq',
-          label: 'FAQ Management',
-          icon: 'FaqIcon',
-          childMenu: []
-        },
-        {
-          href: '/content/policies',
-          label: 'Policy Updates',
-          icon: 'TermsIcon',
-          childMenu: []
-        },
-        {
-          href: '/content/announcements',
-          label: 'News & Announcements',
-          icon: 'NotificationIcon',
-          childMenu: []
-        },
-        {
-          href: '/content/banners',
-          label: 'Banner Management',
-          icon: 'UploadIcon',
-          childMenu: []
-        },
-        {
-          href: '/content/seo',
-          label: 'SEO Management',
-          icon: 'WorldIcon',
-          childMenu: []
-        }
-      ]
-    },
-    'Customer Support': {
-      href: '/support',
-      label: 'Customer Support',
-      icon: 'ChatIcon',
-      childMenu: [
-        {
-          href: '/support/tickets',
-          label: 'Support Tickets',
-          icon: 'ChatIcon',
-          childMenu: []
-        },
-        {
-          href: '/support/knowledge-base',
-          label: 'Knowledge Base',
+          href: '/content/cms',
+          label: 'CMS Management',
           icon: 'InformationIcon',
           childMenu: []
         },
         {
-          href: '/support/analytics',
-          label: 'Support Analytics',
-          icon: 'TransactionsIcon',
-          childMenu: []
-        },
-        {
-          href: '/support/feedback',
-          label: 'Customer Feedback',
-          icon: 'ReviewIcon',
-          childMenu: []
-        }
-      ]
-    },
-    'Platform Settings': {
-      href: '/settings',
-      label: 'Platform Settings',
-      icon: 'SettingsIcon',
-      childMenu: [
-        {
-          href: '/settings/general',
-          label: 'General Settings',
-          icon: 'SettingsIcon',
-          childMenu: []
-        },
-        {
-          href: '/settings/commission-rates',
-          label: 'Commission Rates',
-          icon: 'CoinIcon',
-          childMenu: []
-        },
-        {
-          href: '/settings/payment',
-          label: 'Payment Settings',
-          icon: 'WalletPointsIcon',
-          childMenu: []
-        },
-        {
-          href: '/settings/security',
-          label: 'Security Settings',
-          icon: 'CheckmarkIcon',
-          childMenu: []
-        },
-        {
-          href: '/settings/maintenance',
-          label: 'Maintenance Mode',
-          icon: 'MaintenanceIcon',
+          href: '/content/marketing',
+          label: 'Marketing Tools',
+          icon: 'CouponsIcon',
           childMenu: []
         }
       ]
